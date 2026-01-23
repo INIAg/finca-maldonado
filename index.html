@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- VARIABLES --- */
+        /* --- ESTILOS (CSS) --- */
         :root {
             --dorado: #D4AF37;
             --negro-fondo: #0a0a0a;
@@ -29,10 +29,10 @@
 
         h1, h2, h3 { font-family: var(--fuente-titulo); color: var(--dorado); }
 
-        /* --- PORTADA (HERO) --- */
+        /* PORTADA CAMBIANTE */
         .hero {
             height: 100vh;
-            background-color: #111; /* Color base por si falla la imagen */
+            background-color: #111; 
             background-size: cover;
             background-position: center;
             position: relative;
@@ -40,12 +40,13 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            transition: background-image 0.5s ease-in-out;
+            /* Esta transición hace que el cambio de imagen no sea brusco */
+            transition: background-image 0.5s ease-in-out; 
         }
 
         .overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.65); /* Un poco más oscuro para que resalte el texto */
         }
 
         .hero-content { position: relative; z-index: 2; padding: 20px; }
@@ -65,7 +66,7 @@
         }
         .btn-dorado:hover { background: var(--dorado); color: black; }
 
-        /* --- SALONES --- */
+        /* SALONES */
         .salones { padding: 80px 20px; text-align: center; }
         .grid-salones {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -94,26 +95,7 @@
         }
         .btn-seleccionar:hover { background: var(--dorado); color: black; }
 
-        /* --- GALERÍA / SLIDER (LO QUE FALTABA) --- */
-        .galeria-section { padding: 60px 20px; background: #000; text-align: center; }
-        .slider-container {
-            position: relative; max-width: 800px; margin: 40px auto;
-            border: 1px solid #333; height: 450px; overflow: hidden;
-        }
-        .slide { display: none; height: 100%; width: 100%; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Animación suave */
-        .fade { animation-name: fade; animation-duration: 1.5s; }
-        @keyframes fade { from {opacity: .4} to {opacity: 1} }
-
-        .texto-slider {
-            position: absolute; bottom: 0; width: 100%;
-            background: rgba(0,0,0,0.7); color: var(--dorado);
-            padding: 15px; font-size: 1.2rem;
-        }
-
-        /* --- MODAL --- */
+        /* MODAL */
         .modal {
             display: none; position: fixed; z-index: 9999;
             left: 0; top: 0; width: 100%; height: 100%;
@@ -138,14 +120,25 @@
             border: 1px solid var(--dorado); background: #222; color: white;
         }
 
-        /* --- CALENDARIO --- */
+        /* CALENDARIO */
         .wrapper-calendario { background: #1a1a1a; padding: 15px; border-radius: 8px; margin-top: 10px; }
         .calendario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; color: var(--dorado); }
         .calendario ul { display: flex; flex-wrap: wrap; list-style: none; }
         .calendario ul li { width: calc(100% / 7); padding: 10px 0; font-size: 1rem; color: #fff; }
         .days li { cursor: pointer; }
         .days li:hover { color: var(--dorado); font-weight: bold; }
+
+        /* SLIDER / RECORRIDO VIRTUAL */
+        .galeria-section { padding: 60px 20px; background: #000; text-align: center; }
+        .slider-container {
+            position: relative; max-width: 800px; margin: 40px auto;
+            border: 1px solid #333; height: 450px; overflow: hidden;
+        }
+        .slide { display: none; height: 100%; width: 100%; animation: fade 1.5s; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
         
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
         footer { padding: 20px; text-align: center; color: #555; margin-top: 50px; }
     </style>
 </head>
@@ -173,6 +166,7 @@
                     <button class="btn-seleccionar">COTIZAR</button>
                 </div>
             </div>
+
             <div class="card-salon" onclick="abrirCotizador('Salón Chico')">
                 <div class="img-container">
                     <img src="img/pista.jpg" alt="Salón Chico">
@@ -184,7 +178,8 @@
                     <button class="btn-seleccionar">COTIZAR</button>
                 </div>
             </div>
-             <div class="card-salon" onclick="abrirCotizador('Salón Baby')">
+            
+            <div class="card-salon" onclick="abrirCotizador('Salón Baby')">
                 <div class="img-container">
                     <img src="img/jardin.jpg" alt="Salón Baby">
                     <span class="capacidad">80 Pax</span>
@@ -202,16 +197,13 @@
         <h2>Recorrido Virtual</h2>
         <div class="slider-container">
             <div class="slide fade">
-                <img src="img/salon.jpg" alt="Salón">
-                <div class="texto-slider">Espacios Amplios</div>
+                <img src="img/salon.jpg" alt="Vista 1">
             </div>
             <div class="slide fade">
-                <img src="img/pista.jpg" alt="Pista">
-                <div class="texto-slider">Iluminación LED</div>
+                <img src="img/pista.jpg" alt="Vista 2">
             </div>
             <div class="slide fade">
-                <img src="img/jardin.jpg" alt="Jardín">
-                <div class="texto-slider">Áreas Verdes</div>
+                <img src="img/jardin.jpg" alt="Vista 3">
             </div>
         </div>
     </section>
@@ -254,39 +246,48 @@
     <script>
         const telefono = " 5565796506"; // PON TU NÚMERO AQUÍ
 
-        // --- 1. FONDO ALEATORIO DE PORTADA ---
-        // Pon aquí los nombres EXACTOS de tus fotos que están en GitHub
-        const fondos = ['fondo.jpg', 'salon.jpg', 'pista.jpg', 'jardin.jpg'];
-        
-        function cambiarFondoHero() {
-            // Elige un número al azar
-            const random = Math.floor(Math.random() * fondos.length);
-            const imagenElegida = fondos[random];
-            // Aplica la imagen al fondo
-            document.getElementById('hero-principal').style.backgroundImage = `url('img/${imagenElegida}')`;
+        /* --- 1. IMAGENES ALEATORIAS EN PORTADA --- */
+        // Asegúrate que estos nombres sean EXACTOS a tus archivos en GitHub
+        const imagenesPortada = [
+            'img/salon.jpg', 
+            'img/pista.jpg', 
+            'img/jardin.jpg',
+            'img/fondo.jpg' // Agrega aquí todas las fotos que quieras que salgan
+        ];
+
+        function cambiarPortadaAleatoria() {
+            // Elige un número al azar entre 0 y el total de fotos
+            const indiceAleatorio = Math.floor(Math.random() * imagenesPortada.length);
+            const imagenElegida = imagenesPortada[indiceAleatorio];
+            
+            // Aplica la imagen al fondo del Hero
+            document.getElementById('hero-principal').style.backgroundImage = `url('${imagenElegida}')`;
         }
+
         // Ejecutar al cargar la página
-        cambiarFondoHero();
+        cambiarPortadaAleatoria();
 
 
-        // --- 2. SLIDER AUTOMÁTICO ---
+        /* --- 2. SLIDER AUTOMÁTICO --- */
         let slideIndex = 0;
-        mostrarSlides();
+        iniciarSlider();
 
-        function mostrarSlides() {
+        function iniciarSlider() {
             let i;
             let slides = document.getElementsByClassName("slide");
+            // Si no hay slides, no hacemos nada para evitar errores
+            if(slides.length === 0) return;
+
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";  
             }
             slideIndex++;
             if (slideIndex > slides.length) {slideIndex = 1}    
             slides[slideIndex-1].style.display = "block";  
-            setTimeout(mostrarSlides, 3500); // Cambia imagen cada 3.5 segundos
+            setTimeout(iniciarSlider, 3000); // Cambia imagen cada 3 segundos
         }
 
-
-        // --- 3. LÓGICA DE COTIZACIÓN ---
+        /* --- 3. COTIZADOR Y CALENDARIO --- */
         let salonActual = "";
         let personas = "";
         let date = new Date();
