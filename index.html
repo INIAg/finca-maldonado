@@ -20,9 +20,6 @@
             --gris-texto: #b0b0b0;
             --fuente-titulo: 'Cinzel', serif;
             --fuente-texto: 'Montserrat', sans-serif;
-            /* Nuevas variables para el Robot Espacial */
-            --neon-azul: #00f3ff;
-            --neon-morado: #bc13fe;
         }
 
         /* --- RESET Y BASE --- */
@@ -34,6 +31,8 @@
             font-family: var(--fuente-texto);
             line-height: 1.6;
             overflow-x: hidden;
+            /* Importante para el 3D */
+            perspective: 1000px;
         }
 
         h1, h2, h3 { 
@@ -165,100 +164,92 @@
         }
         .slide { display: none; height: 100%; width: 100%; animation: fade 1.2s; }
         .slide img { width: 100%; height: 100%; object-fit: cover; }
-        
         @keyframes fade { from {opacity: 0.6} to {opacity: 1} }
 
 
-        /* --- NUEVO ESTILO: ROBOT ESPACIAL 3D --- */
-        .robot-space-section {
-            /* Fondo Espacial profundo */
-            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 90%);
-            padding: 100px 20px;
-            text-align: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Efecto de estrellas sutiles (opcional, solo puntos blancos) */
-        .robot-space-section::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
-            background-size: 550px 550px, 350px 350px;
-            background-position: 0 0, 40px 60px;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .robot-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .robot-title {
-            font-size: 3rem;
-            margin-bottom: 50px;
-            text-transform: uppercase;
-            /* Efecto neón en el texto */
-            color: #fff;
-            text-shadow: 
-                0 0 5px #fff,
-                0 0 10px #fff,
-                0 0 20px var(--neon-azul),
-                0 0 40px var(--neon-morado);
-        }
-
-        .robot-visor-3d {
-            perspective: 1000px; /* Clave para el efecto 3D */
+        /* --- SECCIÓN ROBOT 3D (ESTILO IPHONE / GYROSCOPIO) --- */
+        .robot-3d-section {
             display: flex;
+            align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
+            padding: 100px 20px;
+            background: radial-gradient(circle at center, #111, #000);
+            min-height: 80vh; /* Ocupa buena parte de la pantalla */
+            perspective: 1500px; /* Profundidad de la escena */
+            overflow: hidden;
         }
 
-        .robot-img-3d {
-            width: 100%;
-            max-width: 500px; /* Tamaño máximo de la imagen */
+        .robot-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .robot-text {
+            margin-bottom: 40px;
+            z-index: 10;
+        }
+        
+        .robot-text h2 {
+            font-size: 3rem;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
+        }
+
+        /* Contenedor de la Tarjeta 3D */
+        .card-3d-container {
+            width: 300px;
+            height: 450px;
+            position: relative;
+            transform-style: preserve-3d; /* Clave para el 3D */
+            /* La rotación se aplicará via JS */
+            transition: transform 0.1s ease-out; 
+            cursor: pointer;
+        }
+
+        /* Marco de la tarjeta */
+        .card-3d-frame {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
             border-radius: 20px;
-            /* El borde brillante estilo espacial */
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            
-            /* Sombra doble: Azul y Morada para efecto Sci-Fi */
-            box-shadow: 
-                0 0 20px var(--neon-azul),
-                -10px 0 40px var(--neon-morado),
-                10px 0 40px var(--neon-azul);
-            
-            /* Animación de flotar */
-            animation: flotar 4s ease-in-out infinite;
-            
-            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.2);
+            transform: translateZ(0px); /* Fondo base */
+            overflow: hidden;
         }
 
-        /* Efecto al pasar el mouse: se inclina hacia el usuario */
-        .robot-img-3d:hover {
-            transform: scale(1.05) rotateX(5deg);
-            box-shadow: 
-                0 0 40px var(--neon-azul),
-                -15px 0 60px var(--neon-morado),
-                15px 0 60px var(--neon-azul);
+        /* La imagen del Robot (FLOTA) */
+        .card-3d-img {
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateZ(60px); /* SE SEPARA DEL FONDO (Efecto Profundidad) */
+            transform-style: preserve-3d;
         }
 
-        .robot-desc {
-            color: #ccc;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-            letter-spacing: 1px;
+        .card-3d-img img {
+            width: 90%;
+            height: auto;
+            border-radius: 10px;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
         }
 
-        /* Animación de Gravedad Cero */
-        @keyframes flotar {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); } /* Sube 20px */
-            100% { transform: translateY(0px); }
+        /* Brillo estilo iPhone */
+        .card-glare {
+            position: absolute;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
+            background: linear-gradient(125deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 100%);
+            transform: translateZ(80px) translateX(-100%); /* Flota aún más arriba */
+            opacity: 0.6;
+            pointer-events: none;
+            transition: all 0.5s;
         }
 
 
@@ -297,7 +288,7 @@
             margin-right: 10px;
         }
 
-        /* --- MODAL ESTILO GLASS --- */
+        /* --- MODAL --- */
         .modal {
             display: none; position: fixed; z-index: 9999;
             left: 0; top: 0; width: 100%; height: 100%;
@@ -305,7 +296,6 @@
             backdrop-filter: blur(8px);
             align-items: center; justify-content: center;
         }
-
         .modal-content {
             background: rgba(18, 18, 18, 0.95); 
             border: 1px solid var(--dorado);
@@ -313,14 +303,12 @@
             text-align: center; position: relative;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-
         .cerrar {
             position: absolute; top: 15px; right: 20px;
             font-size: 30px; cursor: pointer; color: var(--gris-texto);
             transition: 0.3s;
         }
         .cerrar:hover { color: var(--dorado); }
-
         #inputPersonas {
             padding: 12px; font-size: 1.2rem; width: 80%;
             margin: 25px 0; text-align: center;
@@ -328,15 +316,13 @@
             background: transparent; color: white; outline: none;
         }
 
-        /* --- CALENDARIO MODERNO --- */
+        /* --- CALENDARIO --- */
         .wrapper-calendario { background: #000; padding: 20px; border: 1px solid #222; margin-top: 20px; }
         .calendario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .calendario-header p { font-weight: 600; color: var(--dorado); text-transform: uppercase; }
-        
         .calendario ul { display: flex; flex-wrap: wrap; list-style: none; }
         .weeks li { color: var(--dorado); font-weight: bold; font-size: 0.8rem; }
         .calendario ul li { width: calc(100% / 7); padding: 12px 0; font-size: 0.9rem; }
-        
         .days li { cursor: pointer; transition: 0.2s; border-radius: 50%; }
         .days li:hover:not(:empty) { background: var(--dorado); color: black; font-weight: bold; }
 
@@ -416,24 +402,30 @@
         </div>
     </section>
 
-    <section class="robot-space-section">
-        <div class="robot-content">
-            <h2 class="robot-title">Show Robot LED</h2>
-            
-            <div class="robot-visor-3d">
-                <img src="img/robot.jpeg" alt="Robot LED Espacial" class="robot-img-3d" 
-                     onerror="this.src='https://images.unsplash.com/photo-1546776310-51d680a96194?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+    <section class="robot-3d-section" id="robot-container">
+        <div class="robot-content-wrapper">
+            <div class="robot-text">
+                <h2>Show Robot LED</h2>
+                <p style="color: #ccc; font-size: 1.1rem;">La atracción del futuro en tu fiesta</p>
+                <p style="color: #666; font-size: 0.8rem; margin-top:5px;">(Mueve tu mouse o celular para ver el efecto)</p>
             </div>
 
-            <p class="robot-desc">
-                Una experiencia visual de otro planeta. Iluminación, tecnología y ambiente futurista para tu evento.
-            </p>
+            <div class="card-3d-container" id="card3d">
+                
+                <div class="card-3d-frame"></div>
+                
+                <div class="card-3d-img">
+                    <img src="img/robot.jpeg" alt="Robot LED" onerror="this.src='https://images.unsplash.com/photo-1546776310-51d680a96194?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">
+                </div>
+
+                <div class="card-glare" id="glare"></div>
+            </div>
+
         </div>
     </section>
     <section class="ubicacion-section" id="ubicacion">
         <h2 style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;">Cómo Llegar</h2>
         <p style="color: var(--gris-texto); margin-top: 10px;">Te esperamos en Finca Maldonado</p>
-        
         <div class="contenedor-mapa">
             <iframe 
                 width="100%" 
@@ -444,7 +436,6 @@
                 src="https://maps.google.com/maps?q=Finca+Maldonado+Cuautitlan+San+Blas&t=&z=15&ie=UTF8&iwloc=&output=embed">
             </iframe>
         </div>
-
         <div class="datos-direccion">
             <p><i class="fas fa-map-marker-alt icono-dorado"></i> C. 29 Mz. 5 Lt. 11, San Blas I, Cuautitlán, Méx.</p>
             <br>
@@ -489,7 +480,7 @@
     </footer>
 
     <script>
-        // --- JAVASCRIPT ---
+        // --- JAVASCRIPT PRINCIPAL ---
         const telefono = "5565796506";
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
 
@@ -512,6 +503,7 @@
         }
         iniciarSlider();
 
+        // --- LÓGICA DEL COTIZADOR ---
         let salonActual = "";
         let personas = "";
         let date = new Date();
@@ -566,6 +558,57 @@
             let msg = `*SOLICITUD DE COTIZACIÓN*\n\n📍 *Salón:* ${salonActual}\n👥 *Invitados:* ${personas}\n📅 *Fecha deseada:* ${dia} de ${mes} ${currYear}\n\nMe gustaría recibir más información.`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
+
+        // --- SCRIPT EFECTO 3D (IPHONE / ESPACIAL) ---
+        const container = document.getElementById('robot-container');
+        const card = document.getElementById('card3d');
+        const glare = document.getElementById('glare');
+
+        // 1. Movimiento con Mouse (PC)
+        container.addEventListener('mousemove', (e) => {
+            // Calcular rotación basada en la posición del mouse
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 20; 
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
+            
+            // Aplicar rotación
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            
+            // Mover el brillo (glare) opuesto para realismo
+            glare.style.transform = `translateZ(80px) translateX(${-xAxis * 2}px) translateY(${-yAxis * 2}px)`;
+        });
+
+        // Restaurar posición al salir (Animación suave de regreso)
+        container.addEventListener('mouseleave', (e) => {
+            card.style.transition = 'all 0.5s ease';
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            glare.style.transform = `translateZ(80px) translateX(-100%)`; // Esconder brillo
+            
+            // Quitar transición después para que el movimiento sea instantáneo al volver a entrar
+            setTimeout(() => {
+                card.style.transition = 'none';
+            }, 500);
+        });
+
+        // 2. Movimiento con Giroscopio (Móvil)
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener("deviceorientation", function(event) {
+                // beta: frente/atrás (-180, 180)
+                // gamma: izquierda/derecha (-90, 90)
+                let yAxis = event.beta;  
+                let xAxis = event.gamma; 
+
+                // Limitar rotación para que no de vueltas completas
+                if (xAxis > 20) xAxis = 20;
+                if (xAxis < -20) xAxis = -20;
+                if (yAxis > 20) yAxis = 20;
+                if (yAxis < -20) yAxis = -20;
+
+                // En móvil invertimos un poco los ejes para naturalidad
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis + 45}deg)`; 
+                // Nota: el -yAxis + 45 es porque usualmente sostenemos el cel a 45 grados
+            }, true);
+        }
     </script>
 </body>
 </html>
+
