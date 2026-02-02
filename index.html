@@ -20,6 +20,9 @@
             --gris-texto: #b0b0b0;
             --fuente-titulo: 'Cinzel', serif;
             --fuente-texto: 'Montserrat', sans-serif;
+            /* Nuevas variables para el Robot Espacial */
+            --neon-azul: #00f3ff;
+            --neon-morado: #bc13fe;
         }
 
         /* --- RESET Y BASE --- */
@@ -165,85 +168,99 @@
         
         @keyframes fade { from {opacity: 0.6} to {opacity: 1} }
 
-        /* --- ESTILOS DEL ROBOT LED (NUEVO) --- */
-        .robot-section {
-            padding: 80px 20px;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        /* --- NUEVO ESTILO: ROBOT ESPACIAL 3D --- */
+        .robot-space-section {
+            /* Fondo Espacial profundo */
+            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 90%);
+            padding: 100px 20px;
+            text-align: center;
             overflow: hidden;
-        }
-
-        .robot-container {
-            max-width: 1100px;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap; 
-            align-items: center;
-            justify-content: space-between;
-            gap: 50px;
-        }
-
-        .robot-info {
-            flex: 1;
-            min-width: 300px;
-            text-align: left;
-        }
-
-        .robot-info h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            background: var(--gradient-oro);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-        }
-
-        .robot-features {
-            list-style: none;
-            margin: 30px 0;
-        }
-
-        .robot-features li {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            color: #ddd;
-        }
-
-        .robot-features i {
-            color: var(--dorado);
-            margin-right: 15px;
-            font-size: 1.2rem;
-            text-shadow: 0 0 10px var(--dorado);
-        }
-
-        .robot-img-box {
-            flex: 1;
-            min-width: 300px;
             position: relative;
         }
 
-        .robot-img-box img {
+        /* Efecto de estrellas sutiles (opcional, solo puntos blancos) */
+        .robot-space-section::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
+            background-size: 550px 550px, 350px 350px;
+            background-position: 0 0, 40px 60px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .robot-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .robot-title {
+            font-size: 3rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            /* Efecto neón en el texto */
+            color: #fff;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--neon-azul),
+                0 0 40px var(--neon-morado);
+        }
+
+        .robot-visor-3d {
+            perspective: 1000px; /* Clave para el efecto 3D */
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .robot-img-3d {
             width: 100%;
-            border-radius: 10px;
-            border: 2px solid var(--dorado);
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
-            transition: transform 0.5s ease;
+            max-width: 500px; /* Tamaño máximo de la imagen */
+            border-radius: 20px;
+            /* El borde brillante estilo espacial */
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            
+            /* Sombra doble: Azul y Morada para efecto Sci-Fi */
+            box-shadow: 
+                0 0 20px var(--neon-azul),
+                -10px 0 40px var(--neon-morado),
+                10px 0 40px var(--neon-azul);
+            
+            /* Animación de flotar */
+            animation: flotar 4s ease-in-out infinite;
+            
+            transition: transform 0.3s ease;
         }
 
-        .robot-img-box:hover img {
-            transform: scale(1.02) rotate(1deg);
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.4);
+        /* Efecto al pasar el mouse: se inclina hacia el usuario */
+        .robot-img-3d:hover {
+            transform: scale(1.05) rotateX(5deg);
+            box-shadow: 
+                0 0 40px var(--neon-azul),
+                -15px 0 60px var(--neon-morado),
+                15px 0 60px var(--neon-azul);
         }
 
-        @media (max-width: 768px) {
-            .robot-container { flex-direction: column-reverse; }
-            .robot-info { text-align: center; }
-            .robot-features li { justify-content: center; }
+        .robot-desc {
+            color: #ccc;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            letter-spacing: 1px;
         }
+
+        /* Animación de Gravedad Cero */
+        @keyframes flotar {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); } /* Sube 20px */
+            100% { transform: translateY(0px); }
+        }
+
 
         /* --- SECCIÓN UBICACIÓN --- */
         .ubicacion-section {
@@ -399,27 +416,18 @@
         </div>
     </section>
 
-    <section class="robot-section">
-        <div class="robot-container">
-            <div class="robot-info">
-                <h2>El Alma de la Fiesta</h2>
-                <p style="color: var(--gris-texto); font-size: 1.1rem; line-height: 1.8;">
-                    Lleva tu evento al siguiente nivel con nuestro exclusivo show de <strong>Robot LED</strong>. 
-                    Una experiencia visual impactante que llenará la pista de baile de energía, luces y diversión inolvidable.
-                </p>
-                <ul class="robot-features">
-                    <li><i class="fas fa-bolt"></i> Show de Luces LED Sincronizadas</li>
-                    <li><i class="fas fa-music"></i> Coreografías y Animación en Pista</li>
-                    <li><i class="fas fa-camera"></i> Sesión de Fotos con tus Invitados</li>
-                    <li><i class="fas fa-cloud"></i> Disparos de CO2 (Efecto Humo Frío)</li>
-                </ul>
-                <button class="btn-dorado" onclick="abrirCotizador('Show Robot LED')">
-                    Agregar a mi Evento
-                </button>
+    <section class="robot-space-section">
+        <div class="robot-content">
+            <h2 class="robot-title">Show Robot LED</h2>
+            
+            <div class="robot-visor-3d">
+                <img src="img/robot.jpeg" alt="Robot LED Espacial" class="robot-img-3d" 
+                     onerror="this.src='https://images.unsplash.com/photo-1546776310-51d680a96194?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
             </div>
-            <div class="robot-img-box">
-                <img src="img/robot.jpg" alt="Robot LED Finca Maldonado" onerror="this.src='https://images.unsplash.com/photo-1535295972055-1c762f4483e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
-            </div>
+
+            <p class="robot-desc">
+                Una experiencia visual de otro planeta. Iluminación, tecnología y ambiente futurista para tu evento.
+            </p>
         </div>
     </section>
     <section class="ubicacion-section" id="ubicacion">
