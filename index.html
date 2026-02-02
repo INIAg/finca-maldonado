@@ -20,6 +20,7 @@
             --gris-texto: #b0b0b0;
             --fuente-titulo: 'Cinzel', serif;
             --fuente-texto: 'Montserrat', sans-serif;
+            --neon-azul: #00f3ff; /* Color Neón Robot */
         }
 
         /* --- RESET Y BASE --- */
@@ -31,8 +32,6 @@
             font-family: var(--fuente-texto);
             line-height: 1.6;
             overflow-x: hidden;
-            /* Importante para el 3D */
-            perspective: 1000px;
         }
 
         h1, h2, h3 { 
@@ -167,89 +166,78 @@
         @keyframes fade { from {opacity: 0.6} to {opacity: 1} }
 
 
-        /* --- SECCIÓN ROBOT 3D (ESTILO IPHONE / GYROSCOPIO) --- */
-        .robot-3d-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* --- SECCIÓN ROBOT: GRAVEDAD CERO (FLUIDO) --- */
+        .robot-space-section {
             padding: 100px 20px;
-            background: radial-gradient(circle at center, #111, #000);
-            min-height: 80vh; /* Ocupa buena parte de la pantalla */
-            perspective: 1500px; /* Profundidad de la escena */
+            /* Fondo Negro profundo con un toque de luz azul en el centro */
+            background: radial-gradient(circle at center, #0a1020 0%, #000000 80%);
+            text-align: center;
             overflow: hidden;
-        }
-
-        .robot-content-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
         }
 
-        .robot-text {
-            margin-bottom: 40px;
-            z-index: 10;
-        }
-        
-        .robot-text h2 {
+        .robot-title {
             font-size: 3rem;
             color: #fff;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
+            /* Efecto de texto brillante elegante */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         }
 
-        /* Contenedor de la Tarjeta 3D */
-        .card-3d-container {
-            width: 300px;
-            height: 450px;
+        .robot-subtitle {
+            color: var(--neon-azul);
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+
+        /* Contenedor de la Imagen */
+        .robot-image-container {
             position: relative;
-            transform-style: preserve-3d; /* Clave para el 3D */
-            /* La rotación se aplicará via JS */
-            transition: transform 0.1s ease-out; 
-            cursor: pointer;
+            max-width: 350px; /* Tamaño controlado para que no se vea gigante */
+            width: 100%;
+            z-index: 10;
+            
+            /* ANIMACIÓN DE LEVITACIÓN SUAVE */
+            animation: levitar 6s ease-in-out infinite;
         }
 
-        /* Marco de la tarjeta */
-        .card-3d-frame {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+        .robot-img {
+            width: 100%;
             border-radius: 20px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 0 50px rgba(0, 243, 255, 0.2);
-            transform: translateZ(0px); /* Fondo base */
-            overflow: hidden;
+            /* Borde sutil */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* Sombra suave de color azul para dar profundidad */
+            box-shadow: 0 10px 50px rgba(0, 243, 255, 0.15);
         }
 
-        /* La imagen del Robot (FLOTA) */
-        .card-3d-img {
-            position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: translateZ(60px); /* SE SEPARA DEL FONDO (Efecto Profundidad) */
-            transform-style: preserve-3d;
+        /* Efecto de "Plataforma" o sombra en el piso */
+        .robot-shadow {
+            width: 200px;
+            height: 20px;
+            background: radial-gradient(ellipse at center, rgba(0, 243, 255, 0.3) 0%, rgba(0,0,0,0) 70%);
+            margin-top: 30px;
+            border-radius: 50%;
+            /* La sombra se hace pequeña cuando el robot sube */
+            animation: sombra-latido 6s ease-in-out infinite;
         }
 
-        .card-3d-img img {
-            width: 90%;
-            height: auto;
-            border-radius: 10px;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+        /* Keyframes para la animación suave */
+        @keyframes levitar {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-25px); } /* Sube suavemente */
+            100% { transform: translateY(0px); }
         }
 
-        /* Brillo estilo iPhone */
-        .card-glare {
-            position: absolute;
-            width: 100%; height: 100%;
-            top: 0; left: 0;
-            background: linear-gradient(125deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 100%);
-            transform: translateZ(80px) translateX(-100%); /* Flota aún más arriba */
-            opacity: 0.6;
-            pointer-events: none;
-            transition: all 0.5s;
+        @keyframes sombra-latido {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(0.8); opacity: 0.3; } /* Se achica cuando el robot se aleja */
+            100% { transform: scale(1); opacity: 0.5; }
         }
 
 
@@ -402,26 +390,19 @@
         </div>
     </section>
 
-    <section class="robot-3d-section" id="robot-container">
-        <div class="robot-content-wrapper">
-            <div class="robot-text">
-                <h2>Show Robot LED</h2>
-                <p style="color: #ccc; font-size: 1.1rem;">La atracción del futuro en tu fiesta</p>
-                <p style="color: #666; font-size: 0.8rem; margin-top:5px;">(Mueve tu mouse o celular para ver el efecto)</p>
-            </div>
+    <section class="robot-space-section">
+        <h2 class="robot-title">Show Robot LED</h2>
+        <p class="robot-subtitle">Tecnología y Diversión</p>
 
-            <div class="card-3d-container" id="card3d">
-                
-                <div class="card-3d-frame"></div>
-                
-                <div class="card-3d-img">
-                    <img src="img/robot.jpeg" alt="Robot LED" onerror="this.src='https://images.unsplash.com/photo-1546776310-51d680a96194?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">
-                </div>
-
-                <div class="card-glare" id="glare"></div>
-            </div>
-
+        <div class="robot-image-container">
+            <img src="img/robot.jpg" alt="Robot LED" class="robot-img" onerror="this.src='https://images.unsplash.com/photo-1546776310-51d680a96194?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">
         </div>
+        
+        <div class="robot-shadow"></div>
+
+        <p style="color: #ccc; margin-top: 40px; font-size: 1.1rem; max-width: 600px;">
+            Una experiencia visual futurista que iluminará tu evento.
+        </p>
     </section>
     <section class="ubicacion-section" id="ubicacion">
         <h2 style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;">Cómo Llegar</h2>
@@ -557,56 +538,6 @@
         function enviarWhats(dia, mes) {
             let msg = `*SOLICITUD DE COTIZACIÓN*\n\n📍 *Salón:* ${salonActual}\n👥 *Invitados:* ${personas}\n📅 *Fecha deseada:* ${dia} de ${mes} ${currYear}\n\nMe gustaría recibir más información.`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        // --- SCRIPT EFECTO 3D (IPHONE / ESPACIAL) ---
-        const container = document.getElementById('robot-container');
-        const card = document.getElementById('card3d');
-        const glare = document.getElementById('glare');
-
-        // 1. Movimiento con Mouse (PC)
-        container.addEventListener('mousemove', (e) => {
-            // Calcular rotación basada en la posición del mouse
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 20; 
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
-            
-            // Aplicar rotación
-            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            
-            // Mover el brillo (glare) opuesto para realismo
-            glare.style.transform = `translateZ(80px) translateX(${-xAxis * 2}px) translateY(${-yAxis * 2}px)`;
-        });
-
-        // Restaurar posición al salir (Animación suave de regreso)
-        container.addEventListener('mouseleave', (e) => {
-            card.style.transition = 'all 0.5s ease';
-            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-            glare.style.transform = `translateZ(80px) translateX(-100%)`; // Esconder brillo
-            
-            // Quitar transición después para que el movimiento sea instantáneo al volver a entrar
-            setTimeout(() => {
-                card.style.transition = 'none';
-            }, 500);
-        });
-
-        // 2. Movimiento con Giroscopio (Móvil)
-        if (window.DeviceOrientationEvent) {
-            window.addEventListener("deviceorientation", function(event) {
-                // beta: frente/atrás (-180, 180)
-                // gamma: izquierda/derecha (-90, 90)
-                let yAxis = event.beta;  
-                let xAxis = event.gamma; 
-
-                // Limitar rotación para que no de vueltas completas
-                if (xAxis > 20) xAxis = 20;
-                if (xAxis < -20) xAxis = -20;
-                if (yAxis > 20) yAxis = 20;
-                if (yAxis < -20) yAxis = -20;
-
-                // En móvil invertimos un poco los ejes para naturalidad
-                card.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis + 45}deg)`; 
-                // Nota: el -yAxis + 45 es porque usualmente sostenemos el cel a 45 grados
-            }, true);
         }
     </script>
 </body>
