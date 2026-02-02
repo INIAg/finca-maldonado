@@ -5,34 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finca Maldonado | Eventos Exclusivos</title>
     <link rel="icon" type="image/jpeg" href="img/logo.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- ESTILOS (CSS) --- */
+        /* --- VARIABLES MEJORADAS --- */
         :root {
             --dorado: #D4AF37;
-            --negro-fondo: #0a0a0a;
-            --negro-card: #151515;
-            --blanco: #f4f4f4;
+            --dorado-light: #f1d592;
+            --gradient-oro: linear-gradient(135deg, #af8910 0%, #D4AF37 50%, #f1d592 100%);
+            --negro-fondo: #050505;
+            --negro-card: #121212;
+            --blanco: #ffffff;
+            --gris-texto: #b0b0b0;
             --fuente-titulo: 'Cinzel', serif;
             --fuente-texto: 'Montserrat', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- RESET Y BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             background-color: var(--negro-fondo);
             color: var(--blanco);
             font-family: var(--fuente-texto);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-family: var(--fuente-titulo); color: var(--dorado); }
+        h1, h2, h3 { 
+            font-family: var(--fuente-titulo); 
+            letter-spacing: 2px;
+        }
 
-        /* PORTADA CAMBIANTE */
+        /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
-            background-color: #111; 
             background-size: cover;
             background-position: center;
             position: relative;
@@ -40,106 +48,171 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            /* Esta transición hace que el cambio de imagen no sea brusco */
-            transition: background-image 0.5s ease-in-out; 
+            transition: background-image 1.2s ease-in-out; 
         }
 
         .overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.65); /* Un poco más oscuro para que resalte el texto */
+            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%);
         }
 
-        .hero-content { position: relative; z-index: 2; padding: 20px; }
+        .hero-content { 
+            position: relative; z-index: 2; padding: 20px; 
+            max-width: 800px;
+        }
 
         .logo-principal {
-            width: 250px; margin-bottom: 20px;
-            mix-blend-mode: screen; 
+            width: 180px; margin-bottom: 30px;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
         }
 
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; }
+        .hero h1 { 
+            font-size: clamp(2rem, 5vw, 4rem); 
+            margin-bottom: 20px; 
+            text-transform: uppercase;
+            background: var(--gradient-oro);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
         
+        /* --- BOTONES --- */
         .btn-dorado {
-            padding: 12px 35px; border: 2px solid var(--dorado);
-            color: var(--dorado); text-decoration: none; text-transform: uppercase;
-            font-weight: bold; transition: 0.3s; background: transparent; cursor: pointer;
-            display: inline-block; margin-top: 20px;
+            padding: 15px 40px; 
+            border: 1px solid var(--dorado);
+            color: var(--dorado); 
+            text-decoration: none; 
+            text-transform: uppercase;
+            font-weight: 600; 
+            letter-spacing: 2px;
+            transition: all 0.4s ease; 
+            background: rgba(0,0,0,0.3); 
+            cursor: pointer;
+            display: inline-block;
+            backdrop-filter: blur(5px);
         }
-        .btn-dorado:hover { background: var(--dorado); color: black; }
 
-        /* SALONES */
-        .salones { padding: 80px 20px; text-align: center; }
+        .btn-dorado:hover { 
+            background: var(--gradient-oro); 
+            color: black; 
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* --- SECCIÓN SALONES --- */
+        .salones { padding: 100px 20px; text-align: center; }
+        .salones h2 { font-size: 2.5rem; margin-bottom: 50px; position: relative; }
+        .salones h2::after {
+            content: ''; width: 60px; height: 2px; background: var(--dorado);
+            display: block; margin: 15px auto;
+        }
+
         .grid-salones {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; max-width: 1200px; margin: 0 auto;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px; max-width: 1200px; margin: 0 auto;
         }
 
         .card-salon {
-            background: var(--negro-card); border: 1px solid #333;
-            overflow: hidden; transition: 0.3s; cursor: pointer; position: relative;
+            background: var(--negro-card); 
+            border: 1px solid #222;
+            overflow: hidden; 
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border-radius: 4px;
         }
-        .card-salon:hover { transform: translateY(-5px); border-color: var(--dorado); }
 
-        .img-container { position: relative; height: 200px; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .card-salon:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--dorado);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .img-container { position: relative; height: 280px; overflow: hidden; }
+        .img-container img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: transform 0.8s ease;
+        }
+        .card-salon:hover .img-container img { transform: scale(1.1); }
         
         .capacidad {
-            position: absolute; top: 10px; right: 10px;
-            background: var(--dorado); color: black; padding: 5px 10px;
-            font-weight: bold; font-size: 0.8rem; border-radius: 4px;
+            position: absolute; bottom: 15px; left: 15px;
+            background: var(--gradient-oro); color: black; padding: 4px 12px;
+            font-weight: bold; font-size: 0.75rem; border-radius: 2px;
+            text-transform: uppercase;
         }
 
-        .info-salon { padding: 20px; }
+        .info-salon { padding: 30px; text-align: left; }
+        .info-salon h3 { margin-bottom: 10px; font-size: 1.5rem; }
+        .info-salon p { color: var(--gris-texto); font-size: 0.9rem; margin-bottom: 20px; }
+
         .btn-seleccionar {
-            background: transparent; border: 1px solid #555; color: #fff;
-            padding: 8px 20px; cursor: pointer; margin-top: 10px;
+            background: transparent; border: 1px solid #444; color: #fff;
+            padding: 10px 25px; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
         }
-        .btn-seleccionar:hover { background: var(--dorado); color: black; }
+        .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
-        /* MODAL */
+        /* --- MODAL ESTILO GLASS --- */
         .modal {
             display: none; position: fixed; z-index: 9999;
             left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.95);
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
             align-items: center; justify-content: center;
         }
 
         .modal-content {
-            background: #111; border: 2px solid var(--dorado);
-            padding: 30px; width: 95%; max-width: 500px;
+            background: rgba(18, 18, 18, 0.95); 
+            border: 1px solid var(--dorado);
+            padding: 40px; width: 90%; max-width: 450px;
             text-align: center; position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
         .cerrar {
-            position: absolute; top: 10px; right: 20px;
-            font-size: 40px; cursor: pointer; color: #fff;
+            position: absolute; top: 15px; right: 20px;
+            font-size: 30px; cursor: pointer; color: var(--gris-texto);
+            transition: 0.3s;
         }
+        .cerrar:hover { color: var(--dorado); }
 
         #inputPersonas {
-            padding: 10px; font-size: 1.2rem; width: 60%;
-            margin: 20px 0; text-align: center;
-            border: 1px solid var(--dorado); background: #222; color: white;
+            padding: 12px; font-size: 1.2rem; width: 80%;
+            margin: 25px 0; text-align: center;
+            border: none; border-bottom: 2px solid var(--dorado); 
+            background: transparent; color: white; outline: none;
         }
 
-        /* CALENDARIO */
-        .wrapper-calendario { background: #1a1a1a; padding: 15px; border-radius: 8px; margin-top: 10px; }
-        .calendario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; color: var(--dorado); }
+        /* --- CALENDARIO MODERNO --- */
+        .wrapper-calendario { background: #000; padding: 20px; border: 1px solid #222; margin-top: 20px; }
+        .calendario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .calendario-header p { font-weight: 600; color: var(--dorado); text-transform: uppercase; }
+        
         .calendario ul { display: flex; flex-wrap: wrap; list-style: none; }
-        .calendario ul li { width: calc(100% / 7); padding: 10px 0; font-size: 1rem; color: #fff; }
-        .days li { cursor: pointer; }
-        .days li:hover { color: var(--dorado); font-weight: bold; }
+        .weeks li { color: var(--dorado); font-weight: bold; font-size: 0.8rem; }
+        .calendario ul li { width: calc(100% / 7); padding: 12px 0; font-size: 0.9rem; }
+        
+        .days li { cursor: pointer; transition: 0.2s; border-radius: 50%; }
+        .days li:hover:not(:empty) { background: var(--dorado); color: black; font-weight: bold; }
 
-        /* SLIDER / RECORRIDO VIRTUAL */
-        .galeria-section { padding: 60px 20px; background: #000; text-align: center; }
+        /* --- GALERÍA / SLIDER --- */
+        .galeria-section { padding: 80px 20px; background: #080808; text-align: center; }
         .slider-container {
-            position: relative; max-width: 800px; margin: 40px auto;
-            border: 1px solid #333; height: 450px; overflow: hidden;
+            position: relative; max-width: 1000px; margin: 50px auto;
+            height: 500px; overflow: hidden; border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
         }
-        .slide { display: none; height: 100%; width: 100%; animation: fade 1.5s; }
+        .slide { display: none; height: 100%; width: 100%; animation: fade 1.2s; }
         .slide img { width: 100%; height: 100%; object-fit: cover; }
         
-        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+        @keyframes fade { from {opacity: 0.6} to {opacity: 1} }
 
-        footer { padding: 20px; text-align: center; color: #555; margin-top: 50px; }
+        footer { 
+            padding: 60px 20px; text-align: center; 
+            border-top: 1px solid #111; color: #666; font-size: 0.8rem; 
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
@@ -148,46 +221,48 @@
         <div class="overlay"></div>
         <div class="hero-content">
             <img src="img/logo.jpg" alt="Finca Maldonado" class="logo-principal">
-            <h1>Donde la elegancia cobra vida</h1>
-            <a href="#salones" class="btn-dorado">Ver Salones</a>
+            <h1>Elegancia en cada detalle</h1>
+            <p style="margin-bottom: 30px; color: var(--gris-texto);">Experiencias exclusivas en el mejor entorno.</p>
+            <a href="#salones" class="btn-dorado">Explorar Salones</a>
         </div>
     </header>
 
     <section id="salones" class="salones">
+        <h2>Nuestros Espacios</h2>
         <div class="grid-salones">
             <div class="card-salon" onclick="abrirCotizador('Salón Grande')">
                 <div class="img-container">
                     <img src="img/salon.jpg" alt="Salón Grande">
-                    <span class="capacidad">500 Pax</span>
+                    <span class="capacidad">Hasta 500 Invitados</span>
                 </div>
                 <div class="info-salon">
                     <h3>Salón Grande</h3>
-                    <p>Ideal para grandes bodas.</p>
-                    <button class="btn-seleccionar">COTIZAR</button>
+                    <p>Un espacio majestuoso para bodas inolvidables y eventos de gala.</p>
+                    <button class="btn-seleccionar">COTIZAR AHORA</button>
                 </div>
             </div>
 
             <div class="card-salon" onclick="abrirCotizador('Salón Chico')">
                 <div class="img-container">
                     <img src="img/pista.jpg" alt="Salón Chico">
-                    <span class="capacidad">200 Pax</span>
+                    <span class="capacidad">Hasta 200 Invitados</span>
                 </div>
                 <div class="info-salon">
                     <h3>Salón Chico</h3>
-                    <p>Perfecto para XV Años.</p>
-                    <button class="btn-seleccionar">COTIZAR</button>
+                    <p>Perfecto para XV Años, graduaciones y eventos corporativos.</p>
+                    <button class="btn-seleccionar">COTIZAR AHORA</button>
                 </div>
             </div>
             
             <div class="card-salon" onclick="abrirCotizador('Salón Baby')">
                 <div class="img-container">
                     <img src="img/jardin.jpg" alt="Salón Baby">
-                    <span class="capacidad">80 Pax</span>
+                    <span class="capacidad">Hasta 80 Invitados</span>
                 </div>
                 <div class="info-salon">
                     <h3>Salón Baby</h3>
-                    <p>Eventos infantiles.</p>
-                    <button class="btn-seleccionar">COTIZAR</button>
+                    <p>El lugar acogedor ideal para eventos infantiles y reuniones íntimas.</p>
+                    <button class="btn-seleccionar">COTIZAR AHORA</button>
                 </div>
             </div>
         </div>
@@ -196,13 +271,13 @@
     <section class="galeria-section">
         <h2>Recorrido Virtual</h2>
         <div class="slider-container">
-            <div class="slide fade">
+            <div class="slide">
                 <img src="img/salon.jpg" alt="Vista 1">
             </div>
-            <div class="slide fade">
+            <div class="slide">
                 <img src="img/pista.jpg" alt="Vista 2">
             </div>
-            <div class="slide fade">
+            <div class="slide">
                 <img src="img/jardin.jpg" alt="Vista 3">
             </div>
         </div>
@@ -212,25 +287,23 @@
         <div class="modal-content">
             <span class="cerrar" onclick="cerrarVentana()">&times;</span>
             <div id="vista-personas">
-                <h2 id="titulo-modal">Cotizando...</h2>
-                <p>¿Cuántos invitados esperas?</p>
-                <input type="number" id="inputPersonas" placeholder="Ej: 150">
-                <br><br>
-                <button class="btn-dorado" onclick="irAlCalendario()">Ver Fechas</button>
+                <h2 id="titulo-modal" style="font-size: 1.4rem;">Cotizando</h2>
+                <p style="color: var(--gris-texto); margin-top: 10px;">¿Cuántos invitados esperas?</p>
+                <input type="number" id="inputPersonas" placeholder="000">
+                <br>
+                <button class="btn-dorado" onclick="irAlCalendario()" style="width: 100%;">Continuar</button>
             </div>
             <div id="vista-calendario" style="display:none;">
-                <h2>Selecciona Fecha</h2>
+                <h2 style="font-size: 1.4rem;">Selecciona la Fecha</h2>
                 <div class="wrapper-calendario">
                     <header class="calendario-header">
+                        <span id="prev" onclick="cambiarMes(-1)" style="cursor:pointer; color: var(--dorado);">&#10094;</span>
                         <p id="mes-actual"></p>
-                        <div class="iconos-nav">
-                            <span id="prev" onclick="cambiarMes(-1)" style="cursor:pointer; font-size:20px;">&#10094;</span>
-                            <span id="next" onclick="cambiarMes(1)" style="cursor:pointer; font-size:20px;">&#10095;</span>
-                        </div>
+                        <span id="next" onclick="cambiarMes(1)" style="cursor:pointer; color: var(--dorado);">&#10095;</span>
                     </header>
                     <div class="calendario">
                         <ul class="weeks">
-                            <li>Do</li><li>Lu</li><li>Ma</li><li>Mi</li><li>Ju</li><li>Vi</li><li>Sá</li>
+                            <li>Do</li><li>Lu</li><li>Ma</li><li>Mi</li><li>Ju</li><li>Vi</li><li>Sa</li>
                         </ul>
                         <ul class="days"></ul>
                     </div>
@@ -240,54 +313,34 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Finca Maldonado</p>
+        <p>FINCA MALDONADO &copy; 2026</p>
+        <p style="margin-top: 10px; font-size: 0.6rem; opacity: 0.5;">TODOS LOS DERECHOS RESERVADOS</p>
     </footer>
 
     <script>
-        const telefono = "5565796506"; // PON TU NÚMERO AQUÍ
-
-        /* --- 1. IMAGENES ALEATORIAS EN PORTADA --- */
-        // Asegúrate que estos nombres sean EXACTOS a tus archivos en GitHub
-        const imagenesPortada = [
-            'img/salon.jpg', 
-            'img/pista.jpg', 
-            'img/jardin.jpg',
-            'img/fondo.jpg' // Agrega aquí todas las fotos que quieras que salgan
-        ];
+        // ... (Mantengo tu lógica de JavaScript que ya funciona perfectamente) ...
+        const telefono = "5565796506";
+        const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
 
         function cambiarPortadaAleatoria() {
-            // Elige un número al azar entre 0 y el total de fotos
             const indiceAleatorio = Math.floor(Math.random() * imagenesPortada.length);
-            const imagenElegida = imagenesPortada[indiceAleatorio];
-            
-            // Aplica la imagen al fondo del Hero
-            document.getElementById('hero-principal').style.backgroundImage = `url('${imagenElegida}')`;
+            const hero = document.getElementById('hero-principal');
+            if(hero) hero.style.backgroundImage = `url('${imagenesPortada[indiceAleatorio]}')`;
         }
-
-        // Ejecutar al cargar la página
         cambiarPortadaAleatoria();
 
-
-        /* --- 2. SLIDER AUTOMÁTICO --- */
         let slideIndex = 0;
+        function iniciarSlider() {
+            let slides = document.getElementsByClassName("slide");
+            if(slides.length === 0) return;
+            for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+            slideIndex++;
+            if (slideIndex > slides.length) slideIndex = 1;
+            slides[slideIndex-1].style.display = "block";
+            setTimeout(iniciarSlider, 4000);
+        }
         iniciarSlider();
 
-        function iniciarSlider() {
-            let i;
-            let slides = document.getElementsByClassName("slide");
-            // Si no hay slides, no hacemos nada para evitar errores
-            if(slides.length === 0) return;
-
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            slides[slideIndex-1].style.display = "block";  
-            setTimeout(iniciarSlider, 3000); // Cambia imagen cada 3 segundos
-        }
-
-        /* --- 3. COTIZADOR Y CALENDARIO --- */
         let salonActual = "";
         let personas = "";
         let date = new Date();
@@ -297,19 +350,17 @@
 
         function abrirCotizador(nombre) {
             salonActual = nombre;
-            document.getElementById("titulo-modal").innerText = "Cotizando " + nombre;
+            document.getElementById("titulo-modal").innerText = nombre;
             document.getElementById("miVentanaModal").style.display = "flex";
             document.getElementById("vista-personas").style.display = "block";
             document.getElementById("vista-calendario").style.display = "none";
         }
 
-        function cerrarVentana() {
-            document.getElementById("miVentanaModal").style.display = "none";
-        }
+        function cerrarVentana() { document.getElementById("miVentanaModal").style.display = "none"; }
 
         function irAlCalendario() {
             let input = document.getElementById("inputPersonas").value;
-            if(!input) return alert("Escribe el número de personas");
+            if(!input) return alert("Por favor, ingresa el número de invitados");
             personas = input;
             document.getElementById("vista-personas").style.display = "none";
             document.getElementById("vista-calendario").style.display = "block";
@@ -322,13 +373,10 @@
             let firstDay = new Date(currYear, currMonth, 1).getDay();
             let lastDate = new Date(currYear, currMonth + 1, 0).getDate();
             let liTag = "";
-
             for (let i = 0; i < firstDay; i++) liTag += `<li></li>`;
-            
             for (let i = 1; i <= lastDate; i++) {
                 liTag += `<li onclick="enviarWhats(${i}, '${meses[currMonth]}')">${i}</li>`;
             }
-            
             fechaTag.innerText = `${meses[currMonth]} ${currYear}`;
             diasTag.innerHTML = liTag;
         }
@@ -344,12 +392,11 @@
         }
 
         function enviarWhats(dia, mes) {
-            let msg = `Hola, quiero cotizar:\nSalón: ${salonActual}\nPersonas: ${personas}\nFecha: ${dia} de ${mes}`;
+            let msg = `*SOLICITUD DE COTIZACIÓN*\n\n📍 *Salón:* ${salonActual}\n👥 *Invitados:* ${personas}\n📅 *Fecha deseada:* ${dia} de ${mes} ${currYear}\n\nMe gustaría recibir más información.`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
     </script>
 </body>
 </html>
-
 
 
