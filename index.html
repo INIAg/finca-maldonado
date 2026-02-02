@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- VARIABLES MEJORADAS --- */
+        /* --- VARIABLES --- */
         :root {
             --dorado: #D4AF37;
             --dorado-light: #f1d592;
@@ -153,6 +153,54 @@
         }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
+        /* --- GALERÍA / SLIDER --- */
+        .galeria-section { padding: 80px 20px; background: #080808; text-align: center; }
+        .slider-container {
+            position: relative; max-width: 1000px; margin: 50px auto;
+            height: 500px; overflow: hidden; border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+        }
+        .slide { display: none; height: 100%; width: 100%; animation: fade 1.2s; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        
+        @keyframes fade { from {opacity: 0.6} to {opacity: 1} }
+
+        /* --- NUEVA SECCIÓN UBICACIÓN --- */
+        .ubicacion-section {
+            padding: 100px 20px;
+            background: linear-gradient(to top, #000000, #080808); /* Transición suave al footer */
+            text-align: center;
+        }
+
+        .contenedor-mapa {
+            max-width: 1000px;
+            margin: 40px auto 0;
+            padding: 10px;
+            border: 1px solid var(--dorado);
+            background: rgba(212, 175, 55, 0.05); /* Brillo dorado muy sutil */
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        .contenedor-mapa iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            display: block;
+            /* Filtro opcional para oscurecer un poco el mapa (si quieres el mapa normal, borra la linea de abajo) */
+            filter: grayscale(20%) contrast(90%); 
+        }
+
+        .datos-direccion {
+            margin-top: 30px;
+            color: var(--gris-texto);
+            font-size: 1.1rem;
+        }
+
+        .icono-dorado {
+            color: var(--dorado);
+            margin-right: 10px;
+        }
+
         /* --- MODAL ESTILO GLASS --- */
         .modal {
             display: none; position: fixed; z-index: 9999;
@@ -196,22 +244,11 @@
         .days li { cursor: pointer; transition: 0.2s; border-radius: 50%; }
         .days li:hover:not(:empty) { background: var(--dorado); color: black; font-weight: bold; }
 
-        /* --- GALERÍA / SLIDER --- */
-        .galeria-section { padding: 80px 20px; background: #080808; text-align: center; }
-        .slider-container {
-            position: relative; max-width: 1000px; margin: 50px auto;
-            height: 500px; overflow: hidden; border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-        }
-        .slide { display: none; height: 100%; width: 100%; animation: fade 1.2s; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
-        
-        @keyframes fade { from {opacity: 0.6} to {opacity: 1} }
-
         footer { 
             padding: 60px 20px; text-align: center; 
             border-top: 1px solid #111; color: #666; font-size: 0.8rem; 
             letter-spacing: 1px;
+            background: #000;
         }
     </style>
 </head>
@@ -283,6 +320,26 @@
         </div>
     </section>
 
+    <section class="ubicacion-section" id="ubicacion">
+        <h2 style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;">Cómo Llegar</h2>
+        <p style="color: var(--gris-texto); margin-top: 10px;">Te esperamos en nuestro paraíso escondido</p>
+        
+        <div class="contenedor-mapa">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.661605389656!2d-99.16869368468305!3d19.427024586887533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c366f0e2de02ff7!2sEl%20%C3%81ngel%20de%20la%20Independencia!5e0!3m2!1ses-419!2smx!4v1645564856321!5m2!1ses-419!2smx" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <div class="datos-direccion">
+            <p><i class="fas fa-map-marker-alt icono-dorado"></i> Carretera Federal México - Cuautla Km 32</p>
+            <br>
+            <a href="https://www.google.com/maps/place/Finca+Maldonado/@19.6641046,-99.1639904,324m/data=!3m1!1e3!4m6!3m5!1s0x85d1f5a11623f67f:0xb0ef1bcd0b67959c!8m2!3d19.6640829!4d-99.1631533!16s%2Fg%2F11g89fsdbg?entry=ttu&g_ep=EgoyMDI2MDEyOC4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D" target="_blank" class="btn-dorado" style="font-size: 0.8rem; padding: 10px 30px;">
+                <i class="fas fa-location-arrow"></i> Ver en GPS
+            </a>
+        </div>
+    </section>
     <div id="miVentanaModal" class="modal">
         <div class="modal-content">
             <span class="cerrar" onclick="cerrarVentana()">&times;</span>
@@ -318,7 +375,7 @@
     </footer>
 
     <script>
-        // ... (Mantengo tu lógica de JavaScript que ya funciona perfectamente) ...
+        // --- JAVASCRIPT ---
         const telefono = "5565796506";
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
 
@@ -398,5 +455,3 @@
     </script>
 </body>
 </html>
-
-
