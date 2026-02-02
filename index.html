@@ -165,10 +165,90 @@
         
         @keyframes fade { from {opacity: 0.6} to {opacity: 1} }
 
-        /* --- NUEVA SECCIÓN UBICACIÓN --- */
+        /* --- ESTILOS DEL ROBOT LED (NUEVO) --- */
+        .robot-section {
+            padding: 80px 20px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .robot-container {
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap; 
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .robot-info {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .robot-info h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: var(--gradient-oro);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .robot-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .robot-features li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            color: #ddd;
+        }
+
+        .robot-features i {
+            color: var(--dorado);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--dorado);
+        }
+
+        .robot-img-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .robot-img-box img {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid var(--dorado);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .robot-img-box:hover img {
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .robot-container { flex-direction: column-reverse; }
+            .robot-info { text-align: center; }
+            .robot-features li { justify-content: center; }
+        }
+
+        /* --- SECCIÓN UBICACIÓN --- */
         .ubicacion-section {
             padding: 100px 20px;
-            background: linear-gradient(to top, #000000, #080808); /* Transición suave al footer */
+            background: linear-gradient(to top, #000000, #080808); 
             text-align: center;
         }
 
@@ -177,7 +257,7 @@
             margin: 40px auto 0;
             padding: 10px;
             border: 1px solid var(--dorado);
-            background: rgba(212, 175, 55, 0.05); /* Brillo dorado muy sutil */
+            background: rgba(212, 175, 55, 0.05); 
             box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
 
@@ -186,7 +266,6 @@
             height: 450px;
             border: none;
             display: block;
-            /* Filtro opcional para oscurecer un poco el mapa (si quieres el mapa normal, borra la linea de abajo) */
             filter: grayscale(20%) contrast(90%); 
         }
 
@@ -318,7 +397,32 @@
                 <img src="img/jardin.jpg" alt="Vista 3">
             </div>
         </div>
- <section class="ubicacion-section" id="ubicacion">
+    </section>
+
+    <section class="robot-section">
+        <div class="robot-container">
+            <div class="robot-info">
+                <h2>El Alma de la Fiesta</h2>
+                <p style="color: var(--gris-texto); font-size: 1.1rem; line-height: 1.8;">
+                    Lleva tu evento al siguiente nivel con nuestro exclusivo show de <strong>Robot LED</strong>. 
+                    Una experiencia visual impactante que llenará la pista de baile de energía, luces y diversión inolvidable.
+                </p>
+                <ul class="robot-features">
+                    <li><i class="fas fa-bolt"></i> Show de Luces LED Sincronizadas</li>
+                    <li><i class="fas fa-music"></i> Coreografías y Animación en Pista</li>
+                    <li><i class="fas fa-camera"></i> Sesión de Fotos con tus Invitados</li>
+                    <li><i class="fas fa-cloud"></i> Disparos de CO2 (Efecto Humo Frío)</li>
+                </ul>
+                <button class="btn-dorado" onclick="abrirCotizador('Show Robot LED')">
+                    Agregar a mi Evento
+                </button>
+            </div>
+            <div class="robot-img-box">
+                <img src="img/robot.jpg" alt="Robot LED Finca Maldonado" onerror="this.src='https://images.unsplash.com/photo-1535295972055-1c762f4483e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+            </div>
+        </div>
+    </section>
+    <section class="ubicacion-section" id="ubicacion">
         <h2 style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;">Cómo Llegar</h2>
         <p style="color: var(--gris-texto); margin-top: 10px;">Te esperamos en Finca Maldonado</p>
         
@@ -341,9 +445,10 @@
             </a>
         </div>
     </section>
+
     <div id="miVentanaModal" class="modal">
         <div class="modal-content">
-            <span class="cerrar" onclick="cerrarVentana()">&times;</span>
+            <span class="cerrar" onclick="cerrarVentana()">×</span>
             <div id="vista-personas">
                 <h2 id="titulo-modal" style="font-size: 1.4rem;">Cotizando</h2>
                 <p style="color: var(--gris-texto); margin-top: 10px;">¿Cuántos invitados esperas?</p>
@@ -355,9 +460,9 @@
                 <h2 style="font-size: 1.4rem;">Selecciona la Fecha</h2>
                 <div class="wrapper-calendario">
                     <header class="calendario-header">
-                        <span id="prev" onclick="cambiarMes(-1)" style="cursor:pointer; color: var(--dorado);">&#10094;</span>
+                        <span id="prev" onclick="cambiarMes(-1)" style="cursor:pointer; color: var(--dorado);">❮</span>
                         <p id="mes-actual"></p>
-                        <span id="next" onclick="cambiarMes(1)" style="cursor:pointer; color: var(--dorado);">&#10095;</span>
+                        <span id="next" onclick="cambiarMes(1)" style="cursor:pointer; color: var(--dorado);">❯</span>
                     </header>
                     <div class="calendario">
                         <ul class="weeks">
@@ -371,7 +476,7 @@
     </div>
 
     <footer>
-        <p>FINCA MALDONADO &copy; 2026</p>
+        <p>FINCA MALDONADO © 2026</p>
         <p style="margin-top: 10px; font-size: 0.6rem; opacity: 0.5;">TODOS LOS DERECHOS RESERVADOS</p>
     </footer>
 
@@ -456,7 +561,3 @@
     </script>
 </body>
 </html>
-
-
-
-
