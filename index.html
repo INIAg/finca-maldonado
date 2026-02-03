@@ -217,7 +217,7 @@
             100% { transform: scale(1); opacity: 0.5; }
         }
         
-        /* --- ESTILOS NUEVOS: SEPARADOR Y RESTAURANTE --- */
+        /* --- ESTILOS NUEVOS: SEPARADOR Y RESTAURANTE (VERSIÓN DARK/GOLD) --- */
         
         /* 1. Separador de Ola */
         .separador-dorado {
@@ -226,7 +226,8 @@
             width: 100%;
             overflow: hidden;
             line-height: 0;
-            background-color: var(--blanco-restaurante, #f4f4f4); /* El fondo debe coincidir con la sig sección */
+            /* EL FONDO AHORA ES NEGRO PARA COINCIDIR CON LA SIGUIENTE SECCIÓN */
+            background-color: #080808; /* Un negro ligeramente distinto al fondo principal */
         }
 
         .separador-dorado svg {
@@ -237,61 +238,86 @@
             transform: rotate(180deg); /* Ola invertida */
         }
 
+        /* LA OLA AHORA ES DORADA */
         .separador-dorado .shape-fill {
-            fill: #000000; /* Color de la sección ANTERIOR (Robot/Negro) */
+            fill: var(--dorado);
         }
 
-        /* 2. Sección Restaurante */
+        /* 2. Sección Restaurante OSCURA */
         .seccion-restaurante {
-            background-color: #f4f4f4; /* Fondo claro */
+            /* FONDO NEGRO */
+            background-color: #080808; 
             padding: 60px 20px 100px 20px;
-            color: #333;
+            /* TEXTO BASE BLANCO */
+            color: var(--blanco);
         }
 
         .titulo-restaurante {
-            text-align: center; font-size: 2.5rem; color: #000;
+            text-align: center; font-size: 2.5rem; 
+            /* TÍTULO DORADO */
+            color: var(--dorado);
             margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;
             font-family: var(--fuente-titulo);
         }
 
         .subtitulo-restaurante {
-            text-align: center; color: #666; margin-bottom: 40px;
+            text-align: center; 
+            /* SUBTÍTULO GRIS CLARO */
+            color: var(--gris-texto); 
+            margin-bottom: 40px;
         }
 
-        .submenu-restaurante {
-            display: flex; justify-content: center; gap: 15px;
-            margin-bottom: 40px; flex-wrap: wrap;
-        }
-
+        /* Submenú Botones */
         .btn-menu {
             background: transparent; border: 2px solid var(--dorado);
-            color: #333; padding: 10px 25px; cursor: pointer;
+            /* TEXTO DORADO EN REPOSO */
+            color: var(--dorado); 
+            padding: 10px 25px; cursor: pointer;
             font-weight: bold; border-radius: 30px; transition: all 0.3s ease;
             font-family: var(--fuente-texto);
         }
 
         .btn-menu:hover, .btn-menu.activo {
-            background-color: var(--dorado); color: white;
+            background-color: var(--dorado); 
+            /* TEXTO NEGRO AL PASAR EL MOUSE PARA CONTRASTE */
+            color: black;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); /* Un brillito extra */
         }
 
+        /* Grid de Platillos */
         .menu-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px; max-width: 1000px; margin: 0 auto;
         }
 
         .tarjeta-platillo {
-            background: white; padding: 20px; border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;
+            /* FONDO DE TARJETA NEGRO */
+            background: var(--negro-card); 
+            border: 1px solid #333; /* Borde sutil */
+            padding: 20px; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-align: center;
             transition: 0.3s;
         }
 
-        .foto-platillo {
-            width: 100%; height: 200px; background-color: #ddd;
-            background-size: cover; background-position: center;
-            border-radius: 5px; margin-bottom: 15px;
+        /* HOVER EN TARJETA */
+        .tarjeta-platillo:hover {
+            border-color: var(--dorado);
+            transform: translateY(-5px);
+             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
         }
 
-        .tarjeta-platillo h3 { margin: 10px 0; font-family: var(--fuente-titulo); color: #000; }
+        .foto-platillo {
+            width: 100%; height: 200px; background-color: #222; /* Gris más oscuro de carga */
+            background-size: cover; background-position: center;
+            border-radius: 5px; margin-bottom: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3); /* Borde fino dorado a la foto */
+        }
+
+        .tarjeta-platillo h3 { 
+            margin: 10px 0; font-family: var(--fuente-titulo); 
+            /* TÍTULO DEL PLATILLO BLANCO/DORADO */
+            color: var(--blanco); 
+        }
         
         .precio {
             display: block; margin-top: 10px; color: var(--dorado);
@@ -299,13 +325,17 @@
         }
 
         .btn-reservar-mesa {
-            background-color: #000; color: var(--dorado);
+            /* BOTÓN INVERTIDO: FONDO DORADO, TEXTO NEGRO */
+            background-color: var(--dorado); 
+            color: black;
             padding: 15px 40px; text-decoration: none;
             font-weight: bold; border-radius: 5px; display: inline-block;
             transition: 0.3s;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
         .btn-reservar-mesa:hover {
-            transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: translateY(-3px); box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            background-color: var(--dorado-light);
         }
 
 
@@ -313,7 +343,7 @@
         .ubicacion-section {
             padding: 100px 20px;
             /* Degradado sutil para volver al negro */
-            background: linear-gradient(to top, #000000, #111111); 
+            background: linear-gradient(to top, #000000, #080808); 
             text-align: center;
         }
 
