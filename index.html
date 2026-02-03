@@ -169,7 +169,6 @@
         /* --- SECCIÓN ROBOT: GRAVEDAD CERO (FLUIDO) --- */
         .robot-space-section {
             padding: 100px 20px;
-            /* Fondo Negro profundo con un toque de luz azul en el centro */
             background: radial-gradient(circle at center, #0a1020 0%, #000000 80%);
             text-align: center;
             overflow: hidden;
@@ -179,109 +178,164 @@
         }
 
         .robot-title {
-            font-size: 3rem;
-            color: #fff;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            /* Efecto de texto brillante elegante */
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            font-size: 3rem; color: #fff; margin-bottom: 10px;
+            text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         }
 
         .robot-subtitle {
-            color: var(--neon-azul);
-            font-size: 1rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-            opacity: 0.8;
+            color: var(--neon-azul); font-size: 1rem; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 50px; opacity: 0.8;
         }
 
-        /* Contenedor de la Imagen */
         .robot-image-container {
-            position: relative;
-            max-width: 350px; /* Tamaño controlado para que no se vea gigante */
-            width: 100%;
-            z-index: 10;
-            
-            /* ANIMACIÓN DE LEVITACIÓN SUAVE */
+            position: relative; max-width: 350px; width: 100%; z-index: 10;
             animation: levitar 6s ease-in-out infinite;
         }
 
         .robot-img {
-            width: 100%;
-            border-radius: 20px;
-            /* Borde sutil */
+            width: 100%; border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            /* Sombra suave de color azul para dar profundidad */
             box-shadow: 0 10px 50px rgba(0, 243, 255, 0.15);
         }
 
-        /* Efecto de "Plataforma" o sombra en el piso */
         .robot-shadow {
-            width: 200px;
-            height: 20px;
+            width: 200px; height: 20px;
             background: radial-gradient(ellipse at center, rgba(0, 243, 255, 0.3) 0%, rgba(0,0,0,0) 70%);
-            margin-top: 30px;
-            border-radius: 50%;
-            /* La sombra se hace pequeña cuando el robot sube */
+            margin-top: 30px; border-radius: 50%;
             animation: sombra-latido 6s ease-in-out infinite;
         }
 
-        /* Keyframes para la animación suave */
         @keyframes levitar {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-25px); } /* Sube suavemente */
+            50% { transform: translateY(-25px); }
             100% { transform: translateY(0px); }
         }
 
         @keyframes sombra-latido {
             0% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(0.8); opacity: 0.3; } /* Se achica cuando el robot se aleja */
+            50% { transform: scale(0.8); opacity: 0.3; }
             100% { transform: scale(1); opacity: 0.5; }
+        }
+        
+        /* --- ESTILOS NUEVOS: SEPARADOR Y RESTAURANTE --- */
+        
+        /* 1. Separador de Ola */
+        .separador-dorado {
+            position: relative;
+            top: -1px; 
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            background-color: var(--blanco-restaurante, #f4f4f4); /* El fondo debe coincidir con la sig sección */
+        }
+
+        .separador-dorado svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 60px;
+            transform: rotate(180deg); /* Ola invertida */
+        }
+
+        .separador-dorado .shape-fill {
+            fill: #000000; /* Color de la sección ANTERIOR (Robot/Negro) */
+        }
+
+        /* 2. Sección Restaurante */
+        .seccion-restaurante {
+            background-color: #f4f4f4; /* Fondo claro */
+            padding: 60px 20px 100px 20px;
+            color: #333;
+        }
+
+        .titulo-restaurante {
+            text-align: center; font-size: 2.5rem; color: #000;
+            margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;
+            font-family: var(--fuente-titulo);
+        }
+
+        .subtitulo-restaurante {
+            text-align: center; color: #666; margin-bottom: 40px;
+        }
+
+        .submenu-restaurante {
+            display: flex; justify-content: center; gap: 15px;
+            margin-bottom: 40px; flex-wrap: wrap;
+        }
+
+        .btn-menu {
+            background: transparent; border: 2px solid var(--dorado);
+            color: #333; padding: 10px 25px; cursor: pointer;
+            font-weight: bold; border-radius: 30px; transition: all 0.3s ease;
+            font-family: var(--fuente-texto);
+        }
+
+        .btn-menu:hover, .btn-menu.activo {
+            background-color: var(--dorado); color: white;
+        }
+
+        .menu-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; max-width: 1000px; margin: 0 auto;
+        }
+
+        .tarjeta-platillo {
+            background: white; padding: 20px; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;
+            transition: 0.3s;
+        }
+
+        .foto-platillo {
+            width: 100%; height: 200px; background-color: #ddd;
+            background-size: cover; background-position: center;
+            border-radius: 5px; margin-bottom: 15px;
+        }
+
+        .tarjeta-platillo h3 { margin: 10px 0; font-family: var(--fuente-titulo); color: #000; }
+        
+        .precio {
+            display: block; margin-top: 10px; color: var(--dorado);
+            font-weight: bold; font-size: 1.2rem;
+        }
+
+        .btn-reservar-mesa {
+            background-color: #000; color: var(--dorado);
+            padding: 15px 40px; text-decoration: none;
+            font-weight: bold; border-radius: 5px; display: inline-block;
+            transition: 0.3s;
+        }
+        .btn-reservar-mesa:hover {
+            transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
 
         /* --- SECCIÓN UBICACIÓN --- */
         .ubicacion-section {
             padding: 100px 20px;
-            background: linear-gradient(to top, #000000, #080808); 
+            /* Degradado sutil para volver al negro */
+            background: linear-gradient(to top, #000000, #111111); 
             text-align: center;
         }
 
         .contenedor-mapa {
-            max-width: 1000px;
-            margin: 40px auto 0;
-            padding: 10px;
-            border: 1px solid var(--dorado);
-            background: rgba(212, 175, 55, 0.05); 
+            max-width: 1000px; margin: 40px auto 0; padding: 10px;
+            border: 1px solid var(--dorado); background: rgba(212, 175, 55, 0.05); 
             box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
 
         .contenedor-mapa iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-            display: block;
+            width: 100%; height: 450px; border: none; display: block;
             filter: grayscale(20%) contrast(90%); 
         }
 
-        .datos-direccion {
-            margin-top: 30px;
-            color: var(--gris-texto);
-            font-size: 1.1rem;
-        }
-
-        .icono-dorado {
-            color: var(--dorado);
-            margin-right: 10px;
-        }
+        .datos-direccion { margin-top: 30px; color: var(--gris-texto); font-size: 1.1rem; }
+        .icono-dorado { color: var(--dorado); margin-right: 10px; }
 
         /* --- MODAL --- */
         .modal {
             display: none; position: fixed; z-index: 9999;
             left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.85);
-            backdrop-filter: blur(8px);
+            background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
             align-items: center; justify-content: center;
         }
         .modal-content {
@@ -317,8 +371,12 @@
         footer { 
             padding: 60px 20px; text-align: center; 
             border-top: 1px solid #111; color: #666; font-size: 0.8rem; 
-            letter-spacing: 1px;
-            background: #000;
+            letter-spacing: 1px; background: #000;
+        }
+        
+        /* Ajuste Responsive de la ola */
+        @media (max-width: 767px) {
+            .separador-dorado svg { height: 30px; }
         }
     </style>
 </head>
@@ -403,6 +461,62 @@
         <p style="color: #ccc; margin-top: 40px; font-size: 1.1rem; max-width: 600px;">
             Una experiencia visual futurista que iluminará tu evento.
         </p>
+    </section>
+
+    <div class="separador-dorado">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+        </svg>
+    </div>
+
+    <section id="restaurante" class="seccion-restaurante">
+        <div class="contenedor">
+            
+            <h2 class="titulo-restaurante">NUESTRO RESTAURANTE</h2>
+            <p class="subtitulo-restaurante">Sabores de la Finca a tu mesa</p>
+
+            <div class="submenu-restaurante">
+                <button class="btn-menu activo" onclick="filtrarMenu('todos', event)">Todo</button>
+                <button class="btn-menu" onclick="filtrarMenu('desayuno', event)">Desayunos</button>
+                <button class="btn-menu" onclick="filtrarMenu('comida', event)">Comidas</button>
+                <button class="btn-menu" onclick="filtrarMenu('bebida', event)">Bebidas</button>
+            </div>
+
+            <div class="menu-grid" id="grid-platillos">
+                <div class="tarjeta-platillo categoria-desayuno">
+                    <div class="foto-platillo" style="background-image: url('img/desayuno1.jpg');"></div>
+                    <h3>Chilaquiles Finca</h3>
+                    <p>Salsa verde artesanal, crema de rancho y cecina.</p>
+                    <span class="precio">$120</span>
+                </div>
+                
+                <div class="tarjeta-platillo categoria-comida">
+                    <div class="foto-platillo" style="background-image: url('img/comida1.jpg');"></div>
+                    <h3>Asado de Puerco</h3>
+                    <p>La especialidad de la casa con arroz rojo.</p>
+                    <span class="precio">$180</span>
+                </div>
+
+                <div class="tarjeta-platillo categoria-bebida">
+                    <div class="foto-platillo" style="background-image: url('img/bebida1.jpg');"></div>
+                    <h3>Margarita de Mango</h3>
+                    <p>Tequila reposado con fruta natural.</p>
+                    <span class="precio">$95</span>
+                </div>
+
+                 <div class="tarjeta-platillo categoria-comida">
+                    <div class="foto-platillo" style="background-image: url('img/comida2.jpg');"></div>
+                    <h3>Parrillada Mixta</h3>
+                    <p>Para compartir: arrachera, chorizo y nopalitos.</p>
+                    <span class="precio">$350</span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20mesa%20en%20el%20restaurante" target="_blank" class="btn-reservar-mesa">Reservar Mesa</a>
+            </div>
+
+        </div>
     </section>
     <section class="ubicacion-section" id="ubicacion">
         <h2 style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;">Cómo Llegar</h2>
@@ -539,7 +653,26 @@
             let msg = `*SOLICITUD DE COTIZACIÓN*\n\n📍 *Salón:* ${salonActual}\n👥 *Invitados:* ${personas}\n📅 *Fecha deseada:* ${dia} de ${mes} ${currYear}\n\nMe gustaría recibir más información.`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
+
+        // --- LÓGICA FILTRO RESTAURANTE (NUEVO) ---
+        function filtrarMenu(categoria, event) {
+            // 1. Quitar clase "activo" a todos los botones
+            let botones = document.querySelectorAll('.btn-menu');
+            botones.forEach(btn => btn.classList.remove('activo'));
+            
+            // 2. Poner clase "activo" al botón clickeado
+            if(event) event.currentTarget.classList.add('activo');
+
+            // 3. Filtrar platillos
+            let platillos = document.querySelectorAll('.tarjeta-platillo');
+            platillos.forEach(plat => {
+                if(categoria === 'todos' || plat.classList.contains('categoria-' + categoria)) {
+                    plat.style.display = 'block';
+                } else {
+                    plat.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
-
