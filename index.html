@@ -41,17 +41,18 @@
             letter-spacing: 2px;
         }
 
-        /* --- FONDO DE ESTRELLAS (BACKGROUND FIX) --- */
-        .fondo-animado {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-            z-index: -10; /* Detrás de todo */
-            overflow: hidden;
-        }
+        /* --- FONDO DE ESTRELLAS (VERSIÓN BLACK LUXURY) --- */
+.fondo-animado {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* CAMBIO: De azul a un degradado negro sutil para dar profundidad sin verse azul */
+    background: radial-gradient(ellipse at bottom, #1a1a1a 0%, #000000 100%);
+    z-index: -10; 
+    overflow: hidden;
+}
 
         /* Animaciones de estrellas (Tu código CSS pegado aquí) */
         #stars {
@@ -499,3 +500,4 @@
     </script>
 </body>
 </html>
+
