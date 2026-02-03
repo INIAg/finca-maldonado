@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Finca Maldonado | Eventos & Restaurante</title>
+    <meta name="description" content="Ven a conocer el mejor lugar en Cuautitlán. Bodas, XV Años y gastronomía mexicana de alta calidad bajo las estrellas.">
+    <meta property="og:title" content="Finca Maldonado | Eventos Exclusivos y Restaurante">
+    <meta property="og:description" content="Salones de lujo, Robot LED y la mejor comida de la región.">
+    <meta property="og:image" content="img/salon.jpg">
+    <meta property="og:type" content="website">
+
     <link rel="icon" type="image/jpeg" href="img/logo.jpg">
+
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -15,7 +23,7 @@
             --dorado-light: #f1d592;
             --gradient-oro: linear-gradient(135deg, #af8910 0%, #D4AF37 50%, #f1d592 100%);
             --negro-fondo: #050505;
-            --negro-card: rgba(18, 18, 18, 0.9);
+            --negro-card: rgba(18, 18, 18, 0.95);
             --blanco: #ffffff;
             --gris-texto: #b0b0b0;
             --fuente-titulo: 'Cinzel', serif;
@@ -23,6 +31,7 @@
             --neon-azul: #00f3ff;
         }
 
+        /* --- RESET Y BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
@@ -31,19 +40,37 @@
             font-family: var(--fuente-texto);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: 85px;
+            padding-top: 85px; /* Espacio para navbar fija */
         }
 
         h1, h2, h3 { font-family: var(--fuente-titulo); letter-spacing: 2px; }
 
-        /* --- FONDO DE ESTRELLAS --- */
+        /* --- PRELOADER (PANTALLA DE CARGA) --- */
+        #preloader {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: #000; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .spinner-dorado {
+            width: 60px; height: 60px;
+            border: 5px solid rgba(212, 175, 55, 0.3);
+            border-top: 5px solid #D4AF37;
+            border-radius: 50%;
+            animation: girar 1s linear infinite;
+        }
+        @keyframes girar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* --- FONDO DE ESTRELLAS ANIMADO (NEGRO PURO) --- */
         .fondo-animado { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at bottom, #1a1a1a 0%, #000000 100%); z-index: -10; overflow: hidden; }
-        #stars, #stars2, #stars3 { width: 1px; height: 1px; background: transparent; animation: animStar 50s linear infinite; box-shadow: 100px 200px #fff, 500px 800px #fff, 900px 100px #fff, 1200px 300px #fff; }
-        #stars2 { width: 2px; height: 2px; animation: animStar 100s linear infinite; }
-        #stars3 { width: 3px; height: 3px; animation: animStar 150s linear infinite; }
+        #stars, #stars2, #stars3 { width: 1px; height: 1px; background: transparent; animation: animStar 50s linear infinite; box-shadow: 501px 811px #fff, 100px 200px #fff, 900px 100px #fff; /* Resumido para no saturar, el script genera el efecto visual */ }
+        #stars { box-shadow: 100px 200px #fff, 500px 800px #fff, 900px 100px #fff, 1200px 300px #fff, 1500px 600px #fff, 1800px 200px #fff, 200px 500px #fff; }
+        #stars2 { width: 2px; height: 2px; animation: animStar 100s linear infinite; box-shadow: 300px 400px #fff, 600px 900px #fff, 100px 800px #fff; }
+        #stars3 { width: 3px; height: 3px; animation: animStar 150s linear infinite; box-shadow: 150px 250px #fff, 400px 700px #fff; }
+        
         @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-2000px); } }
 
-        /* --- SCROLL REVEAL --- */
+        /* --- SCROLL REVEAL (ANIMACIÓN AL BAJAR) --- */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -51,61 +78,36 @@
         .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 85px; background-color: rgba(5, 5, 5, 0.95); border-bottom: 1px solid var(--dorado); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
         .nav-logo { font-family: var(--fuente-titulo); color: var(--dorado); font-size: 1.2rem; font-weight: bold; text-transform: uppercase; }
         
+        .hamburger { display: none; font-size: 1.8rem; color: var(--dorado); cursor: pointer; }
         .nav-menu { display: flex; gap: 20px; transition: 0.3s; }
 
-        /* --- ICONO HAMBURGUESA (Oculto en PC) --- */
-        .hamburger {
-            display: none; /* Por defecto no se ve */
-            font-size: 1.8rem;
-            color: var(--dorado);
-            cursor: pointer;
-        }
-
-        /* --- MEDIA QUERY: ESTO ES LO QUE CAMBIA EN EL CELULAR --- */
         @media (max-width: 768px) {
-            .hamburger { display: block; } /* En celular SÍ se ve la hamburguesa */
-
-            /* El menú se convierte en una caja lateral o pantalla completa */
-            .nav-menu {
-                position: fixed;
-                top: 85px; /* Debajo de la barra */
-                left: -100%; /* Escondido a la izquierda */
-                width: 100%;
-                height: calc(100vh - 85px);
-                background-color: rgba(0, 0, 0, 0.98);
-                flex-direction: column; /* Botones uno abajo del otro */
-                align-items: center;
-                justify-content: center;
-                gap: 40px;
-                transition: 0.4s ease;
-            }
-
-            .nav-menu.active {
-                left: 0; /* Aparece al activarse */
-            }
+            .hamburger { display: block; } 
+            .nav-menu { position: fixed; top: 85px; left: -100%; width: 100%; height: calc(100vh - 85px); background-color: rgba(0, 0, 0, 0.98); flex-direction: column; align-items: center; justify-content: center; gap: 40px; transition: 0.4s ease; border-top: 1px solid #333; }
+            .nav-menu.active { left: 0; }
         }
 
         /* --- BOTONES STAR --- */
         .btn-star { position: relative; padding: 10px 25px; background: #000000; font-size: 14px; font-weight: 600; color: var(--dorado); border: 2px solid var(--dorado); border-radius: 8px; transition: all 0.3s ease-in-out; cursor: pointer; font-family: var(--fuente-texto); text-transform: uppercase; overflow: hidden; }
         .btn-star:hover, .btn-star.activo { background: var(--dorado); color: #000; box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
         .btn-star svg { fill: var(--dorado); }
-        /* (Estrellas CSS resumidas para ahorrar espacio, funcionan igual) */
         .star-1, .star-2, .star-3, .star-4, .star-5, .star-6 { position: absolute; width: 10px; height: auto; z-index: -5; transition: 0.5s; opacity: 0; }
         .btn-star:hover .star-1 { top: -80%; left: -30%; opacity: 1; } 
-        /* ... resto de animaciones de estrellas ... */
+        /* (El resto de las estrellas usan la misma lógica en el hover, simplificado aquí) */
 
         /* --- VISTAS --- */
         .vista-seccion { display: none; animation: fadeIn 0.8s ease; }
         .vista-activa { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* HERO, SALONES, ETC (Igual que antes) */
+        /* --- HERO --- */
         .hero { height: calc(100vh - 85px); background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; transition: background-image 1.2s ease-in-out; }
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%); }
         .hero-content { position: relative; z-index: 2; padding: 20px; max-width: 800px; }
         .logo-principal { width: 180px; margin-bottom: 30px; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); }
         .hero h1 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 20px; text-transform: uppercase; background: var(--gradient-oro); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
         
+        /* --- QUIENES SOMOS --- */
         .quienes-somos { padding: 80px 20px; background: rgba(10, 10, 10, 0.8); border-bottom: 1px solid #222; }
         .qs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1100px; margin: 0 auto; align-items: center; }
         .qs-texto h2 { color: var(--dorado); font-size: 2.5rem; margin-bottom: 20px; }
@@ -115,9 +117,11 @@
         .qs-img:hover img { filter: sepia(0%); }
         @media (max-width: 768px) { .qs-grid { grid-template-columns: 1fr; } }
 
+        /* --- BOTONES DORADOS --- */
         .btn-dorado { padding: 15px 40px; border: 1px solid var(--dorado); color: var(--dorado); text-decoration: none; text-transform: uppercase; font-weight: 600; letter-spacing: 2px; transition: all 0.4s ease; background: rgba(0,0,0,0.3); cursor: pointer; display: inline-block; backdrop-filter: blur(5px); }
         .btn-dorado:hover { background: var(--gradient-oro); color: black; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); transform: translateY(-3px); }
 
+        /* --- SALONES --- */
         .salones { padding: 100px 20px; text-align: center; }
         .grid-salones { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
         .card-salon { background: var(--negro-card); border: 1px solid #222; overflow: hidden; transition: 0.5s; position: relative; border-radius: 4px; }
@@ -130,8 +134,10 @@
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
+        /* --- RESTAURANTE --- */
         .seccion-restaurante { padding: 50px 20px 100px 20px; color: var(--blanco); text-align: center; }
         .titulo-restaurante { font-size: 3rem; color: var(--dorado); margin-bottom: 10px; text-transform: uppercase; }
+        .subtitulo-restaurante { color: var(--gris-texto); margin-bottom: 50px; }
         .submenu-restaurante { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
         .btn-menu { background: transparent; border: 2px solid var(--dorado); color: var(--dorado); padding: 10px 25px; cursor: pointer; font-weight: bold; border-radius: 30px; transition: all 0.3s ease; }
         .btn-menu:hover, .btn-menu.activo { background-color: var(--dorado); color: black; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
@@ -141,6 +147,7 @@
         .foto-platillo { width: 100%; height: 200px; background-color: #222; background-size: cover; background-position: center; border-radius: 5px; margin-bottom: 15px; border: 1px solid rgba(212, 175, 55, 0.3); }
         .precio { display: block; margin-top: 10px; color: var(--dorado); font-weight: bold; font-size: 1.2rem; }
 
+        /* --- GALERÍA & ROBOT --- */
         .galeria-section { padding: 80px 20px; background: rgba(8, 8, 8, 0.85); text-align: center; }
         .slider-container { position: relative; max-width: 1000px; margin: 50px auto; height: 500px; overflow: hidden; border-radius: 8px; box-shadow: 0 15px 40px rgba(0,0,0,0.7); }
         .slide { display: none; height: 100%; width: 100%; animation: fade 1.2s; } .slide img { width: 100%; height: 100%; object-fit: cover; }
@@ -153,9 +160,11 @@
         @keyframes levitar { 0% { transform: translateY(0px); } 50% { transform: translateY(-25px); } 100% { transform: translateY(0px); } }
         @keyframes sombra-latido { 0% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(0.8); opacity: 0.3; } 100% { transform: scale(1); opacity: 0.5; } }
 
+        /* --- UBICACIÓN --- */
         .ubicacion-section { padding: 100px 20px; background: rgba(0, 0, 0, 0.85); text-align: center; }
         .contenedor-mapa { max-width: 1000px; margin: 40px auto 0; padding: 10px; border: 1px solid var(--dorado); background: rgba(212, 175, 55, 0.05); }
 
+        /* --- MODAL --- */
         .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; }
         .modal-content { background: rgba(18, 18, 18, 0.95); border: 1px solid var(--dorado); padding: 40px; width: 90%; max-width: 450px; text-align: center; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         .cerrar { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: var(--gris-texto); }
@@ -168,17 +177,21 @@
         .days li { cursor: pointer; transition: 0.2s; border-radius: 50%; }
         .days li:hover:not(:empty) { background: var(--dorado); color: black; font-weight: bold; }
         
+        /* --- FOOTER & BOTÓN FLOTANTE --- */
         footer { padding: 60px 20px; text-align: center; border-top: 1px solid #111; color: #666; font-size: 0.9rem; letter-spacing: 1px; background: rgba(0,0,0,0.95); }
         .social-icons { margin-bottom: 20px; }
         .social-icons a { color: var(--dorado); font-size: 1.5rem; margin: 0 15px; transition: 0.3s; }
         .social-icons a:hover { color: #fff; transform: scale(1.2); }
 
-        /* Botón Flotante */
         .btn-whatsapp-flotante { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #25d366; color: white; border-radius: 50%; text-align: center; font-size: 35px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 2000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; border: 2px solid var(--dorado); }
         .btn-whatsapp-flotante:hover { transform: scale(1.1); box-shadow: 0 0 20px #25d366; }
     </style>
 </head>
 <body>
+
+    <div id="preloader">
+        <div class="spinner-dorado"></div>
+    </div>
 
     <div class="fondo-animado"><div id="stars"></div><div id="stars2"></div><div id="stars3"></div></div>
 
@@ -190,8 +203,15 @@
         </div>
 
         <div class="nav-menu" id="navMenu">
-            <button class="btn-star activo" onclick="cambiarVista('eventos', this)">EVENTOS</button>
-            <button class="btn-star" onclick="cambiarVista('restaurante', this)">RESTAURANTE</button>
+            <button class="btn-star activo" onclick="cambiarVista('eventos', this)">
+                EVENTOS
+                <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+                </button>
+
+            <button class="btn-star" onclick="cambiarVista('restaurante', this)">
+                RESTAURANTE
+                <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+                </button>
         </div>
     </nav>
 
@@ -301,7 +321,10 @@
     <section class="ubicacion-section reveal">
         <h2 style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;">Cómo Llegar</h2>
         <div class="contenedor-mapa"><iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=Finca+Maldonado+Cuautitlan+San+Blas&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe></div>
-        <div class="datos-direccion"><p><i class="fas fa-map-marker-alt" style="color:var(--dorado)"></i> C. 29 Mz. 5 Lt. 11, San Blas I, Cuautitlán</p><a href="https://www.google.com/maps?q=C.+29+Mz.+5+Lt.+11,+San+Blas+I,+Cuautitlán" target="_blank" class="btn-dorado" style="font-size: 0.8rem; padding: 10px 30px; margin-top: 20px; display:inline-block;"><i class="fas fa-location-arrow"></i> Abrir en GPS</a></div>
+        <div class="datos-direccion">
+            <p><i class="fas fa-map-marker-alt" style="color:var(--dorado)"></i> C. 29 Mz. 5 Lt. 11, San Blas I, Cuautitlán</p>
+            <a href="https://www.google.com/maps?q=C.+29+Mz.+5+Lt.+11,+San+Blas+I,+Cuautitlán" target="_blank" class="btn-dorado" style="font-size: 0.8rem; padding: 10px 30px; margin-top: 20px; display:inline-block;"><i class="fas fa-location-arrow"></i> Abrir en GPS</a>
+        </div>
     </section>
 
     <div id="miVentanaModal" class="modal">
@@ -312,16 +335,23 @@
         </div>
     </div>
 
-  <footer>
-    <div class="social-icons">
-        <a href="https://www.facebook.com/fincamaldonad" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/finca_maldonado_salon/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.tiktok.com/@fincamaldonado" target="_blank"><i class="fab fa-tiktok"></i></a>
-    </div>
-    <p>FINCA MALDONADO © 2026</p>
-</footer>
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/fincamaldonad" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/finca_maldonado_salon/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@fincamaldonado" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p>FINCA MALDONADO © 2026</p>
+    </footer>
 
     <script>
+        // --- PRELOADER SCRIPT ---
+        window.addEventListener("load", function() {
+            const preloader = document.getElementById("preloader");
+            preloader.style.opacity = "0";
+            setTimeout(function() { preloader.style.display = "none"; }, 500);
+        });
+
         // --- MENU HAMBURGUESA SCRIPT ---
         function toggleMenu() {
             var menu = document.getElementById("navMenu");
@@ -337,9 +367,7 @@
             botones.forEach(btn => btn.classList.remove('activo'));
             boton.classList.add('activo');
             
-            // Cerrar menú automáticamente al seleccionar en celular
-            document.getElementById("navMenu").classList.remove("active");
-            
+            document.getElementById("navMenu").classList.remove("active"); // Cerrar menú en móvil
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -390,4 +418,5 @@
     </script>
 </body>
 </html>
+
 
