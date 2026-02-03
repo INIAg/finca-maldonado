@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Finca Maldonado | Eventos & Restaurante</title>
-    <meta name="description" content="Ven a conocer el mejor lugar en Cuautitlán. Bodas, XV Años y gastronomía mexicana de alta calidad bajo las estrellas.">
-    <meta property="og:title" content="Finca Maldonado | Eventos Exclusivos y Restaurante">
-    <meta property="og:description" content="Salones de lujo, Robot LED y la mejor comida de la región.">
+    
+    <meta property="og:title" content="Finca Maldonado | Eventos Exclusivos">
     <meta property="og:image" content="img/salon.jpg">
-    <meta property="og:type" content="website">
-
     <link rel="icon" type="image/jpeg" href="img/logo.jpg">
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         /* --- VARIABLES --- */
@@ -31,7 +29,6 @@
             --neon-azul: #00f3ff;
         }
 
-        /* --- RESET Y BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
@@ -40,47 +37,32 @@
             font-family: var(--fuente-texto);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: 85px; /* Espacio para navbar fija */
+            padding-top: 85px;
         }
 
         h1, h2, h3 { font-family: var(--fuente-titulo); letter-spacing: 2px; }
 
-        /* --- PRELOADER (PANTALLA DE CARGA) --- */
-        #preloader {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: #000; z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            transition: opacity 0.5s ease;
-        }
-        .spinner-dorado {
-            width: 60px; height: 60px;
-            border: 5px solid rgba(212, 175, 55, 0.3);
-            border-top: 5px solid #D4AF37;
-            border-radius: 50%;
-            animation: girar 1s linear infinite;
-        }
-        @keyframes girar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* --- FONDO DE ESTRELLAS ANIMADO (NEGRO PURO) --- */
+        /* --- FONDO DE ESTRELLAS --- */
         .fondo-animado { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at bottom, #1a1a1a 0%, #000000 100%); z-index: -10; overflow: hidden; }
-        #stars, #stars2, #stars3 { width: 1px; height: 1px; background: transparent; animation: animStar 50s linear infinite; box-shadow: 501px 811px #fff, 100px 200px #fff, 900px 100px #fff; /* Resumido para no saturar, el script genera el efecto visual */ }
-        #stars { box-shadow: 100px 200px #fff, 500px 800px #fff, 900px 100px #fff, 1200px 300px #fff, 1500px 600px #fff, 1800px 200px #fff, 200px 500px #fff; }
+        #stars, #stars2, #stars3 { width: 1px; height: 1px; background: transparent; animation: animStar 50s linear infinite; box-shadow: 501px 811px #fff, 100px 200px #fff, 900px 100px #fff, 1200px 300px #fff, 1500px 600px #fff; }
         #stars2 { width: 2px; height: 2px; animation: animStar 100s linear infinite; box-shadow: 300px 400px #fff, 600px 900px #fff, 100px 800px #fff; }
         #stars3 { width: 3px; height: 3px; animation: animStar 150s linear infinite; box-shadow: 150px 250px #fff, 400px 700px #fff; }
-        
         @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-2000px); } }
 
-        /* --- SCROLL REVEAL (ANIMACIÓN AL BAJAR) --- */
+        /* --- PRELOADER --- */
+        #preloader { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
+        .spinner-dorado { width: 60px; height: 60px; border: 5px solid rgba(212, 175, 55, 0.3); border-top: 5px solid #D4AF37; border-radius: 50%; animation: girar 1s linear infinite; }
+        @keyframes girar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* --- SCROLL REVEAL --- */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- BARRA DE NAVEGACIÓN --- */
+        /* --- NAVBAR --- */
         .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 85px; background-color: rgba(5, 5, 5, 0.95); border-bottom: 1px solid var(--dorado); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
         .nav-logo { font-family: var(--fuente-titulo); color: var(--dorado); font-size: 1.2rem; font-weight: bold; text-transform: uppercase; }
-        
         .hamburger { display: none; font-size: 1.8rem; color: var(--dorado); cursor: pointer; }
         .nav-menu { display: flex; gap: 20px; transition: 0.3s; }
-
         @media (max-width: 768px) {
             .hamburger { display: block; } 
             .nav-menu { position: fixed; top: 85px; left: -100%; width: 100%; height: calc(100vh - 85px); background-color: rgba(0, 0, 0, 0.98); flex-direction: column; align-items: center; justify-content: center; gap: 40px; transition: 0.4s ease; border-top: 1px solid #333; }
@@ -92,8 +74,7 @@
         .btn-star:hover, .btn-star.activo { background: var(--dorado); color: #000; box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
         .btn-star svg { fill: var(--dorado); }
         .star-1, .star-2, .star-3, .star-4, .star-5, .star-6 { position: absolute; width: 10px; height: auto; z-index: -5; transition: 0.5s; opacity: 0; }
-        .btn-star:hover .star-1 { top: -80%; left: -30%; opacity: 1; } 
-        /* (El resto de las estrellas usan la misma lógica en el hover, simplificado aquí) */
+        .btn-star:hover .star-1 { top: -80%; left: -30%; opacity: 1; }
 
         /* --- VISTAS --- */
         .vista-seccion { display: none; animation: fadeIn 0.8s ease; }
@@ -147,10 +128,33 @@
         .foto-platillo { width: 100%; height: 200px; background-color: #222; background-size: cover; background-position: center; border-radius: 5px; margin-bottom: 15px; border: 1px solid rgba(212, 175, 55, 0.3); }
         .precio { display: block; margin-top: 10px; color: var(--dorado); font-weight: bold; font-size: 1.2rem; }
 
-        /* --- GALERÍA & ROBOT --- */
+        /* --- 2. NUEVO ESTILO PARA EL CARRUSEL (SWIPER) --- */
         .galeria-section { padding: 80px 20px; background: rgba(8, 8, 8, 0.85); text-align: center; }
-        .slider-container { position: relative; max-width: 1000px; margin: 50px auto; height: 500px; overflow: hidden; border-radius: 8px; box-shadow: 0 15px 40px rgba(0,0,0,0.7); }
-        .slide { display: none; height: 100%; width: 100%; animation: fade 1.2s; } .slide img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .swiper {
+            width: 100%;
+            max-width: 1000px;
+            height: 500px;
+            margin: 40px auto;
+            border-radius: 10px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Personalización Dorado de Swiper */
+        .swiper-button-next, .swiper-button-prev { color: var(--dorado) !important; text-shadow: 0 0 5px black; }
+        .swiper-pagination-bullet { background: #fff !important; opacity: 0.5; }
+        .swiper-pagination-bullet-active { background: var(--dorado) !important; opacity: 1; }
+
+
+        /* --- ROBOT --- */
         .robot-space-section { padding: 100px 20px; background: transparent; text-align: center; display: flex; flex-direction: column; align-items: center; }
         .robot-title { font-size: 3rem; color: #fff; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
         .robot-subtitle { color: var(--neon-azul); margin-bottom: 50px; opacity: 0.8; }
@@ -260,11 +264,25 @@
 
         <section class="galeria-section reveal">
             <h2>Recorrido Virtual</h2>
-            <div class="slider-container">
-                <div class="slide"><img src="img/salon.jpg" alt="Vista 1"></div>
-                <div class="slide"><img src="img/pista.jpg" alt="Vista 2"></div>
-                <div class="slide"><img src="img/jardin.jpg" alt="Vista 3"></div>
+            
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="img/salon.jpg" alt="Vista Salón">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="img/pista.jpg" alt="Vista Pista">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="img/jardin.jpg" alt="Vista Jardín">
+                    </div>
+                    </div>
+                
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
+
         </section>
 
         <section class="robot-space-section reveal">
@@ -344,7 +362,27 @@
         <p>FINCA MALDONADO © 2026</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script>
+        // --- INICIALIZAR EL CARRUSEL PRO (SWIPER) ---
+        var swiper = new Swiper(".mySwiper", {
+            effect: "fade", // Efecto de desvanecimiento elegante
+            loop: true,     // Infinito
+            autoplay: {
+                delay: 3500, // Tiempo entre fotos (ms)
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
         // --- PRELOADER SCRIPT ---
         window.addEventListener("load", function() {
             const preloader = document.getElementById("preloader");
@@ -403,9 +441,6 @@
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
         function cambiarPortadaAleatoria() { const hero = document.getElementById('hero-principal'); if(hero) { const indice = Math.floor(Math.random() * imagenesPortada.length); hero.style.backgroundImage = `url('${imagenesPortada[indice]}')`; } }
         cambiarPortadaAleatoria();
-        let slideIndex = 0;
-        function iniciarSlider() { let slides = document.getElementsByClassName("slide"); if(slides.length === 0) return; for (let i = 0; i < slides.length; i++) slides[i].style.display = "none"; slideIndex++; if (slideIndex > slides.length) slideIndex = 1; slides[slideIndex-1].style.display = "block"; setTimeout(iniciarSlider, 4000); }
-        iniciarSlider();
 
         let salonActual="", personas="", date=new Date(), currYear=date.getFullYear(), currMonth=date.getMonth();
         const meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
@@ -418,5 +453,6 @@
     </script>
 </body>
 </html>
+
 
 
