@@ -434,7 +434,7 @@
                 }
             }
         }
-        window.addEventListener("scroll", reveal);
+       window.addEventListener("scroll", reveal);
         reveal();
 
         const telefono = "5565796506";
@@ -449,7 +449,12 @@
         function irAlCalendario(){ if(!document.getElementById("inputPersonas").value) return alert("Pon invitados"); personas=document.getElementById("inputPersonas").value; document.getElementById("vista-personas").style.display="none"; document.getElementById("vista-calendario").style.display="block"; renderCalendario(); }
         function renderCalendario(){ let firstDay=new Date(currYear,currMonth,1).getDay(), lastDate=new Date(currYear,currMonth+1,0).getDate(), liTag=""; for(let i=0;i<firstDay;i++) liTag+=`<li></li>`; for(let i=1;i<=lastDate;i++) liTag+=`<li onclick="enviarWhats(${i},'${meses[currMonth]}')">${i}</li>`; document.getElementById("mes-actual").innerText=`${meses[currMonth]} ${currYear}`; document.querySelector(".days").innerHTML=liTag; }
         function cambiarMes(dir){ currMonth+=dir; if(currMonth<0||currMonth>11){ date=new Date(currYear,currMonth,1); currYear=date.getFullYear(); currMonth=date.getMonth(); } renderCalendario(); }
-        function enviarWhats(d,m){ window.open(`https://wa.me/${telefono}?text=Cotizar%20${salonActual}%20para%20${personas}%20personas%20el%20${d}%20de%20${m}`, '_blank'); }
+        
+        // --- MENSAJE AMIGABLE WHATSAPP ---
+        function enviarWhats(d,m){ 
+            let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${d} de ${m} del ${currYear}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
+            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank'); 
+        }
     </script>
 </body>
 </html>
