@@ -42,17 +42,16 @@
 
         h1, h2, h3 { font-family: var(--fuente-titulo); letter-spacing: 2px; }
 
-        /* --- ESTILOS DE DÍAS OCUPADOS (NUEVO) --- */
+        /* --- ESTILOS DE DÍAS OCUPADOS (VISUAL) --- */
         .ocupado-visual {
-            color: #444 !important; /* Color apagado */
+            color: #444 !important; /* Gris oscuro */
             text-decoration: line-through; /* Tachado */
             cursor: not-allowed !important;
             position: relative;
         }
-        /* Pequeña X roja */
         .ocupado-visual::after {
             content: '✕';
-            color: #d32f2f;
+            color: #d32f2f; /* Roja */
             font-size: 0.7rem;
             position: absolute;
             top: 2px;
@@ -359,14 +358,13 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // --- 1. BASE DE DATOS MANUAL DE DISPONIBILIDAD ---
-        // Aquí agregas las fechas que ya están ocupadas.
+        // --- 1. BASE DE DATOS DE FECHAS OCUPADAS (PRUEBA DE FUEGO) ---
         // Formato: "Día-Mes": ["Nombre del salón"]
-        // Nota: Los meses empiezan en 0 (Enero=0, Febrero=1, ..., Diciembre=11)
+        // Nota importante: Enero=0, Febrero=1, Marzo=2 ...
         const fechasOcupadas = {
-            "14-1": ["Salón Grande"],  // 14 de Febrero: Salón Grande ocupado
-            "10-4": ["Salón Grande", "Salón Chico", "Salón Baby"], // 10 de Mayo: Todo lleno
-            "25-11": ["Salón Chico"]   // 25 de Diciembre: Salón Chico ocupado
+            "4-1": ["Salón Grande"],  // 4 de Febrero: Salón Grande ocupado (Intenta cotizarlo)
+            "5-1": ["Salón Chico"],   // 5 de Febrero: Salón Chico ocupado (Intenta cotizarlo)
+            "14-1": ["Salón Grande", "Salón Chico", "Salón Baby"] // 14 de Febrero: TODO LLENO
         };
 
         // --- INICIALIZAR SWIPER ---
@@ -420,7 +418,7 @@
         function cerrarVentana(){ document.getElementById("miVentanaModal").style.display="none"; }
         function irAlCalendario(){ if(!document.getElementById("inputPersonas").value) return alert("Pon invitados"); personas=document.getElementById("inputPersonas").value; document.getElementById("vista-personas").style.display="none"; document.getElementById("vista-calendario").style.display="block"; renderCalendario(); }
         
-        // --- 2. RENDERIZAR CALENDARIO CON CLASES DE DISPONIBILIDAD ---
+        // --- RENDER CALENDARIO CON BLOQUEOS VISUALES ---
         function renderCalendario(){ 
             let firstDay=new Date(currYear,currMonth,1).getDay(), lastDate=new Date(currYear,currMonth+1,0).getDate(), liTag=""; 
             for(let i=0;i<firstDay;i++) liTag+=`<li></li>`; 
@@ -428,7 +426,7 @@
             for(let i=1;i<=lastDate;i++) {
                 let key = `${i}-${currMonth}`;
                 let claseExtra = "";
-                // Si la fecha existe en la base de datos Y incluye el salón actual, lo marcamos
+                // Si la fecha existe en la base de datos Y el salón actual está en la lista de bloqueados
                 if(fechasOcupadas[key] && fechasOcupadas[key].includes(salonActual)) {
                     claseExtra = "ocupado-visual"; 
                 }
@@ -440,17 +438,17 @@
         
         function cambiarMes(dir){ currMonth+=dir; if(currMonth<0||currMonth>11){ date=new Date(currYear,currMonth,1); currYear=date.getFullYear(); currMonth=date.getMonth(); } renderCalendario(); }
         
-        // --- 3. LÓGICA DE VERIFICACIÓN ANTES DE ENVIAR ---
+        // --- VERIFICACIÓN DE DISPONIBILIDAD ---
         function verificarYEnviar(dia, nombreMes, indiceMes) {
             let key = `${dia}-${indiceMes}`;
             
-            // Verificamos disponibilidad
+            // Si la fecha existe Y el salón está bloqueado
             if (fechasOcupadas[key] && fechasOcupadas[key].includes(salonActual)) {
                 alert(`⚠️ Lo sentimos.\n\nEl ${salonActual} ya está reservado para el ${dia} de ${nombreMes}.\n\n¡Por favor intenta con otro Salón u otra fecha!`);
-                return; 
+                return; // NO ENVIAR WHATSAPP
             }
 
-            // Si está libre, armamos el mensaje bonito
+            // Si pasa, enviar el mensaje
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${dia} de ${nombreMes} del ${currYear}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank'); 
         }
