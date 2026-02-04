@@ -420,28 +420,32 @@
         
         function cambiarMes(dir){ currMonth+=dir; if(currMonth<0||currMonth>11){ date=new Date(currYear,currMonth,1); currYear=date.getFullYear(); currMonth=date.getMonth(); } renderCalendario(); }
         
-        // --- FUNCIÓN PRINCIPAL: ENVIAR A SHEETS Y ABRIR WHATSAPP ---
+       // --- FUNCIÓN CORREGIDA: ENVIAR A SHEETS Y ABRIR WHATSAPP ---
         function enviarWhats(d, m) {
             // 1. Preparar datos
             const fechaCompleta = `${d} de ${m} ${currYear}`;
-            const formData = new FormData();
-            formData.append('Salón', salonActual);     // Asegúrate que en Excel B1 diga "Salón"
-            formData.append('Invitados', personas);    // Asegúrate que en Excel C1 diga "Invitados"
-            formData.append('Fecha Evento', fechaCompleta); // Asegúrate que en Excel D1 diga "Fecha Evento"
+            
+            // CAMBIO CLAVE: Usamos URLSearchParams en lugar de FormData
+            const datos = new URLSearchParams();
+            datos.append('Salón', salonActual);
+            datos.append('Invitados', personas);
+            datos.append('Fecha Evento', fechaCompleta);
 
-            // 2. Enviar a Sheets usando 'no-cors' (Esto evita bloqueos del navegador)
+            // 2. Enviar a Sheets
             fetch(scriptURL, { 
                 method: 'POST', 
-                mode: 'no-cors', // <--- ESTA ES LA MAGIA
-                body: formData 
+                mode: 'no-cors', 
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: datos 
             })
-            .then(() => console.log("Datos enviados a Google Sheets"))
+            .then(() => console.log("¡Datos enviados correctamente!"))
             .catch(error => console.error("Error:", error));
 
-            // 3. Abrir WhatsApp inmediatamente
+            // 3. Abrir WhatsApp
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${fechaCompleta}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
-
 
 
