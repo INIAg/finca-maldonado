@@ -6,12 +6,12 @@
     <title>Finca Maldonado | Eventos & Restaurante</title>
     
     <meta property="og:title" content="Finca Maldonado | Eventos Exclusivos">
+    <meta property="og:description" content="Salones de lujo y experiencias inolvidables bajo las estrellas.">
     <meta property="og:image" content="img/salon.jpg">
     <link rel="icon" type="image/jpeg" href="img/logo.jpg">
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
@@ -42,10 +42,27 @@
 
         h1, h2, h3 { font-family: var(--fuente-titulo); letter-spacing: 2px; }
 
+        /* --- ESTILOS DE DÍAS OCUPADOS (NUEVO) --- */
+        .ocupado-visual {
+            color: #444 !important; /* Color apagado */
+            text-decoration: line-through; /* Tachado */
+            cursor: not-allowed !important;
+            position: relative;
+        }
+        /* Pequeña X roja */
+        .ocupado-visual::after {
+            content: '✕';
+            color: #d32f2f;
+            font-size: 0.7rem;
+            position: absolute;
+            top: 2px;
+            right: 5px;
+        }
+
         /* --- FONDO DE ESTRELLAS --- */
         .fondo-animado { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at bottom, #1a1a1a 0%, #000000 100%); z-index: -10; overflow: hidden; }
         #stars, #stars2, #stars3 { width: 1px; height: 1px; background: transparent; animation: animStar 50s linear infinite; box-shadow: 501px 811px #fff, 100px 200px #fff, 900px 100px #fff, 1200px 300px #fff, 1500px 600px #fff; }
-        #stars2 { width: 2px; height: 2px; animation: animStar 100s linear infinite; box-shadow: 300px 400px #fff, 600px 900px #fff, 100px 800px #fff; }
+        #stars2 { width: 2px; height: 2px; animation: animStar 100s linear infinite; box-shadow: 300px 400px #fff, 600px 900px #fff; }
         #stars3 { width: 3px; height: 3px; animation: animStar 150s linear infinite; box-shadow: 150px 250px #fff, 400px 700px #fff; }
         @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-2000px); } }
 
@@ -128,31 +145,13 @@
         .foto-platillo { width: 100%; height: 200px; background-color: #222; background-size: cover; background-position: center; border-radius: 5px; margin-bottom: 15px; border: 1px solid rgba(212, 175, 55, 0.3); }
         .precio { display: block; margin-top: 10px; color: var(--dorado); font-weight: bold; font-size: 1.2rem; }
 
-        /* --- 2. NUEVO ESTILO PARA EL CARRUSEL (SWIPER) --- */
+        /* --- GALERÍA SWIPER --- */
         .galeria-section { padding: 80px 20px; background: rgba(8, 8, 8, 0.85); text-align: center; }
-        
-        .swiper {
-            width: 100%;
-            max-width: 1000px;
-            height: 500px;
-            margin: 40px auto;
-            border-radius: 10px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-        }
-
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Personalización Dorado de Swiper */
+        .swiper { width: 100%; max-width: 1000px; height: 500px; margin: 40px auto; border-radius: 10px; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .swiper-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
         .swiper-button-next, .swiper-button-prev { color: var(--dorado) !important; text-shadow: 0 0 5px black; }
         .swiper-pagination-bullet { background: #fff !important; opacity: 0.5; }
         .swiper-pagination-bullet-active { background: var(--dorado) !important; opacity: 1; }
-
 
         /* --- ROBOT --- */
         .robot-space-section { padding: 100px 20px; background: transparent; text-align: center; display: flex; flex-direction: column; align-items: center; }
@@ -210,12 +209,16 @@
             <button class="btn-star activo" onclick="cambiarVista('eventos', this)">
                 EVENTOS
                 <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
-                </button>
+                <div class="star-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+                <div class="star-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+            </button>
 
             <button class="btn-star" onclick="cambiarVista('restaurante', this)">
                 RESTAURANTE
                 <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
-                </button>
+                <div class="star-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+                <div class="star-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+            </button>
         </div>
     </nav>
 
@@ -248,15 +251,15 @@
             <h2 class="reveal">Nuestros Espacios</h2>
             <div class="grid-salones">
                 <div class="card-salon reveal" onclick="abrirCotizador('Salón Grande')">
-                    <div class="img-container"><img src="img/salon.jpg" alt="Salón Grande"><span class="capacidad">400 Invitados Max</span></div>
+                    <div class="img-container"><img src="img/salon.jpg" alt="Salón Grande"><span class="capacidad">Hasta 500 Invitados</span></div>
                     <div class="info-salon"><h3>Salón Grande</h3><p>Un espacio majestuoso para bodas inolvidables.</p><button class="btn-seleccionar">COTIZAR AHORA</button></div>
                 </div>
                 <div class="card-salon reveal" onclick="abrirCotizador('Salón Chico')">
-                    <div class="img-container"><img src="img/pista.jpg" alt="Salón Chico"><span class="capacidad">250 Invitados Max</span></div>
+                    <div class="img-container"><img src="img/pista.jpg" alt="Salón Chico"><span class="capacidad">Hasta 200 Invitados</span></div>
                     <div class="info-salon"><h3>Salón Chico</h3><p>Perfecto para XV Años y eventos corporativos.</p><button class="btn-seleccionar">COTIZAR AHORA</button></div>
                 </div>
                 <div class="card-salon reveal" onclick="abrirCotizador('Salón Baby')">
-                    <div class="img-container"><img src="img/jardin.jpg" alt="Salón Baby"><span class="capacidad">230 Invitados Max</span></div>
+                    <div class="img-container"><img src="img/jardin.jpg" alt="Salón Baby"><span class="capacidad">Hasta 80 Invitados</span></div>
                     <div class="info-salon"><h3>Salón Baby</h3><p>El lugar acogedor para eventos íntimos.</p><button class="btn-seleccionar">COTIZAR AHORA</button></div>
                 </div>
             </div>
@@ -264,25 +267,16 @@
 
         <section class="galeria-section reveal">
             <h2>Recorrido Virtual</h2>
-            
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="img/salon.jpg" alt="Vista Salón">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="img/pista.jpg" alt="Vista Pista">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="img/jardin.jpg" alt="Vista Jardín">
-                    </div>
-                    </div>
-                
+                    <div class="swiper-slide"><img src="img/salon.jpg" alt="Vista Salón"></div>
+                    <div class="swiper-slide"><img src="img/pista.jpg" alt="Vista Pista"></div>
+                    <div class="swiper-slide"><img src="img/jardin.jpg" alt="Vista Jardín"></div>
+                </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
             </div>
-
         </section>
 
         <section class="robot-space-section reveal">
@@ -365,47 +359,33 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // --- INICIALIZAR EL CARRUSEL PRO (SWIPER) ---
-        var swiper = new Swiper(".mySwiper", {
-            effect: "fade", // Efecto de desvanecimiento elegante
-            loop: true,     // Infinito
-            autoplay: {
-                delay: 3500, // Tiempo entre fotos (ms)
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
+        // --- 1. BASE DE DATOS MANUAL DE DISPONIBILIDAD ---
+        // Aquí agregas las fechas que ya están ocupadas.
+        // Formato: "Día-Mes": ["Nombre del salón"]
+        // Nota: Los meses empiezan en 0 (Enero=0, Febrero=1, ..., Diciembre=11)
+        const fechasOcupadas = {
+            "14-1": ["Salón Grande"],  // 14 de Febrero: Salón Grande ocupado
+            "10-4": ["Salón Grande", "Salón Chico", "Salón Baby"], // 10 de Mayo: Todo lleno
+            "25-11": ["Salón Chico"]   // 25 de Diciembre: Salón Chico ocupado
+        };
 
-        // --- PRELOADER SCRIPT ---
-        window.addEventListener("load", function() {
-            const preloader = document.getElementById("preloader");
-            preloader.style.opacity = "0";
-            setTimeout(function() { preloader.style.display = "none"; }, 500);
-        });
+        // --- INICIALIZAR SWIPER ---
+        var swiper = new Swiper(".mySwiper", { effect: "fade", loop: true, autoplay: { delay: 3500, disableOnInteraction: false }, pagination: { el: ".swiper-pagination", clickable: true }, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, });
 
-        // --- MENU HAMBURGUESA SCRIPT ---
-        function toggleMenu() {
-            var menu = document.getElementById("navMenu");
-            menu.classList.toggle("active");
-        }
+        // --- PRELOADER ---
+        window.addEventListener("load", function() { const preloader = document.getElementById("preloader"); preloader.style.opacity = "0"; setTimeout(function() { preloader.style.display = "none"; }, 500); });
+
+        // --- MENU HAMBURGUESA ---
+        function toggleMenu() { var menu = document.getElementById("navMenu"); menu.classList.toggle("active"); }
 
         function cambiarVista(vista, boton) {
             document.getElementById('vista-eventos').classList.remove('vista-activa');
             document.getElementById('vista-restaurante').classList.remove('vista-activa');
             document.getElementById('vista-' + vista).classList.add('vista-activa');
-            
             let botones = document.querySelectorAll('.btn-star');
             botones.forEach(btn => btn.classList.remove('activo'));
             boton.classList.add('activo');
-            
-            document.getElementById("navMenu").classList.remove("active"); // Cerrar menú en móvil
+            document.getElementById("navMenu").classList.remove("active");
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -414,13 +394,7 @@
             botones.forEach(btn => btn.classList.remove('activo'));
             if(event) event.currentTarget.classList.add('activo');
             let platillos = document.querySelectorAll('.tarjeta-platillo');
-            platillos.forEach(plat => {
-                if(categoria === 'todos' || plat.classList.contains('categoria-' + categoria)) {
-                    plat.style.display = 'block';
-                } else {
-                    plat.style.display = 'none';
-                }
-            });
+            platillos.forEach(plat => { if(categoria === 'todos' || plat.classList.contains('categoria-' + categoria)) { plat.style.display = 'block'; } else { plat.style.display = 'none'; } });
         }
 
         function reveal() {
@@ -429,13 +403,10 @@
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
                 var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
+                if (elementTop < windowHeight - elementVisible) { reveals[i].classList.add("active"); }
             }
         }
-       window.addEventListener("scroll", reveal);
-        reveal();
+        window.addEventListener("scroll", reveal); reveal();
 
         const telefono = "5565796506";
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
@@ -444,21 +415,47 @@
 
         let salonActual="", personas="", date=new Date(), currYear=date.getFullYear(), currMonth=date.getMonth();
         const meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+        
         function abrirCotizador(nombre){ salonActual=nombre; document.getElementById("titulo-modal").innerText=nombre; document.getElementById("miVentanaModal").style.display="flex"; document.getElementById("vista-personas").style.display="block"; document.getElementById("vista-calendario").style.display="none"; }
         function cerrarVentana(){ document.getElementById("miVentanaModal").style.display="none"; }
         function irAlCalendario(){ if(!document.getElementById("inputPersonas").value) return alert("Pon invitados"); personas=document.getElementById("inputPersonas").value; document.getElementById("vista-personas").style.display="none"; document.getElementById("vista-calendario").style.display="block"; renderCalendario(); }
-        function renderCalendario(){ let firstDay=new Date(currYear,currMonth,1).getDay(), lastDate=new Date(currYear,currMonth+1,0).getDate(), liTag=""; for(let i=0;i<firstDay;i++) liTag+=`<li></li>`; for(let i=1;i<=lastDate;i++) liTag+=`<li onclick="enviarWhats(${i},'${meses[currMonth]}')">${i}</li>`; document.getElementById("mes-actual").innerText=`${meses[currMonth]} ${currYear}`; document.querySelector(".days").innerHTML=liTag; }
+        
+        // --- 2. RENDERIZAR CALENDARIO CON CLASES DE DISPONIBILIDAD ---
+        function renderCalendario(){ 
+            let firstDay=new Date(currYear,currMonth,1).getDay(), lastDate=new Date(currYear,currMonth+1,0).getDate(), liTag=""; 
+            for(let i=0;i<firstDay;i++) liTag+=`<li></li>`; 
+            
+            for(let i=1;i<=lastDate;i++) {
+                let key = `${i}-${currMonth}`;
+                let claseExtra = "";
+                // Si la fecha existe en la base de datos Y incluye el salón actual, lo marcamos
+                if(fechasOcupadas[key] && fechasOcupadas[key].includes(salonActual)) {
+                    claseExtra = "ocupado-visual"; 
+                }
+                liTag+=`<li class="${claseExtra}" onclick="verificarYEnviar(${i}, '${meses[currMonth]}', ${currMonth})">${i}</li>`;
+            }
+            document.getElementById("mes-actual").innerText=`${meses[currMonth]} ${currYear}`; 
+            document.querySelector(".days").innerHTML=liTag; 
+        }
+        
         function cambiarMes(dir){ currMonth+=dir; if(currMonth<0||currMonth>11){ date=new Date(currYear,currMonth,1); currYear=date.getFullYear(); currMonth=date.getMonth(); } renderCalendario(); }
         
-        // --- MENSAJE AMIGABLE WHATSAPP ---
-        function enviarWhats(d,m){ 
-            let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${d} de ${m} del ${currYear}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
+        // --- 3. LÓGICA DE VERIFICACIÓN ANTES DE ENVIAR ---
+        function verificarYEnviar(dia, nombreMes, indiceMes) {
+            let key = `${dia}-${indiceMes}`;
+            
+            // Verificamos disponibilidad
+            if (fechasOcupadas[key] && fechasOcupadas[key].includes(salonActual)) {
+                alert(`⚠️ Lo sentimos.\n\nEl ${salonActual} ya está reservado para el ${dia} de ${nombreMes}.\n\n¡Por favor intenta con otro Salón u otra fecha!`);
+                return; 
+            }
+
+            // Si está libre, armamos el mensaje bonito
+            let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${dia} de ${nombreMes} del ${currYear}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank'); 
         }
     </script>
 </body>
 </html>
-
-
 
 
