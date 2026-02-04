@@ -422,24 +422,26 @@
         
         // --- FUNCIÓN PRINCIPAL: ENVIAR A SHEETS Y ABRIR WHATSAPP ---
         function enviarWhats(d, m) {
-            // 1. Datos para Google Sheets
+            // 1. Preparar datos
             const fechaCompleta = `${d} de ${m} ${currYear}`;
             const formData = new FormData();
-            formData.append('Salón', salonActual);
-            formData.append('Invitados', personas);
-            formData.append('Fecha Evento', fechaCompleta);
+            formData.append('Salón', salonActual);     // Asegúrate que en Excel B1 diga "Salón"
+            formData.append('Invitados', personas);    // Asegúrate que en Excel C1 diga "Invitados"
+            formData.append('Fecha Evento', fechaCompleta); // Asegúrate que en Excel D1 diga "Fecha Evento"
 
-            // 2. Enviar a Sheets (sin esperar)
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => console.log('Enviado a Sheets'))
-                .catch(error => console.error('Error al guardar', error));
+            // 2. Enviar a Sheets usando 'no-cors' (Esto evita bloqueos del navegador)
+            fetch(scriptURL, { 
+                method: 'POST', 
+                mode: 'no-cors', // <--- ESTA ES LA MAGIA
+                body: formData 
+            })
+            .then(() => console.log("Datos enviados a Google Sheets"))
+            .catch(error => console.error("Error:", error));
 
-            // 3. Abrir WhatsApp
+            // 3. Abrir WhatsApp inmediatamente
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${fechaCompleta}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
-    </script>
-</body>
-</html>
+
 
 
