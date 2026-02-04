@@ -1,921 +1,445 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Finca Maldonado | Eventos & Restaurante</title>
-
     
-
     <meta property="og:title" content="Finca Maldonado | Eventos Exclusivos">
-
     <meta property="og:image" content="img/salon.jpg">
-
     <link rel="icon" type="image/jpeg" href="img/logo.jpg">
 
-
-
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-
-
     <style>
-
         /* --- VARIABLES --- */
-
         :root {
-
             --dorado: #D4AF37;
-
             --dorado-light: #f1d592;
-
             --gradient-oro: linear-gradient(135deg, #af8910 0%, #D4AF37 50%, #f1d592 100%);
-
             --negro-fondo: #050505;
-
             --negro-card: rgba(18, 18, 18, 0.95);
-
             --blanco: #ffffff;
-
             --gris-texto: #b0b0b0;
-
             --fuente-titulo: 'Cinzel', serif;
-
             --fuente-texto: 'Montserrat', sans-serif;
-
             --neon-azul: #00f3ff;
-
         }
-
-
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
-
-
         body {
-
             background-color: #000;
-
             color: var(--blanco);
-
             font-family: var(--fuente-texto);
-
             line-height: 1.6;
-
             overflow-x: hidden;
-
             padding-top: 85px;
-
         }
-
-
 
         h1, h2, h3 { font-family: var(--fuente-titulo); letter-spacing: 2px; }
 
-
-
         /* --- FONDO DE ESTRELLAS --- */
-
         .fondo-animado { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at bottom, #1a1a1a 0%, #000000 100%); z-index: -10; overflow: hidden; }
-
         #stars, #stars2, #stars3 { width: 1px; height: 1px; background: transparent; animation: animStar 50s linear infinite; box-shadow: 501px 811px #fff, 100px 200px #fff, 900px 100px #fff, 1200px 300px #fff, 1500px 600px #fff; }
-
         #stars2 { width: 2px; height: 2px; animation: animStar 100s linear infinite; box-shadow: 300px 400px #fff, 600px 900px #fff, 100px 800px #fff; }
-
         #stars3 { width: 3px; height: 3px; animation: animStar 150s linear infinite; box-shadow: 150px 250px #fff, 400px 700px #fff; }
-
         @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-2000px); } }
 
-
-
         /* --- PRELOADER --- */
-
         #preloader { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
-
         .spinner-dorado { width: 60px; height: 60px; border: 5px solid rgba(212, 175, 55, 0.3); border-top: 5px solid #D4AF37; border-radius: 50%; animation: girar 1s linear infinite; }
-
         @keyframes girar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-
-
         /* --- SCROLL REVEAL --- */
-
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
-
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-
-
         /* --- NAVBAR --- */
-
         .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 85px; background-color: rgba(5, 5, 5, 0.95); border-bottom: 1px solid var(--dorado); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
-
         .nav-logo { font-family: var(--fuente-titulo); color: var(--dorado); font-size: 1.2rem; font-weight: bold; text-transform: uppercase; }
-
         .hamburger { display: none; font-size: 1.8rem; color: var(--dorado); cursor: pointer; }
-
         .nav-menu { display: flex; gap: 20px; transition: 0.3s; }
-
         @media (max-width: 768px) {
-
             .hamburger { display: block; } 
-
             .nav-menu { position: fixed; top: 85px; left: -100%; width: 100%; height: calc(100vh - 85px); background-color: rgba(0, 0, 0, 0.98); flex-direction: column; align-items: center; justify-content: center; gap: 40px; transition: 0.4s ease; border-top: 1px solid #333; }
-
             .nav-menu.active { left: 0; }
-
         }
-
-
 
         /* --- BOTONES STAR --- */
-
         .btn-star { position: relative; padding: 10px 25px; background: #000000; font-size: 14px; font-weight: 600; color: var(--dorado); border: 2px solid var(--dorado); border-radius: 8px; transition: all 0.3s ease-in-out; cursor: pointer; font-family: var(--fuente-texto); text-transform: uppercase; overflow: hidden; }
-
         .btn-star:hover, .btn-star.activo { background: var(--dorado); color: #000; box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
-
         .btn-star svg { fill: var(--dorado); }
-
         .star-1, .star-2, .star-3, .star-4, .star-5, .star-6 { position: absolute; width: 10px; height: auto; z-index: -5; transition: 0.5s; opacity: 0; }
-
         .btn-star:hover .star-1 { top: -80%; left: -30%; opacity: 1; }
 
-
-
         /* --- VISTAS --- */
-
         .vista-seccion { display: none; animation: fadeIn 0.8s ease; }
-
         .vista-activa { display: block; }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-
-
         /* --- HERO --- */
-
         .hero { height: calc(100vh - 85px); background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; transition: background-image 1.2s ease-in-out; }
-
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%); }
-
         .hero-content { position: relative; z-index: 2; padding: 20px; max-width: 800px; }
-
         .logo-principal { width: 180px; margin-bottom: 30px; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); }
-
         .hero h1 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 20px; text-transform: uppercase; background: var(--gradient-oro); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
-
         
-
         /* --- QUIENES SOMOS --- */
-
         .quienes-somos { padding: 80px 20px; background: rgba(10, 10, 10, 0.8); border-bottom: 1px solid #222; }
-
         .qs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1100px; margin: 0 auto; align-items: center; }
-
         .qs-texto h2 { color: var(--dorado); font-size: 2.5rem; margin-bottom: 20px; }
-
         .qs-texto p { color: var(--gris-texto); margin-bottom: 20px; font-size: 1rem; }
-
         .qs-img { position: relative; border: 2px solid var(--dorado); padding: 10px; }
-
         .qs-img img { width: 100%; display: block; filter: sepia(20%); transition: 0.5s; }
-
         .qs-img:hover img { filter: sepia(0%); }
-
         @media (max-width: 768px) { .qs-grid { grid-template-columns: 1fr; } }
 
-
-
         /* --- BOTONES DORADOS --- */
-
         .btn-dorado { padding: 15px 40px; border: 1px solid var(--dorado); color: var(--dorado); text-decoration: none; text-transform: uppercase; font-weight: 600; letter-spacing: 2px; transition: all 0.4s ease; background: rgba(0,0,0,0.3); cursor: pointer; display: inline-block; backdrop-filter: blur(5px); }
-
         .btn-dorado:hover { background: var(--gradient-oro); color: black; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); transform: translateY(-3px); }
 
-
-
         /* --- SALONES --- */
-
         .salones { padding: 100px 20px; text-align: center; }
-
         .grid-salones { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
-
         .card-salon { background: var(--negro-card); border: 1px solid #222; overflow: hidden; transition: 0.5s; position: relative; border-radius: 4px; }
-
         .card-salon:hover { transform: translateY(-10px); border-color: var(--dorado); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
         .img-container { position: relative; height: 280px; overflow: hidden; }
-
         .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
-
         .card-salon:hover .img-container img { transform: scale(1.1); }
-
         .capacidad { position: absolute; bottom: 15px; left: 15px; background: var(--gradient-oro); color: black; padding: 4px 12px; font-weight: bold; font-size: 0.75rem; border-radius: 2px; text-transform: uppercase; }
-
         .info-salon { padding: 30px; text-align: left; }
-
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
-
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
-
-
         /* --- RESTAURANTE --- */
-
         .seccion-restaurante { padding: 50px 20px 100px 20px; color: var(--blanco); text-align: center; }
-
         .titulo-restaurante { font-size: 3rem; color: var(--dorado); margin-bottom: 10px; text-transform: uppercase; }
-
         .subtitulo-restaurante { color: var(--gris-texto); margin-bottom: 50px; }
-
         .submenu-restaurante { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
-
         .btn-menu { background: transparent; border: 2px solid var(--dorado); color: var(--dorado); padding: 10px 25px; cursor: pointer; font-weight: bold; border-radius: 30px; transition: all 0.3s ease; }
-
         .btn-menu:hover, .btn-menu.activo { background-color: var(--dorado); color: black; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
-
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
-
         .tarjeta-platillo { background: var(--negro-card); border: 1px solid #333; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-align: center; transition: 0.3s; }
-
         .tarjeta-platillo:hover { border-color: var(--dorado); transform: translateY(-5px); }
-
         .foto-platillo { width: 100%; height: 200px; background-color: #222; background-size: cover; background-position: center; border-radius: 5px; margin-bottom: 15px; border: 1px solid rgba(212, 175, 55, 0.3); }
-
         .precio { display: block; margin-top: 10px; color: var(--dorado); font-weight: bold; font-size: 1.2rem; }
 
-
-
-        /* --- 2. NUEVO ESTILO PARA EL CARRUSEL (SWIPER) --- */
-
+        /* --- GALERÍA SWIPER --- */
         .galeria-section { padding: 80px 20px; background: rgba(8, 8, 8, 0.85); text-align: center; }
-
-        
-
-        .swiper {
-
-            width: 100%;
-
-            max-width: 1000px;
-
-            height: 500px;
-
-            margin: 40px auto;
-
-            border-radius: 10px;
-
-            border: 1px solid #333;
-
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-
-        }
-
-
-
-        .swiper-slide img {
-
-            display: block;
-
-            width: 100%;
-
-            height: 100%;
-
-            object-fit: cover;
-
-        }
-
-
-
-        /* Personalización Dorado de Swiper */
-
+        .swiper { width: 100%; max-width: 1000px; height: 500px; margin: 40px auto; border-radius: 10px; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .swiper-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
         .swiper-button-next, .swiper-button-prev { color: var(--dorado) !important; text-shadow: 0 0 5px black; }
-
         .swiper-pagination-bullet { background: #fff !important; opacity: 0.5; }
-
         .swiper-pagination-bullet-active { background: var(--dorado) !important; opacity: 1; }
 
-
-
-
-
         /* --- ROBOT --- */
-
         .robot-space-section { padding: 100px 20px; background: transparent; text-align: center; display: flex; flex-direction: column; align-items: center; }
-
         .robot-title { font-size: 3rem; color: #fff; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
-
         .robot-subtitle { color: var(--neon-azul); margin-bottom: 50px; opacity: 0.8; }
-
         .robot-image-container { position: relative; max-width: 350px; width: 100%; z-index: 10; animation: levitar 6s ease-in-out infinite; }
-
         .robot-img { width: 100%; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 10px 50px rgba(0, 243, 255, 0.15); }
-
         .robot-shadow { width: 200px; height: 20px; background: radial-gradient(ellipse at center, rgba(0, 243, 255, 0.3) 0%, rgba(0,0,0,0) 70%); margin-top: 30px; border-radius: 50%; animation: sombra-latido 6s ease-in-out infinite; }
-
         @keyframes levitar { 0% { transform: translateY(0px); } 50% { transform: translateY(-25px); } 100% { transform: translateY(0px); } }
-
         @keyframes sombra-latido { 0% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(0.8); opacity: 0.3; } 100% { transform: scale(1); opacity: 0.5; } }
 
-
-
         /* --- UBICACIÓN --- */
-
         .ubicacion-section { padding: 100px 20px; background: rgba(0, 0, 0, 0.85); text-align: center; }
-
         .contenedor-mapa { max-width: 1000px; margin: 40px auto 0; padding: 10px; border: 1px solid var(--dorado); background: rgba(212, 175, 55, 0.05); }
 
-
-
         /* --- MODAL --- */
-
         .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; }
-
         .modal-content { background: rgba(18, 18, 18, 0.95); border: 1px solid var(--dorado); padding: 40px; width: 90%; max-width: 450px; text-align: center; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-
         .cerrar { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: var(--gris-texto); }
-
         #inputPersonas { padding: 12px; font-size: 1.2rem; width: 80%; margin: 25px 0; text-align: center; border: none; border-bottom: 2px solid var(--dorado); background: transparent; color: white; outline: none; }
-
         .wrapper-calendario { background: #000; padding: 20px; border: 1px solid #222; margin-top: 20px; }
-
         .calendario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-
         .calendario ul { display: flex; flex-wrap: wrap; list-style: none; }
-
         .weeks li { color: var(--dorado); font-weight: bold; font-size: 0.8rem; }
-
         .calendario ul li { width: calc(100% / 7); padding: 12px 0; font-size: 0.9rem; }
-
         .days li { cursor: pointer; transition: 0.2s; border-radius: 50%; }
-
         .days li:hover:not(:empty) { background: var(--dorado); color: black; font-weight: bold; }
-
         
-
         /* --- FOOTER & BOTÓN FLOTANTE --- */
-
         footer { padding: 60px 20px; text-align: center; border-top: 1px solid #111; color: #666; font-size: 0.9rem; letter-spacing: 1px; background: rgba(0,0,0,0.95); }
-
         .social-icons { margin-bottom: 20px; }
-
         .social-icons a { color: var(--dorado); font-size: 1.5rem; margin: 0 15px; transition: 0.3s; }
-
         .social-icons a:hover { color: #fff; transform: scale(1.2); }
 
-
-
         .btn-whatsapp-flotante { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #25d366; color: white; border-radius: 50%; text-align: center; font-size: 35px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 2000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease; border: 2px solid var(--dorado); }
-
         .btn-whatsapp-flotante:hover { transform: scale(1.1); box-shadow: 0 0 20px #25d366; }
-
     </style>
-
 </head>
-
 <body>
 
-
-
     <div id="preloader">
-
         <div class="spinner-dorado"></div>
-
     </div>
-
-
 
     <div class="fondo-animado"><div id="stars"></div><div id="stars2"></div><div id="stars3"></div></div>
 
-
-
     <nav class="navbar">
-
         <div class="nav-logo">Finca Maldonado</div>
-
-        
-
         <div class="hamburger" onclick="toggleMenu()">
-
             <i class="fas fa-bars"></i>
-
         </div>
-
-
-
         <div class="nav-menu" id="navMenu">
-
             <button class="btn-star activo" onclick="cambiarVista('eventos', this)">
-
                 EVENTOS
-
                 <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
-
-                </button>
-
-
-
+                <div class="star-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+                <div class="star-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+            </button>
             <button class="btn-star" onclick="cambiarVista('restaurante', this)">
-
                 RESTAURANTE
-
                 <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
-
-                </button>
-
+                <div class="star-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+                <div class="star-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+            </button>
         </div>
-
     </nav>
-
-
 
     <a href="https://wa.me/5565796506" class="btn-whatsapp-flotante" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-
-
     <div id="vista-eventos" class="vista-seccion vista-activa">
-
         
-
         <header class="hero" id="hero-principal">
-
             <div class="overlay"></div>
-
             <div class="hero-content reveal">
-
                 <img src="img/logo.jpg" alt="Finca Maldonado" class="logo-principal">
-
                 <h1>Elegancia en cada detalle</h1>
-
                 <p style="margin-bottom: 30px; color: var(--gris-texto);">Experiencias exclusivas en el mejor entorno.</p>
-
                 <a href="#salones" class="btn-dorado">Explorar Salones</a>
-
             </div>
-
         </header>
 
-
-
         <section class="quienes-somos reveal">
-
             <div class="qs-grid">
-
                 <div class="qs-texto">
-
                     <h2>Nuestra Historia</h2>
-
                     <p>En Finca Maldonado, fusionamos la tradición mexicana con la elegancia contemporánea. Somos más que un lugar de eventos; somos creadores de momentos inolvidables.</p>
-
                     <p>Desde bodas de ensueño hasta reuniones corporativas de alto nivel, nuestro compromiso es brindar un servicio impecable y un entorno mágico bajo las estrellas.</p>
-
                 </div>
-
                 <div class="qs-img"><img src="img/fondo.jpg" alt="Nosotros"></div>
-
             </div>
-
         </section>
-
-
 
         <section id="salones" class="salones">
-
             <h2 class="reveal">Nuestros Espacios</h2>
-
             <div class="grid-salones">
-
                 <div class="card-salon reveal" onclick="abrirCotizador('Salón Grande')">
-
                     <div class="img-container"><img src="img/salon.jpg" alt="Salón Grande"><span class="capacidad">400 Invitados Max</span></div>
-
                     <div class="info-salon"><h3>Salón Grande</h3><p>Un espacio majestuoso para bodas inolvidables.</p><button class="btn-seleccionar">COTIZAR AHORA</button></div>
-
                 </div>
-
                 <div class="card-salon reveal" onclick="abrirCotizador('Salón Chico')">
-
                     <div class="img-container"><img src="img/pista.jpg" alt="Salón Chico"><span class="capacidad">250 Invitados Max</span></div>
-
                     <div class="info-salon"><h3>Salón Chico</h3><p>Perfecto para XV Años y eventos corporativos.</p><button class="btn-seleccionar">COTIZAR AHORA</button></div>
-
                 </div>
-
                 <div class="card-salon reveal" onclick="abrirCotizador('Salón Baby')">
-
                     <div class="img-container"><img src="img/jardin.jpg" alt="Salón Baby"><span class="capacidad">230 Invitados Max</span></div>
-
                     <div class="info-salon"><h3>Salón Baby</h3><p>El lugar acogedor para eventos íntimos.</p><button class="btn-seleccionar">COTIZAR AHORA</button></div>
-
                 </div>
-
             </div>
-
         </section>
-
-
 
         <section class="galeria-section reveal">
-
             <h2>Recorrido Virtual</h2>
-
-            
-
             <div class="swiper mySwiper">
-
                 <div class="swiper-wrapper">
-
-                    <div class="swiper-slide">
-
-                        <img src="img/salon.jpg" alt="Vista Salón">
-
-                    </div>
-
-                    <div class="swiper-slide">
-
-                        <img src="img/pista.jpg" alt="Vista Pista">
-
-                    </div>
-
-                    <div class="swiper-slide">
-
-                        <img src="img/jardin.jpg" alt="Vista Jardín">
-
-                    </div>
-
-                    </div>
-
-                
-
+                    <div class="swiper-slide"><img src="img/salon.jpg" alt="Vista Salón"></div>
+                    <div class="swiper-slide"><img src="img/pista.jpg" alt="Vista Pista"></div>
+                    <div class="swiper-slide"><img src="img/jardin.jpg" alt="Vista Jardín"></div>
+                </div>
                 <div class="swiper-button-next"></div>
-
                 <div class="swiper-button-prev"></div>
-
                 <div class="swiper-pagination"></div>
-
             </div>
-
-
-
         </section>
-
-
 
         <section class="robot-space-section reveal">
-
             <h2 class="robot-title">Show Robot LED</h2>
-
             <p class="robot-subtitle">Tecnología y Diversión</p>
-
             <div class="robot-image-container"><img src="img/robot.jpg" alt="Robot LED" class="robot-img" onerror="this.src='https://images.unsplash.com/photo-1546776310-51d680a96194?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'"></div>
-
             <div class="robot-shadow"></div>
-
         </section>
-
-
 
     </div> 
 
-
-
     <div id="vista-restaurante" class="vista-seccion">
-
         <div class="hero" style="height: 50vh; background-image: url('img/comida1.jpg');">
-
             <div class="overlay"></div>
-
             <div class="hero-content reveal">
-
                 <h1>El Sabor de la Finca</h1>
-
                 <p>Gastronomía Mexicana de Alta Calidad</p>
-
             </div>
-
         </div>
-
-
 
         <section class="seccion-restaurante reveal">
-
             <h2 class="titulo-restaurante">Nuestro Menú</h2>
-
             <p class="subtitulo-restaurante">Selecciona una categoría</p>
-
             <div class="submenu-restaurante">
-
                 <button class="btn-menu activo" onclick="filtrarMenu('todos', event)">Todo</button>
-
                 <button class="btn-menu" onclick="filtrarMenu('desayuno', event)">Desayunos</button>
-
                 <button class="btn-menu" onclick="filtrarMenu('comida', event)">Comidas</button>
-
                 <button class="btn-menu" onclick="filtrarMenu('bebida', event)">Bebidas</button>
-
             </div>
-
             <div class="menu-grid">
-
                 <div class="tarjeta-platillo categoria-desayuno reveal">
-
                     <div class="foto-platillo" style="background-image: url('img/desayuno1.jpg');"></div>
-
                     <h3>Chilaquiles Finca</h3><p>Salsa verde artesanal y cecina.</p><span class="precio">$120</span>
-
                 </div>
-
                 <div class="tarjeta-platillo categoria-comida reveal">
-
                     <div class="foto-platillo" style="background-image: url('img/comida1.jpg');"></div>
-
                     <h3>Asado de Puerco</h3><p>La especialidad de la casa.</p><span class="precio">$180</span>
-
                 </div>
-
                 <div class="tarjeta-platillo categoria-bebida reveal">
-
                     <div class="foto-platillo" style="background-image: url('img/bebida1.jpg');"></div>
-
                     <h3>Margarita de Mango</h3><p>Tequila reposado con fruta.</p><span class="precio">$95</span>
-
                 </div>
-
                  <div class="tarjeta-platillo categoria-comida reveal">
-
                     <div class="foto-platillo" style="background-image: url('img/comida2.jpg');"></div>
-
                     <h3>Parrillada Mixta</h3><p>Arrachera, chorizo y nopalitos.</p><span class="precio">$350</span>
-
                 </div>
-
             </div>
-
             <div style="text-align: center; margin-top: 50px;">
-
                 <a href="https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20mesa" target="_blank" class="btn-dorado"><i class="fab fa-whatsapp"></i> Reservar Mesa</a>
-
             </div>
-
         </section>
-
     </div>
-
-
 
     <section class="ubicacion-section reveal">
-
         <h2 style="font-size: 2.5rem; color: #fff; margin-bottom: 20px;">Cómo Llegar</h2>
-
         <div class="contenedor-mapa"><iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=Finca+Maldonado+Cuautitlan+San+Blas&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe></div>
-
         <div class="datos-direccion">
-
             <p><i class="fas fa-map-marker-alt" style="color:var(--dorado)"></i> C. 29 Mz. 5 Lt. 11, San Blas I, Cuautitlán</p>
-
             <a href="https://www.google.com/maps?q=C.+29+Mz.+5+Lt.+11,+San+Blas+I,+Cuautitlán" target="_blank" class="btn-dorado" style="font-size: 0.8rem; padding: 10px 30px; margin-top: 20px; display:inline-block;"><i class="fas fa-location-arrow"></i> Abrir en GPS</a>
-
         </div>
-
     </section>
 
-
-
     <div id="miVentanaModal" class="modal">
-
         <div class="modal-content">
-
             <span class="cerrar" onclick="cerrarVentana()">×</span>
-
             <div id="vista-personas"><h2 id="titulo-modal">Cotizando</h2><input type="number" id="inputPersonas" placeholder="Invitados"><button class="btn-dorado" onclick="irAlCalendario()" style="width: 100%;">Continuar</button></div>
-
             <div id="vista-calendario" style="display:none;"><div class="wrapper-calendario"><header class="calendario-header"><span onclick="cambiarMes(-1)" style="cursor:pointer; color: var(--dorado);">❮</span><p id="mes-actual"></p><span onclick="cambiarMes(1)" style="cursor:pointer; color: var(--dorado);">❯</span></header><div class="calendario"><ul class="weeks"><li>Do</li><li>Lu</li><li>Ma</li><li>Mi</li><li>Ju</li><li>Vi</li><li>Sa</li></ul><ul class="days"></ul></div></div></div>
-
         </div>
-
     </div>
 
-
-
     <footer>
-
         <div class="social-icons">
-
             <a href="https://www.facebook.com/fincamaldonad" target="_blank"><i class="fab fa-facebook-f"></i></a>
-
             <a href="https://www.instagram.com/finca_maldonado_salon/" target="_blank"><i class="fab fa-instagram"></i></a>
-
             <a href="https://www.tiktok.com/@fincamaldonado" target="_blank"><i class="fab fa-tiktok"></i></a>
-
         </div>
-
         <p>FINCA MALDONADO © 2026</p>
-
     </footer>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-
-
     <script>
+        // --- URL DEL SCRIPT DE GOOGLE SHEETS ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxirW9BlQfGRcyE_6ea_mffz0_Jlk_wE36NviPZNf2mpmiTnTFaG-t6EeCKjfsMTKBF7g/exec';
 
-        // --- INICIALIZAR EL CARRUSEL PRO (SWIPER) ---
-
-        var swiper = new Swiper(".mySwiper", {
-
-            effect: "fade", // Efecto de desvanecimiento elegante
-
-            loop: true,     // Infinito
-
-            autoplay: {
-
-                delay: 3500, // Tiempo entre fotos (ms)
-
-                disableOnInteraction: false,
-
-            },
-
-            pagination: {
-
-                el: ".swiper-pagination",
-
-                clickable: true,
-
-            },
-
-            navigation: {
-
-                nextEl: ".swiper-button-next",
-
-                prevEl: ".swiper-button-prev",
-
-            },
-
+        // --- INICIALIZAR SWIPER ---
+        var swiper = new Swiper(".mySwiper", { 
+            effect: "fade", 
+            loop: true, 
+            autoplay: { delay: 3500, disableOnInteraction: false }, 
+            pagination: { el: ".swiper-pagination", clickable: true }, 
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, 
         });
 
-
-
-        // --- PRELOADER SCRIPT ---
-
-        window.addEventListener("load", function() {
-
-            const preloader = document.getElementById("preloader");
-
-            preloader.style.opacity = "0";
-
-            setTimeout(function() { preloader.style.display = "none"; }, 500);
-
+        // --- PRELOADER ---
+        window.addEventListener("load", function() { 
+            const preloader = document.getElementById("preloader"); 
+            preloader.style.opacity = "0"; 
+            setTimeout(function() { preloader.style.display = "none"; }, 500); 
         });
 
-
-
-        // --- MENU HAMBURGUESA SCRIPT ---
-
-        function toggleMenu() {
-
-            var menu = document.getElementById("navMenu");
-
-            menu.classList.toggle("active");
-
-        }
-
-
+        // --- MENU ---
+        function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
 
         function cambiarVista(vista, boton) {
-
             document.getElementById('vista-eventos').classList.remove('vista-activa');
-
             document.getElementById('vista-restaurante').classList.remove('vista-activa');
-
             document.getElementById('vista-' + vista).classList.add('vista-activa');
-
-            
-
             let botones = document.querySelectorAll('.btn-star');
-
             botones.forEach(btn => btn.classList.remove('activo'));
-
             boton.classList.add('activo');
-
-            
-
-            document.getElementById("navMenu").classList.remove("active"); // Cerrar menú en móvil
-
+            document.getElementById("navMenu").classList.remove("active");
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
         }
-
-
 
         function filtrarMenu(categoria, event) {
-
             let botones = document.querySelectorAll('.btn-menu');
-
             botones.forEach(btn => btn.classList.remove('activo'));
-
             if(event) event.currentTarget.classList.add('activo');
-
             let platillos = document.querySelectorAll('.tarjeta-platillo');
-
-            platillos.forEach(plat => {
-
-                if(categoria === 'todos' || plat.classList.contains('categoria-' + categoria)) {
-
-                    plat.style.display = 'block';
-
-                } else {
-
-                    plat.style.display = 'none';
-
-                }
-
+            platillos.forEach(plat => { 
+                if(categoria === 'todos' || plat.classList.contains('categoria-' + categoria)) { 
+                    plat.style.display = 'block'; 
+                } else { 
+                    plat.style.display = 'none'; 
+                } 
             });
-
         }
 
-
-
+        // --- ANIMACIONES ---
         function reveal() {
-
             var reveals = document.querySelectorAll(".reveal");
-
             for (var i = 0; i < reveals.length; i++) {
-
                 var windowHeight = window.innerHeight;
-
                 var elementTop = reveals[i].getBoundingClientRect().top;
-
                 var elementVisible = 150;
-
-                if (elementTop < windowHeight - elementVisible) {
-
-                    reveals[i].classList.add("active");
-
-                }
-
+                if (elementTop < windowHeight - elementVisible) { reveals[i].classList.add("active"); }
             }
-
         }
-
-       window.addEventListener("scroll", reveal);
-
+        window.addEventListener("scroll", reveal); 
         reveal();
 
-
-
         const telefono = "5565796506";
-
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
-
         function cambiarPortadaAleatoria() { const hero = document.getElementById('hero-principal'); if(hero) { const indice = Math.floor(Math.random() * imagenesPortada.length); hero.style.backgroundImage = `url('${imagenesPortada[indice]}')`; } }
-
         cambiarPortadaAleatoria();
 
-
-
         let salonActual="", personas="", date=new Date(), currYear=date.getFullYear(), currMonth=date.getMonth();
-
         const meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-
-        function abrirCotizador(nombre){ salonActual=nombre; document.getElementById("titulo-modal").innerText=nombre; document.getElementById("miVentanaModal").style.display="flex"; document.getElementById("vista-personas").style.display="block"; document.getElementById("vista-calendario").style.display="none"; }
-
-        function cerrarVentana(){ document.getElementById("miVentanaModal").style.display="none"; }
-
-        function irAlCalendario(){ if(!document.getElementById("inputPersonas").value) return alert("Pon invitados"); personas=document.getElementById("inputPersonas").value; document.getElementById("vista-personas").style.display="none"; document.getElementById("vista-calendario").style.display="block"; renderCalendario(); }
-
-        function renderCalendario(){ let firstDay=new Date(currYear,currMonth,1).getDay(), lastDate=new Date(currYear,currMonth+1,0).getDate(), liTag=""; for(let i=0;i<firstDay;i++) liTag+=`<li></li>`; for(let i=1;i<=lastDate;i++) liTag+=`<li onclick="enviarWhats(${i},'${meses[currMonth]}')">${i}</li>`; document.getElementById("mes-actual").innerText=`${meses[currMonth]} ${currYear}`; document.querySelector(".days").innerHTML=liTag; }
-
-        function cambiarMes(dir){ currMonth+=dir; if(currMonth<0||currMonth>11){ date=new Date(currYear,currMonth,1); currYear=date.getFullYear(); currMonth=date.getMonth(); } renderCalendario(); }
-
         
-
-        // --- MENSAJE AMIGABLE WHATSAPP ---
-
-        function enviarWhats(d,m){ 
-
-            let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${d} de ${m} del ${currYear}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
-
-            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank'); 
-
+        function abrirCotizador(nombre){ salonActual=nombre; document.getElementById("titulo-modal").innerText=nombre; document.getElementById("miVentanaModal").style.display="flex"; document.getElementById("vista-personas").style.display="block"; document.getElementById("vista-calendario").style.display="none"; }
+        function cerrarVentana(){ document.getElementById("miVentanaModal").style.display="none"; }
+        function irAlCalendario(){ if(!document.getElementById("inputPersonas").value) return alert("Pon invitados"); personas=document.getElementById("inputPersonas").value; document.getElementById("vista-personas").style.display="none"; document.getElementById("vista-calendario").style.display="block"; renderCalendario(); }
+        
+        function renderCalendario(){ 
+            let firstDay=new Date(currYear,currMonth,1).getDay(), lastDate=new Date(currYear,currMonth+1,0).getDate(), liTag=""; 
+            for(let i=0;i<firstDay;i++) liTag+=`<li></li>`; 
+            for(let i=1;i<=lastDate;i++) liTag+=`<li onclick="enviarWhats(${i},'${meses[currMonth]}')">${i}</li>`; 
+            document.getElementById("mes-actual").innerText=`${meses[currMonth]} ${currYear}`; 
+            document.querySelector(".days").innerHTML=liTag; 
         }
+        
+        function cambiarMes(dir){ currMonth+=dir; if(currMonth<0||currMonth>11){ date=new Date(currYear,currMonth,1); currYear=date.getFullYear(); currMonth=date.getMonth(); } renderCalendario(); }
+        
+        // --- FUNCIÓN PRINCIPAL: ENVIAR A SHEETS Y ABRIR WHATSAPP ---
+        function enviarWhats(d, m) {
+            // 1. Datos para Google Sheets
+            const fechaCompleta = `${d} de ${m} ${currYear}`;
+            const formData = new FormData();
+            formData.append('Salón', salonActual);
+            formData.append('Invitados', personas);
+            formData.append('Fecha Evento', fechaCompleta);
 
+            // 2. Enviar a Sheets (sin esperar)
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => console.log('Enviado a Sheets'))
+                .catch(error => console.error('Error al guardar', error));
+
+            // 3. Abrir WhatsApp
+            let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${fechaCompleta}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
+            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
     </script>
-
 </body>
-
 </html>
 
 
