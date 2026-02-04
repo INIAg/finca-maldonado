@@ -42,18 +42,18 @@
 
         h1, h2, h3 { font-family: var(--fuente-titulo); letter-spacing: 2px; }
 
-        /* --- ESTILO PARA DÍAS OCUPADOS (NUEVO VISUAL) --- */
+        /* --- ESTILOS DE DÍAS OCUPADOS (ROJO / PROHIBIDO) --- */
         .ocupado-visual {
-            background-color: #8a2be2 !important; /* Morado fuerte para que destaque */
+            background-color: #8a2be2 !important; /* Morado fuerte */
             color: white !important;
             text-decoration: line-through;
-            cursor: not-allowed !important; /* Cursor de prohibido */
+            cursor: not-allowed !important;
             position: relative;
             font-weight: bold;
             border-radius: 50%;
         }
         .ocupado-visual::after {
-            content: '⛔'; /* Icono de prohibido */
+            content: '⛔'; /* Icono prohibido */
             font-size: 0.6rem;
             position: absolute;
             top: -2px;
@@ -360,21 +360,46 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // --- 1. BASE DE DATOS DE FECHAS OCUPADAS (MANUAL) ---
-        const fechasOcupadas = {
-            "4-1": ["Salón Grande"],  // 4 de Febrero: Salón Grande ocupado
-            "5-1": ["Salón Chico"],   // 5 de Febrero: Salón Chico ocupado
-            "14-1": ["Salón Grande", "Salón Chico", "Salón Baby"] // 14 de Febrero: TODO LLENO
-        };
+        // ==========================================
+        // 1. CONFIGURACIÓN DE PRUEBA (AUTOMÁTICA)
+        // ==========================================
+        
+        // Calculamos "Mañana" automáticamente para que la prueba no falle
+        const hoy = new Date();
+        const manana = new Date(hoy);
+        manana.setDate(hoy.getDate() + 1); // Sumamos 1 día
 
-        // --- INICIALIZAR SWIPER ---
+        // Generamos la clave de mañana (Ejemplo: "4-1" si es 4 de Febrero)
+        const diaBloqueado = manana.getDate();
+        const mesBloqueado = manana.getMonth(); // 0 = Enero, 1 = Febrero...
+        const claveMagica = `${diaBloqueado}-${mesBloqueado}`;
+
+        // BASE DE DATOS DE FECHAS
+        const fechasOcupadas = {};
+        
+        // ¡AQUÍ ESTÁ EL TRUCO! 
+        // Bloqueamos "Mañana" para el Salón Grande automáticamente.
+        fechasOcupadas[claveMagica] = ["Salón Grande"]; 
+        
+        // También bloqueamos el día 15 y 20 del mes actual para que veas más ejemplos
+        fechasOcupadas[`15-${mesBloqueado}`] = ["Salón Chico"];
+        fechasOcupadas[`20-${mesBloqueado}`] = ["Salón Grande", "Salón Chico", "Salón Baby"];
+
+        console.log("Fechas Bloqueadas para prueba:", fechasOcupadas);
+
+        // ==========================================
+        // 2. LÓGICA DEL SITIO
+        // ==========================================
+
         var swiper = new Swiper(".mySwiper", { effect: "fade", loop: true, autoplay: { delay: 3500, disableOnInteraction: false }, pagination: { el: ".swiper-pagination", clickable: true }, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, });
 
-        // --- PRELOADER ---
-        window.addEventListener("load", function() { const preloader = document.getElementById("preloader"); preloader.style.opacity = "0"; setTimeout(function() { preloader.style.display = "none"; }, 500); });
+        window.addEventListener("load", function() { 
+            const preloader = document.getElementById("preloader"); 
+            preloader.style.opacity = "0"; 
+            setTimeout(function() { preloader.style.display = "none"; }, 500); 
+        });
 
-        // --- MENU HAMBURGUESA ---
-        function toggleMenu() { var menu = document.getElementById("navMenu"); menu.classList.toggle("active"); }
+        function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
 
         function cambiarVista(vista, boton) {
             document.getElementById('vista-eventos').classList.remove('vista-activa');
@@ -418,18 +443,22 @@
         function cerrarVentana(){ document.getElementById("miVentanaModal").style.display="none"; }
         function irAlCalendario(){ if(!document.getElementById("inputPersonas").value) return alert("Pon invitados"); personas=document.getElementById("inputPersonas").value; document.getElementById("vista-personas").style.display="none"; document.getElementById("vista-calendario").style.display="block"; renderCalendario(); }
         
-        // --- RENDER CALENDARIO ---
+        // --- RENDERIZAR CALENDARIO ---
         function renderCalendario(){ 
             let firstDay=new Date(currYear,currMonth,1).getDay(), lastDate=new Date(currYear,currMonth+1,0).getDate(), liTag=""; 
             for(let i=0;i<firstDay;i++) liTag+=`<li></li>`; 
             
             for(let i=1;i<=lastDate;i++) {
+                // Clave única del día: "Día-Mes"
                 let key = `${i}-${currMonth}`;
+                
                 let claseExtra = "";
                 // Si la fecha existe en la base de datos Y incluye el salón actual
                 if(fechasOcupadas[key] && fechasOcupadas[key].includes(salonActual)) {
                     claseExtra = "ocupado-visual"; 
                 }
+                
+                // IMPORTANTE: Aquí pasamos los valores directamente a la función onclick
                 liTag+=`<li class="${claseExtra}" onclick="verificarYEnviar(${i}, '${meses[currMonth]}', ${currMonth})">${i}</li>`;
             }
             document.getElementById("mes-actual").innerText=`${meses[currMonth]} ${currYear}`; 
@@ -438,20 +467,22 @@
         
         function cambiarMes(dir){ currMonth+=dir; if(currMonth<0||currMonth>11){ date=new Date(currYear,currMonth,1); currYear=date.getFullYear(); currMonth=date.getMonth(); } renderCalendario(); }
         
-        // --- VERIFICACIÓN DE DISPONIBILIDAD ---
+        // --- VERIFICACIÓN Y ENVÍO ---
         function verificarYEnviar(dia, nombreMes, indiceMes) {
             let key = `${dia}-${indiceMes}`;
             
-            // Si la fecha existe Y el salón está bloqueado
+            // 1. Verificar si está ocupado
             if (fechasOcupadas[key] && fechasOcupadas[key].includes(salonActual)) {
-                alert(`⚠️ Lo sentimos.\n\nEl ${salonActual} ya está reservado para el ${dia} de ${nombreMes}.\n\n¡Por favor intenta con otro Salón u otra fecha!`);
-                return; // NO ENVIAR WHATSAPP
+                // ALERTA VISUAL
+                alert(`⛔ FECHA NO DISPONIBLE ⛔\n\nLo sentimos, el "${salonActual}" ya tiene evento programado para el ${dia} de ${nombreMes}.\n\nPor favor selecciona otro día u otro salón.`);
+                return; // ¡AQUÍ SE DETIENE TODO! No abre WhatsApp.
             }
 
-            // Si pasa, enviar el mensaje
+            // 2. Si no está ocupado, abre WhatsApp
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${dia} de ${nombreMes} del ${currYear}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank'); 
         }
     </script>
 </body>
 </html>
+
