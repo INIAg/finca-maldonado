@@ -241,7 +241,7 @@
         /* Contenedor de Video/Foto (Estilo Vertical) */
         .video-card-container {
             position: relative;
-            max-width: 350px; /* Ancho perfecto para vertical */
+            max-width: 350px; 
             width: 100%;
             margin: 40px auto;
             aspect-ratio: 3/4; /* Formato retrato */
@@ -300,19 +300,6 @@
         .ubicacion-section { padding: 100px 20px; background: rgba(0, 0, 0, 0.85); text-align: center; }
         .contenedor-mapa { max-width: 1000px; margin: 40px auto 0; padding: 10px; border: 1px solid var(--dorado); background: rgba(212, 175, 55, 0.05); }
 
-        /* --- MODAL --- */
-        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; }
-        .modal-content { background: rgba(18, 18, 18, 0.95); border: 1px solid var(--dorado); padding: 40px; width: 90%; max-width: 450px; text-align: center; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .cerrar { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: var(--gris-texto); }
-        #inputPersonas { padding: 12px; font-size: 1.2rem; width: 80%; margin: 25px 0; text-align: center; border: none; border-bottom: 2px solid var(--dorado); background: transparent; color: white; outline: none; }
-        .wrapper-calendario { background: #000; padding: 20px; border: 1px solid #222; margin-top: 20px; }
-        .calendario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .calendario ul { display: flex; flex-wrap: wrap; list-style: none; }
-        .weeks li { color: var(--dorado); font-weight: bold; font-size: 0.8rem; }
-        .calendario ul li { width: calc(100% / 7); padding: 12px 0; font-size: 0.9rem; }
-        .days li { cursor: pointer; transition: 0.2s; border-radius: 50%; }
-        .days li:hover:not(:empty) { background: var(--dorado); color: black; font-weight: bold; }
-        
         /* --- FOOTER & BOTÓN FLOTANTE --- */
         footer { padding: 60px 20px; text-align: center; border-top: 1px solid #111; color: #666; font-size: 0.9rem; letter-spacing: 1px; background: rgba(0,0,0,0.95); }
         .social-icons { margin-bottom: 20px; }
@@ -381,7 +368,7 @@
             <h2 class="reveal">Nuestros Espacios</h2>
             <div class="grid-salones">
                 
-                <div class="card-salon reveal" onclick="abrirCotizador('Salón Grande')">
+                <div class="card-salon reveal" onclick="cotizarSalon('Salón Grande')">
                     <div class="img-container">
                         <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('grande', -1, event)">❮</div>
                         <img id="img-grande" src="img/salongrande.jpg" alt="Salón Grande">
@@ -395,7 +382,7 @@
                     </div>
                 </div>
 
-                <div class="card-salon reveal" onclick="abrirCotizador('Salón Chico')">
+                <div class="card-salon reveal" onclick="cotizarSalon('Salón Chico')">
                     <div class="img-container">
                         <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('chico', -1, event)">❮</div>
                         <img id="img-chico" src="img/salonchico.jpg" alt="Salón Chico">
@@ -409,7 +396,7 @@
                     </div>
                 </div>
 
-                <div class="card-salon reveal" onclick="abrirCotizador('Salón Baby')">
+                <div class="card-salon reveal" onclick="cotizarSalon('Salón Baby')">
                     <div class="img-container">
                         <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('baby', -1, event)">❮</div>
                         <img id="img-baby" src="img/salonbaby.jpg" alt="Salón Baby">
@@ -619,14 +606,6 @@
         </div>
     </section>
 
-    <div id="miVentanaModal" class="modal">
-        <div class="modal-content">
-            <span class="cerrar" onclick="cerrarVentana()">×</span>
-            <div id="vista-personas"><h2 id="titulo-modal">Cotizando</h2><input type="number" id="inputPersonas" placeholder="Invitados"><button class="btn-dorado" onclick="irAlCalendario()" style="width: 100%;">Continuar</button></div>
-            <div id="vista-calendario" style="display:none;"><div class="wrapper-calendario"><header class="calendario-header"><span onclick="cambiarMes(-1)" style="cursor:pointer; color: var(--dorado);">❮</span><p id="mes-actual"></p><span onclick="cambiarMes(1)" style="cursor:pointer; color: var(--dorado);">❯</span></header><div class="calendario"><ul class="weeks"><li>Do</li><li>Lu</li><li>Ma</li><li>Mi</li><li>Ju</li><li>Vi</li><li>Sa</li></ul><ul class="days"></ul></div></div></div>
-        </div>
-    </div>
-
     <footer>
         <div class="social-icons">
             <a href="https://www.facebook.com/fincamaldonad" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -639,9 +618,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // --- URL DEL SCRIPT DE GOOGLE SHEETS ---
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxirW9BlQfGRcyE_6ea_mffz0_Jlk_wE36NviPZNf2mpmiTnTFaG-t6EeCKjfsMTKBF7g/exec';
-
         // --- INICIALIZAR SWIPER (Carrusel Principal) ---
         var swiper = new Swiper(".mySwiper", { 
             effect: "fade", 
@@ -705,7 +681,6 @@
         }
 
         // --- GALERÍA DE SALONES (LÓGICA DE FLECHAS) ---
-        // Arrays con las fotos exactas
         const imgsGrande = ['img/salongrande.jpg', 'img/salongrande2.jpg', 'img/salongrande3.jpg', 'img/salongrande4.jpg'];
         const imgsChico = ['img/salonchico.jpg', 'img/salonchico2.jpg', 'img/salonchico3.jpg'];
         const imgsBaby = ['img/salonbaby.jpg', 'img/salonbaby2.jpg', 'img/salonbaby3.jpg', 'img/salonbaby4.jpg', 'img/salonbaby5.jpg', 'img/salonbaby6.jpg'];
@@ -715,8 +690,7 @@
         let iBaby = 0;
 
         function cambiarFotoSalon(salon, direccion, event) {
-            // Detiene que se abra el cotizador al dar clic a la flecha
-            event.stopPropagation();
+            event.stopPropagation(); // Evita que se abra el cotizador al tocar la flecha
 
             let arr, indiceActual, imgID;
 
@@ -743,8 +717,14 @@
                 imgID = 'img-baby';
             }
 
-            // Cambiar la foto
             document.getElementById(imgID).src = arr[indiceActual];
+        }
+
+        // --- NUEVA FUNCIÓN: COTIZAR DIRECTO (SIN CALENDARIO) ---
+        function cotizarSalon(nombreSalon) {
+            const telefono = "5565796506";
+            let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${nombreSalon}*.\nQuisiera saber disponibilidad y precios. ¡Gracias! ✨`;
+            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         // --- ANIMACIONES ---
@@ -760,49 +740,9 @@
         window.addEventListener("scroll", reveal); 
         reveal();
 
-        const telefono = "5565796506";
-        // Añadidas las nuevas fotos al array de portadas aleatorias también (opcional)
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
         function cambiarPortadaAleatoria() { const hero = document.getElementById('hero-principal'); if(hero) { const indice = Math.floor(Math.random() * imagenesPortada.length); hero.style.backgroundImage = `url('${imagenesPortada[indice]}')`; } }
         cambiarPortadaAleatoria();
-
-        let salonActual="", personas="", date=new Date(), currYear=date.getFullYear(), currMonth=date.getMonth();
-        const meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-        
-        function abrirCotizador(nombre){ salonActual=nombre; document.getElementById("titulo-modal").innerText=nombre; document.getElementById("miVentanaModal").style.display="flex"; document.getElementById("vista-personas").style.display="block"; document.getElementById("vista-calendario").style.display="none"; }
-        function cerrarVentana(){ document.getElementById("miVentanaModal").style.display="none"; }
-        function irAlCalendario(){ if(!document.getElementById("inputPersonas").value) return alert("Pon invitados"); personas=document.getElementById("inputPersonas").value; document.getElementById("vista-personas").style.display="none"; document.getElementById("vista-calendario").style.display="block"; renderCalendario(); }
-        
-        function renderCalendario(){ 
-            let firstDay=new Date(currYear,currMonth,1).getDay(), lastDate=new Date(currYear,currMonth+1,0).getDate(), liTag=""; 
-            for(let i=0;i<firstDay;i++) liTag+=`<li></li>`; 
-            for(let i=1;i<=lastDate;i++) liTag+=`<li onclick="enviarWhats(${i},'${meses[currMonth]}')">${i}</li>`; 
-            document.getElementById("mes-actual").innerText=`${meses[currMonth]} ${currYear}`; 
-            document.querySelector(".days").innerHTML=liTag; 
-        }
-        
-        function cambiarMes(dir){ currMonth+=dir; if(currMonth<0||currMonth>11){ date=new Date(currYear,currMonth,1); currYear=date.getFullYear(); currMonth=date.getMonth(); } renderCalendario(); }
-        
-       // --- FUNCIÓN ENVIAR WHATSAPP ---
-        function enviarWhats(d, m) {
-            const fechaCompleta = `${d} de ${m} ${currYear}`;
-            const datos = new URLSearchParams();
-            datos.append('Salón', salonActual);
-            datos.append('Invitados', personas);
-            datos.append('Fecha Evento', fechaCompleta);
-
-            fetch(scriptURL, { 
-                method: 'POST', 
-                mode: 'no-cors', 
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: datos 
-            })
-            .then(() => console.log("¡Datos enviados correctamente!"))
-            .catch(error => console.error("Error:", error));
-
-            let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${fechaCompleta}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
-            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
     </script>
 </body>
 </html>
