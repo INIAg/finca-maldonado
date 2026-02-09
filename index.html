@@ -114,7 +114,7 @@
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
-   /* --- TARJETAS INTERACTIVAS (CORREGIDO - FOTOS COMPLETAS) --- */
+        /* --- TARJETAS INTERACTIVAS (FORMATO VERTICAL CORREGIDO) --- */
         .seccion-restaurante { padding: 50px 20px 100px 20px; color: var(--blanco); text-align: center; }
         .titulo-restaurante { font-size: 3rem; color: var(--dorado); margin-bottom: 10px; text-transform: uppercase; }
         .subtitulo-restaurante { color: var(--gris-texto); margin-bottom: 20px; font-size: 1.1rem; }
@@ -126,7 +126,7 @@
         
         .menu-grid { 
             display: grid; 
-            /* Hacemos las columnas un poco más angostas para el formato vertical */
+            /* Columnas optimizadas para vertical */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 25px; 
             max-width: 1100px; 
@@ -135,8 +135,7 @@
 
         .tarjeta-interactiva {
             position: relative;
-            /* CAMBIO CLAVE: Aumentamos la altura para que la foto quepa mejor */
-            height: 500px; 
+            height: 500px; /* ALTO PARA FOTOS COMPLETAS */
             border-radius: 15px;
             overflow: hidden;
             cursor: pointer;
@@ -153,10 +152,9 @@
         .tarjeta-bg {
             width: 100%;
             height: 100%;
-            /* 'cover' asegura que se llene el espacio, pero ahora el espacio es más alto */
-            background-size: cover; 
+            background-size: cover;
             background-position: center;
-            transition: transform 0.8s ease; /* Transición más suave */
+            transition: transform 0.8s ease;
         }
 
         .tarjeta-overlay {
@@ -165,7 +163,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Degradado ajustado para el nuevo formato vertical */
             background: linear-gradient(to top, rgba(0,0,0,0.95) 5%, rgba(0,0,0,0.5) 30%, transparent 60%);
             display: flex;
             flex-direction: column;
@@ -189,36 +186,22 @@
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animación más elegante */
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
             font-weight: 300;
             line-height: 1.5;
         }
 
-        /* Estado Activo (Al dar clic) */
-        .tarjeta-interactiva.activa .tarjeta-bg { 
-            transform: scale(1.05); /* Zoom más sutil */
-        }
-        .tarjeta-interactiva.activa .tarjeta-overlay { 
-            background: rgba(0, 0, 0, 0.88); /* Fondo oscuro casi total */
-            justify-content: center; 
-            align-items: center; 
-            text-align: center; 
-            padding: 40px;
-        }
-        .tarjeta-interactiva.activa .tarjeta-titulo { 
-            margin-bottom: 20px; 
-            font-size: 1.9rem; 
-        }
-        .tarjeta-interactiva.activa .tarjeta-desc { 
-            max-height: 300px; 
-            opacity: 1; 
-        }
+        /* Estado Activo */
+        .tarjeta-interactiva.activa .tarjeta-bg { transform: scale(1.05); }
+        .tarjeta-interactiva.activa .tarjeta-overlay { background: rgba(0, 0, 0, 0.88); justify-content: center; align-items: center; text-align: center; padding: 40px; }
+        .tarjeta-interactiva.activa .tarjeta-titulo { margin-bottom: 20px; font-size: 1.9rem; }
+        .tarjeta-interactiva.activa .tarjeta-desc { max-height: 300px; opacity: 1; }
 
         .icono-touch {
             position: absolute; top: 20px; right: 20px; color: var(--dorado); background: rgba(0,0,0,0.6); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; border: 1px solid var(--dorado); animation: parpadeo 2.5s infinite; z-index: 5;
         }
         @keyframes parpadeo { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); } }
-        
+
         /* --- GALERÍA SWIPER --- */
         .galeria-section { padding: 80px 20px; background: rgba(8, 8, 8, 0.85); text-align: center; }
         .swiper { width: 100%; max-width: 1000px; height: 500px; margin: 40px auto; border-radius: 10px; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
@@ -466,9 +449,13 @@
             </div>
 
             <div style="text-align: center; margin-top: 40px; margin-bottom: 60px;">
-                <p style="color: #999; margin-bottom: 15px; font-size: 0.9rem;">* Toca las tarjetas para ver detalles</p>
-                <a href="https://wa.me/5565796506?text="Hola, estoy buscando un lugar especial y me gustó mucho su propuesta. Quisiera cotizar una reserva en el restaurante. ✨" target="_blank" class="btn-dorado" style="font-size: 1.2rem; padding: 20px 50px; border-radius: 50px;">
-                    <i class="fab fa-whatsapp"></i> RESERVAR MESA
+                <p style="color: #999; margin-bottom: 15px; font-size: 0.9rem;">* Toca las tarjetas para descubrir los ingredientes</p>
+                
+                <a href="https://wa.me/5565796506?text=Hola,%20estoy%20buscando%20un%20lugar%20especial%20y%20me%20gustó%20mucho%20su%20propuesta.%20Quisiera%20cotizar%20una%20reserva%20en%20el%20restaurante.%20✨" 
+                   target="_blank" 
+                   class="btn-dorado" 
+                   style="font-size: 1.1rem; padding: 20px 40px; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); text-decoration: none;">
+                    <i class="fas fa-wine-glass-alt"></i> Cotizar Reserva Especial
                 </a>
             </div>
 
@@ -541,7 +528,7 @@
             let botones = document.querySelectorAll('.btn-menu');
             botones.forEach(btn => btn.classList.remove('activo'));
             if(event) event.currentTarget.classList.add('activo');
-            let platillos = document.querySelectorAll('.tarjeta-interactiva'); // Cambiado a tarjeta-interactiva
+            let platillos = document.querySelectorAll('.tarjeta-interactiva'); 
             platillos.forEach(plat => { 
                 if(categoria === 'todos' || plat.classList.contains('categoria-' + categoria)) { 
                     plat.style.display = 'block'; 
@@ -620,7 +607,6 @@
     </script>
 </body>
 </html>
-
 
 
 
