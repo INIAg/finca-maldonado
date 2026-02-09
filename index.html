@@ -101,13 +101,14 @@
         .btn-dorado { padding: 15px 40px; border: 1px solid var(--dorado); color: var(--dorado); text-decoration: none; text-transform: uppercase; font-weight: 600; letter-spacing: 2px; transition: all 0.4s ease; background: rgba(0,0,0,0.3); cursor: pointer; display: inline-block; backdrop-filter: blur(5px); }
         .btn-dorado:hover { background: var(--gradient-oro); color: black; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); transform: translateY(-3px); }
 
-        /* --- SALONES (ACTUALIZADO CON FLECHAS) --- */
+        /* --- SALONES --- */
         .salones { padding: 100px 20px; text-align: center; }
         .grid-salones { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
         .card-salon { background: var(--negro-card); border: 1px solid #222; overflow: hidden; transition: 0.5s; position: relative; border-radius: 4px; }
         .card-salon:hover { transform: translateY(-10px); border-color: var(--dorado); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .img-container { position: relative; height: 280px; overflow: hidden; }
         .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .card-salon:hover .img-container img { transform: scale(1.1); }
         
         /* FLECHAS DE NAVEGACIÓN EN SALONES */
         .flecha-galeria {
@@ -382,9 +383,9 @@
                 
                 <div class="card-salon reveal" onclick="abrirCotizador('Salón Grande')">
                     <div class="img-container">
-                        <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('grande', -1, event)">&#10094;</div>
+                        <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('grande', -1, event)">❮</div>
                         <img id="img-grande" src="img/salongrande.jpg" alt="Salón Grande">
-                        <div class="flecha-galeria derecha" onclick="cambiarFotoSalon('grande', 1, event)">&#10095;</div>
+                        <div class="flecha-galeria derecha" onclick="cambiarFotoSalon('grande', 1, event)">❯</div>
                         <span class="capacidad">400 Invitados Max</span>
                     </div>
                     <div class="info-salon">
@@ -396,9 +397,9 @@
 
                 <div class="card-salon reveal" onclick="abrirCotizador('Salón Chico')">
                     <div class="img-container">
-                        <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('chico', -1, event)">&#10094;</div>
+                        <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('chico', -1, event)">❮</div>
                         <img id="img-chico" src="img/salonchico.jpg" alt="Salón Chico">
-                        <div class="flecha-galeria derecha" onclick="cambiarFotoSalon('chico', 1, event)">&#10095;</div>
+                        <div class="flecha-galeria derecha" onclick="cambiarFotoSalon('chico', 1, event)">❯</div>
                         <span class="capacidad">250 Invitados Max</span>
                     </div>
                     <div class="info-salon">
@@ -410,9 +411,9 @@
 
                 <div class="card-salon reveal" onclick="abrirCotizador('Salón Baby')">
                     <div class="img-container">
-                        <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('baby', -1, event)">&#10094;</div>
+                        <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('baby', -1, event)">❮</div>
                         <img id="img-baby" src="img/salonbaby.jpg" alt="Salón Baby">
-                        <div class="flecha-galeria derecha" onclick="cambiarFotoSalon('baby', 1, event)">&#10095;</div>
+                        <div class="flecha-galeria derecha" onclick="cambiarFotoSalon('baby', 1, event)">❯</div>
                         <span class="capacidad">230 Invitados Max</span>
                     </div>
                     <div class="info-salon">
@@ -432,6 +433,10 @@
                     <div class="swiper-slide"><img src="img/salon.jpg" alt="Vista Salón"></div>
                     <div class="swiper-slide"><img src="img/pista.jpg" alt="Vista Pista"></div>
                     <div class="swiper-slide"><img src="img/jardin.jpg" alt="Vista Jardín"></div>
+                    <div class="swiper-slide"><img src="img/candybar.jpg" alt="Candy Bar"></div>
+                    <div class="swiper-slide"><img src="img/corazon.jpg" alt="Decoración Corazón"></div>
+                    <div class="swiper-slide"><img src="img/fuente.jpg" alt="Fuente"></div>
+                    <div class="swiper-slide"><img src="img/pasillo.jpg" alt="Pasillo Iluminado"></div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -637,7 +642,7 @@
         // --- URL DEL SCRIPT DE GOOGLE SHEETS ---
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxirW9BlQfGRcyE_6ea_mffz0_Jlk_wE36NviPZNf2mpmiTnTFaG-t6EeCKjfsMTKBF7g/exec';
 
-        // --- INICIALIZAR SWIPER ---
+        // --- INICIALIZAR SWIPER (Carrusel Principal) ---
         var swiper = new Swiper(".mySwiper", { 
             effect: "fade", 
             loop: true, 
@@ -699,8 +704,8 @@
             video.play();
         }
 
-        // --- GALERÍA DE SALONES ---
-        // Arrays con las fotos que me dijiste
+        // --- GALERÍA DE SALONES (LÓGICA DE FLECHAS) ---
+        // Arrays con las fotos exactas
         const imgsGrande = ['img/salongrande.jpg', 'img/salongrande2.jpg', 'img/salongrande3.jpg', 'img/salongrande4.jpg'];
         const imgsChico = ['img/salonchico.jpg', 'img/salonchico2.jpg', 'img/salonchico3.jpg'];
         const imgsBaby = ['img/salonbaby.jpg', 'img/salonbaby2.jpg', 'img/salonbaby3.jpg', 'img/salonbaby4.jpg', 'img/salonbaby5.jpg', 'img/salonbaby6.jpg'];
@@ -756,6 +761,7 @@
         reveal();
 
         const telefono = "5565796506";
+        // Añadidas las nuevas fotos al array de portadas aleatorias también (opcional)
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
         function cambiarPortadaAleatoria() { const hero = document.getElementById('hero-principal'); if(hero) { const indice = Math.floor(Math.random() * imagenesPortada.length); hero.style.backgroundImage = `url('${imagenesPortada[indice]}')`; } }
         cambiarPortadaAleatoria();
