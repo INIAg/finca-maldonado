@@ -208,27 +208,18 @@
         .swiper-pagination-bullet { background: #fff !important; opacity: 0.5; }
         .swiper-pagination-bullet-active { background: var(--dorado) !important; opacity: 1; }
 
-        /* --- ROBOT --- */
-        .robot-space-section { padding: 100px 20px; background: transparent; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        /* --- ESTILOS COMPARTIDOS (ROBOT Y FOLCLORE) --- */
+        .robot-space-section, .folclore-section { padding: 100px 20px; background: transparent; text-align: center; display: flex; flex-direction: column; align-items: center; }
         .robot-title { font-size: 3rem; color: #fff; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
         .robot-subtitle { color: var(--neon-azul); margin-bottom: 50px; opacity: 0.8; }
-        .robot-image-container { position: relative; max-width: 350px; width: 100%; z-index: 10; animation: levitar 6s ease-in-out infinite; }
-        .robot-img { width: 100%; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 10px 50px rgba(0, 243, 255, 0.15); }
-        .robot-shadow { width: 200px; height: 20px; background: radial-gradient(ellipse at center, rgba(0, 243, 255, 0.3) 0%, rgba(0,0,0,0) 70%); margin-top: 30px; border-radius: 50%; animation: sombra-latido 6s ease-in-out infinite; }
-        @keyframes levitar { 0% { transform: translateY(0px); } 50% { transform: translateY(-25px); } 100% { transform: translateY(0px); } }
-        @keyframes sombra-latido { 0% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(0.8); opacity: 0.3; } 100% { transform: scale(1); opacity: 0.5; } }
 
-        /* --- SECCIÓN FOLCLORE (CORREGIDA - ESTILO ROBOT VERTICAL) --- */
-        .folclore-section { padding: 100px 20px; text-align: center; border-top: 1px solid #222; }
-
+        /* Contenedor de Video/Foto (Estilo Vertical) */
         .video-card-container {
             position: relative;
-            /* CAMBIO CLAVE: Ancho reducido igual al robot */
-            max-width: 350px; 
+            max-width: 350px; /* Ancho perfecto para vertical */
             width: 100%;
             margin: 40px auto;
-            /* CAMBIO CLAVE: Formato vertical (Retrato) */
-            aspect-ratio: 3/4; 
+            aspect-ratio: 3/4; /* Formato retrato */
             border-radius: 20px;
             overflow: hidden;
             border: 2px solid var(--dorado);
@@ -243,14 +234,14 @@
         .media-cover { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Cover para llenar el espacio vertical */
+            object-fit: cover; /* LLENA TODO EL ESPACIO */
             display: block;
         }
 
         .media-video { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; 
+            object-fit: cover; /* LLENA TODO EL ESPACIO */
             display: none; 
         }
 
@@ -396,8 +387,17 @@
         <section class="robot-space-section reveal">
             <h2 class="robot-title">Show Robot LED</h2>
             <p class="robot-subtitle">Tecnología y Diversión</p>
-            <div class="robot-image-container"><img src="img/robot.jpg" alt="Robot LED" class="robot-img" onerror="this.src='https://images.unsplash.com/photo-1546776310-51d680a96194?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'"></div>
-            <div class="robot-shadow"></div>
+            
+            <div class="video-card-container" onclick="reproducirVideo(this)">
+                <img src="img/robot.jpg" alt="Robot LED" class="media-cover">
+                
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+                
+                <video class="media-video" muted loop playsinline>
+                    <source src="img/video_robot.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
+                </video>
+            </div>
         </section>
 
         <section class="folclore-section reveal">
@@ -410,7 +410,7 @@
             </p>
 
             <div class="video-card-container" onclick="reproducirVideo(this)">
-                <img src="img/Folclorico.jpg" alt="Show Folclore" class="media-cover">
+                <img src="img/folclorico.jpg" alt="Show Folclore" class="media-cover">
                 
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 
@@ -637,7 +637,7 @@
             }
         }
 
-        // --- FUNCIÓN PARA REPRODUCIR VIDEO (FOLCLORE) ---
+        // --- FUNCIÓN PARA REPRODUCIR VIDEO (FOLCLORE Y ROBOT) ---
         function reproducirVideo(elemento) {
             let video = elemento.querySelector('video');
             elemento.classList.add('playing');
@@ -702,5 +702,4 @@
     </script>
 </body>
 </html>
-
 
