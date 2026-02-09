@@ -114,18 +114,30 @@
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
-        /* --- RESTAURANTE --- */
+        /* --- RESTAURANTE MEJORADO --- */
         .seccion-restaurante { padding: 50px 20px 100px 20px; color: var(--blanco); text-align: center; }
         .titulo-restaurante { font-size: 3rem; color: var(--dorado); margin-bottom: 10px; text-transform: uppercase; }
-        .subtitulo-restaurante { color: var(--gris-texto); margin-bottom: 50px; }
+        .subtitulo-restaurante { color: var(--gris-texto); margin-bottom: 20px; font-size: 1.1rem; }
+        .nota-temporada { font-size: 0.9rem; color: #888; font-style: italic; margin-bottom: 40px; }
+        
         .submenu-restaurante { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
-        .btn-menu { background: transparent; border: 2px solid var(--dorado); color: var(--dorado); padding: 10px 25px; cursor: pointer; font-weight: bold; border-radius: 30px; transition: all 0.3s ease; }
-        .btn-menu:hover, .btn-menu.activo { background-color: var(--dorado); color: black; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
-        .tarjeta-platillo { background: var(--negro-card); border: 1px solid #333; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-align: center; transition: 0.3s; }
-        .tarjeta-platillo:hover { border-color: var(--dorado); transform: translateY(-5px); }
-        .foto-platillo { width: 100%; height: 200px; background-color: #222; background-size: cover; background-position: center; border-radius: 5px; margin-bottom: 15px; border: 1px solid rgba(212, 175, 55, 0.3); }
-        .precio { display: block; margin-top: 10px; color: var(--dorado); font-weight: bold; font-size: 1.2rem; }
+        .btn-menu { background: transparent; border: 1px solid #444; color: var(--gris-texto); padding: 10px 25px; cursor: pointer; font-weight: 500; border-radius: 30px; transition: all 0.3s ease; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        .btn-menu:hover, .btn-menu.activo { border-color: var(--dorado); color: var(--dorado); background: rgba(212, 175, 55, 0.1); }
+        
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
+        
+        .tarjeta-platillo { background: var(--negro-card); border: 1px solid #222; border-radius: 8px; overflow: hidden; transition: 0.4s; text-align: left; display: flex; flex-direction: column; }
+        .tarjeta-platillo:hover { border-color: var(--dorado); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+        
+        .foto-platillo { width: 100%; height: 220px; background-color: #222; background-size: cover; background-position: center; border-bottom: 1px solid #333; }
+        
+        .info-platillo { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .info-platillo h3 { color: var(--dorado); font-size: 1.4rem; margin-bottom: 10px; font-family: var(--fuente-titulo); }
+        .info-platillo p { color: #bbb; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6; font-weight: 300; }
+        
+        .btn-cotizar-platillo { text-align: center; display: block; padding: 10px 0; border: 1px solid #444; color: #fff; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; margin-top: auto; border-radius: 4px; }
+        .btn-cotizar-platillo:hover { border-color: var(--dorado); color: var(--dorado); background: rgba(212, 175, 55, 0.05); }
+
 
         /* --- GALERÍA SWIPER --- */
         .galeria-section { padding: 80px 20px; background: rgba(8, 8, 8, 0.85); text-align: center; }
@@ -277,35 +289,120 @@
         </div>
 
         <section class="seccion-restaurante reveal">
-            <h2 class="titulo-restaurante">Nuestro Menú</h2>
-            <p class="subtitulo-restaurante">Selecciona una categoría</p>
+            <h2 class="titulo-restaurante">Experiencia Culinaria</h2>
+            <p class="subtitulo-restaurante">Selección del Chef</p>
+            <p class="nota-temporada">Nuestra cocina trabaja con ingredientes frescos de temporada. Contáctanos para consultar disponibilidad del día.</p>
+            
             <div class="submenu-restaurante">
                 <button class="btn-menu activo" onclick="filtrarMenu('todos', event)">Todo</button>
                 <button class="btn-menu" onclick="filtrarMenu('desayuno', event)">Desayunos</button>
                 <button class="btn-menu" onclick="filtrarMenu('comida', event)">Comidas</button>
                 <button class="btn-menu" onclick="filtrarMenu('bebida', event)">Bebidas</button>
             </div>
+
             <div class="menu-grid">
+                
                 <div class="tarjeta-platillo categoria-desayuno reveal">
-                    <div class="foto-platillo" style="background-image: url('img/desayuno1.jpg');"></div>
-                    <h3>Chilaquiles Finca</h3><p>Salsa verde artesanal y cecina.</p><span class="precio">$120</span>
+                    <div class="foto-platillo" style="background-image: url('img/desayuno_patron.jpg');"></div>
+                    <div class="info-platillo">
+                        <div>
+                            <h3>Desayuno Patrón</h3>
+                            <p>Huevos al gusto bañados en salsa roja martajada, acompañados de plátanos machos fritos, jamón, chícharos y frijoles refritos.</p>
+                        </div>
+                        <a href="https://wa.me/5565796506?text=Hola,%20quisiera%20probar%20el%20Desayuno%20Patrón" target="_blank" class="btn-cotizar-platillo">Ver Disponibilidad</a>
+                    </div>
                 </div>
+
+                <div class="tarjeta-platillo categoria-desayuno reveal">
+                    <div class="foto-platillo" style="background-image: url('img/omelette_fit.jpg');"></div>
+                    <div class="info-platillo">
+                        <div>
+                            <h3>Omelette del Huerto</h3>
+                            <p>Opción ligera rellena de espinacas y hierbas finas, servido con una selección fresca de frutas de temporada, nuez y aguacate.</p>
+                        </div>
+                        <a href="https://wa.me/5565796506?text=Hola,%20me%20interesa%20el%20Omelette%20del%20Huerto" target="_blank" class="btn-cotizar-platillo">Ver Disponibilidad</a>
+                    </div>
+                </div>
+
+                <div class="tarjeta-platillo categoria-desayuno reveal">
+                    <div class="foto-platillo" style="background-image: url('img/enfrijoladas.jpg');"></div>
+                    <div class="info-platillo">
+                        <div>
+                            <h3>Enfrijoladas de la Finca</h3>
+                            <p>Tortillas de maíz bañadas en crema de frijol artesanal, con chorizo asado, queso fresco, crema y abanico de aguacate.</p>
+                        </div>
+                        <a href="https://wa.me/5565796506?text=Hola,%20se%20me%20antojaron%20las%20Enfrijoladas" target="_blank" class="btn-cotizar-platillo">Ver Disponibilidad</a>
+                    </div>
+                </div>
+
                 <div class="tarjeta-platillo categoria-comida reveal">
-                    <div class="foto-platillo" style="background-image: url('img/comida1.jpg');"></div>
-                    <h3>Asado de Puerco</h3><p>La especialidad de la casa.</p><span class="precio">$180</span>
+                    <div class="foto-platillo" style="background-image: url('img/corte_premium.jpg');"></div>
+                    <div class="info-platillo">
+                        <div>
+                            <h3>Corte Premium Finca</h3>
+                            <p>Jugosa arrachera marinada al grill, acompañada de elote dulce entero, papas a la francesa y chiles toreados.</p>
+                        </div>
+                        <a href="https://wa.me/5565796506?text=Hola,%20quiero%20info%20sobre%20el%20Corte%20Premium" target="_blank" class="btn-cotizar-platillo">Cotizar Platillo</a>
+                    </div>
                 </div>
+
+                <div class="tarjeta-platillo categoria-comida reveal">
+                    <div class="foto-platillo" style="background-image: url('img/parrillada_mixta.jpg');"></div>
+                    <div class="info-platillo">
+                        <div>
+                            <h3>Parrillada Norteña</h3>
+                            <p>La favorita para compartir. Carne asada al carbón con cebollitas cambray, nopales y guarniciones clásicas.</p>
+                        </div>
+                        <a href="https://wa.me/5565796506?text=Hola,%20info%20sobre%20la%20Parrillada" target="_blank" class="btn-cotizar-platillo">Cotizar para grupo</a>
+                    </div>
+                </div>
+
                 <div class="tarjeta-platillo categoria-bebida reveal">
-                    <div class="foto-platillo" style="background-image: url('img/bebida1.jpg');"></div>
-                    <h3>Margarita de Mango</h3><p>Tequila reposado con fruta.</p><span class="precio">$95</span>
+                    <div class="foto-platillo" style="background-image: url('img/jarra_clericot.jpg');"></div>
+                    <div class="info-platillo">
+                        <div>
+                            <h3>Jarra de Clericot</h3>
+                            <p>Nuestra mezcla especial de vino tinto joven con trozos de manzana, melón y frutas de temporada. Ideal para el calor.</p>
+                        </div>
+                        <a href="https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20jarra%20de%20Clericot" target="_blank" class="btn-cotizar-platillo">Pedir Jarra</a>
+                    </div>
                 </div>
-                 <div class="tarjeta-platillo categoria-comida reveal">
-                    <div class="foto-platillo" style="background-image: url('img/comida2.jpg');"></div>
-                    <h3>Parrillada Mixta</h3><p>Arrachera, chorizo y nopalitos.</p><span class="precio">$350</span>
+
+                <div class="tarjeta-platillo categoria-bebida reveal">
+                    <div class="foto-platillo" style="background-image: url('img/carajillo.jpg');"></div>
+                    <div class="info-platillo">
+                        <div>
+                            <h3>Carajillo Shakeado</h3>
+                            <p>El digestivo perfecto. Licor 43 shakeado con hielo y una carga de espresso recién extraído. Espuma densa y cremosa.</p>
+                        </div>
+                        <a href="https://wa.me/5565796506?text=Hola,%20quiero%20un%20Carajillo" target="_blank" class="btn-cotizar-platillo">Pedir Ahora</a>
+                    </div>
                 </div>
+
+                <div class="tarjeta-platillo categoria-bebida reveal">
+                    <div class="foto-platillo" style="background-image: url('img/coctel_azul.jpg');"></div>
+                    <div class="info-platillo">
+                        <div>
+                            <h3>Blue Mystique</h3>
+                            <p>Coctelería de autor. Una infusión refrescante color azul profundo con notas cítricas, menta fresca y granos de café.</p>
+                        </div>
+                        <a href="https://wa.me/5565796506?text=Hola,%20me%20llamó%20la%20atención%20el%20Coctel%20Azul" target="_blank" class="btn-cotizar-platillo">Probar</a>
+                    </div>
+                </div>
+
+                <div class="tarjeta-platillo categoria-bebida reveal">
+                    <div class="foto-platillo" style="background-image: url('img/frappe_rojo.jpg');"></div>
+                    <div class="info-platillo">
+                        <div>
+                            <h3>Frappé Frutos Rojos</h3>
+                            <p>Escarchado con chamoy y miguelito, una explosión helada de fresas naturales. Disponible con o sin alcohol.</p>
+                        </div>
+                        <a href="https://wa.me/5565796506?text=Hola,%20quiero%20un%20Frappé" target="_blank" class="btn-cotizar-platillo">Pedir Ahora</a>
+                    </div>
+                </div>
+
             </div>
-            <div style="text-align: center; margin-top: 50px;">
-                <a href="https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20mesa" target="_blank" class="btn-dorado"><i class="fab fa-whatsapp"></i> Reservar Mesa</a>
-            </div>
+            
         </section>
     </div>
 
@@ -378,7 +475,7 @@
             let platillos = document.querySelectorAll('.tarjeta-platillo');
             platillos.forEach(plat => { 
                 if(categoria === 'todos' || plat.classList.contains('categoria-' + categoria)) { 
-                    plat.style.display = 'block'; 
+                    plat.style.display = 'flex'; // Changed to flex to keep card layout
                 } else { 
                     plat.style.display = 'none'; 
                 } 
@@ -420,33 +517,29 @@
         
         function cambiarMes(dir){ currMonth+=dir; if(currMonth<0||currMonth>11){ date=new Date(currYear,currMonth,1); currYear=date.getFullYear(); currMonth=date.getMonth(); } renderCalendario(); }
         
-       // --- FUNCIÓN CORREGIDA: ENVIAR A SHEETS Y ABRIR WHATSAPP ---
+       // --- FUNCIÓN ENVIAR WHATSAPP ---
         function enviarWhats(d, m) {
-            // 1. Preparar datos
             const fechaCompleta = `${d} de ${m} ${currYear}`;
-            
-            // CAMBIO CLAVE: Usamos URLSearchParams en lugar de FormData
             const datos = new URLSearchParams();
             datos.append('Salón', salonActual);
             datos.append('Invitados', personas);
             datos.append('Fecha Evento', fechaCompleta);
 
-            // 2. Enviar a Sheets
             fetch(scriptURL, { 
                 method: 'POST', 
                 mode: 'no-cors', 
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: datos 
             })
             .then(() => console.log("¡Datos enviados correctamente!"))
             .catch(error => console.error("Error:", error));
 
-            // 3. Abrir WhatsApp
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${salonActual}*.\nEstoy planeando un evento para *${personas} personas* el día *${fechaCompleta}*.\n\n¿Podrían darme más información y disponibilidad? ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
+    </script>
+</body>
+</html>
 
 
 
