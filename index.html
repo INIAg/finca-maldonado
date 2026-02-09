@@ -114,7 +114,7 @@
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
-        /* --- RESTAURANTE MEJORADO --- */
+        /* --- TARJETAS INTERACTIVAS (NUEVO CSS) --- */
         .seccion-restaurante { padding: 50px 20px 100px 20px; color: var(--blanco); text-align: center; }
         .titulo-restaurante { font-size: 3rem; color: var(--dorado); margin-bottom: 10px; text-transform: uppercase; }
         .subtitulo-restaurante { color: var(--gris-texto); margin-bottom: 20px; font-size: 1.1rem; }
@@ -124,19 +124,81 @@
         .btn-menu { background: transparent; border: 1px solid #444; color: var(--gris-texto); padding: 10px 25px; cursor: pointer; font-weight: 500; border-radius: 30px; transition: all 0.3s ease; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
         .btn-menu:hover, .btn-menu.activo { border-color: var(--dorado); color: var(--dorado); background: rgba(212, 175, 55, 0.1); }
         
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
-        
-        .tarjeta-platillo { background: var(--negro-card); border: 1px solid #222; border-radius: 8px; overflow: hidden; transition: 0.4s; text-align: left; display: flex; flex-direction: column; }
-        .tarjeta-platillo:hover { border-color: var(--dorado); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-        
-        .foto-platillo { width: 100%; height: 220px; background-color: #222; background-size: cover; background-position: center; border-bottom: 1px solid #333; }
-        
-        .info-platillo { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .info-platillo h3 { color: var(--dorado); font-size: 1.4rem; margin-bottom: 10px; font-family: var(--fuente-titulo); }
-        .info-platillo p { color: #bbb; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6; font-weight: 300; }
-        
-        .btn-cotizar-platillo { text-align: center; display: block; padding: 10px 0; border: 1px solid #444; color: #fff; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; margin-top: auto; border-radius: 4px; }
-        .btn-cotizar-platillo:hover { border-color: var(--dorado); color: var(--dorado); background: rgba(212, 175, 55, 0.05); }
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+            max-width: 1000px; 
+            margin: 0 auto 50px auto; 
+        }
+
+        .tarjeta-interactiva {
+            position: relative;
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+        }
+
+        .tarjeta-interactiva:hover {
+            transform: translateY(-5px);
+            border-color: var(--dorado);
+        }
+
+        .tarjeta-bg {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .tarjeta-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 40%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .tarjeta-titulo {
+            font-family: var(--fuente-titulo);
+            color: var(--dorado);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            transition: margin 0.4s ease;
+        }
+
+        .tarjeta-desc {
+            color: #ddd;
+            font-size: 0.95rem;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            font-weight: 300;
+        }
+
+        /* Estado Activo */
+        .tarjeta-interactiva.activa .tarjeta-bg { transform: scale(1.1); }
+        .tarjeta-interactiva.activa .tarjeta-overlay { background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; text-align: center; }
+        .tarjeta-interactiva.activa .tarjeta-titulo { margin-bottom: 15px; font-size: 1.8rem; }
+        .tarjeta-interactiva.activa .tarjeta-desc { max-height: 200px; opacity: 1; }
+
+        .icono-touch {
+            position: absolute; top: 15px; right: 15px; color: var(--dorado); background: rgba(0,0,0,0.5); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; border: 1px solid var(--dorado); animation: parpadeo 2s infinite;
+        }
+        @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
         /* --- GALERÍA SWIPER --- */
         .galeria-section { padding: 80px 20px; background: rgba(8, 8, 8, 0.85); text-align: center; }
@@ -301,107 +363,96 @@
 
             <div class="menu-grid">
                 
-                <div class="tarjeta-platillo categoria-desayuno reveal">
-                    <div class="foto-platillo" style="background-image: url('img/desayuno_patron.jpg');"></div>
-                    <div class="info-platillo">
-                        <div>
-                            <h3>Desayuno Patrón</h3>
-                            <p>Huevos al gusto bañados en salsa roja martajada, acompañados de plátanos machos fritos, jamón, chícharos y frijoles refritos.</p>
-                        </div>
-                        <a href="https://wa.me/5565796506?text=Hola,%20quisiera%20probar%20el%20Desayuno%20Patrón" target="_blank" class="btn-cotizar-platillo">Ver Disponibilidad</a>
+                <div class="tarjeta-interactiva categoria-desayuno reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/desayuno_patron.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Desayuno Patrón</h3>
+                        <p class="tarjeta-desc">Huevos al gusto en salsa roja martajada, plátanos machos fritos, jamón, chícharos y frijoles refritos.</p>
                     </div>
                 </div>
 
-                <div class="tarjeta-platillo categoria-desayuno reveal">
-                    <div class="foto-platillo" style="background-image: url('img/omelette_fit.jpg');"></div>
-                    <div class="info-platillo">
-                        <div>
-                            <h3>Omelette del Huerto</h3>
-                            <p>Opción ligera rellena de espinacas y hierbas finas, servido con una selección fresca de frutas de temporada, nuez y aguacate.</p>
-                        </div>
-                        <a href="https://wa.me/5565796506?text=Hola,%20me%20interesa%20el%20Omelette%20del%20Huerto" target="_blank" class="btn-cotizar-platillo">Ver Disponibilidad</a>
+                <div class="tarjeta-interactiva categoria-desayuno reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/omelette_fit.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Omelette del Huerto</h3>
+                        <p class="tarjeta-desc">Opción ligera con espinacas y hierbas finas. Servido con fruta fresca de temporada, nuez y aguacate.</p>
                     </div>
                 </div>
 
-                <div class="tarjeta-platillo categoria-desayuno reveal">
-                    <div class="foto-platillo" style="background-image: url('img/enfrijoladas.jpg');"></div>
-                    <div class="info-platillo">
-                        <div>
-                            <h3>Enfrijoladas de la Finca</h3>
-                            <p>Tortillas de maíz bañadas en crema de frijol artesanal, con chorizo asado, queso fresco, crema y abanico de aguacate.</p>
-                        </div>
-                        <a href="https://wa.me/5565796506?text=Hola,%20se%20me%20antojaron%20las%20Enfrijoladas" target="_blank" class="btn-cotizar-platillo">Ver Disponibilidad</a>
+                <div class="tarjeta-interactiva categoria-desayuno reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/enfrijoladas.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Enfrijoladas Finca</h3>
+                        <p class="tarjeta-desc">Tortillas en crema de frijol artesanal, con chorizo asado, queso fresco, crema y abanico de aguacate.</p>
                     </div>
                 </div>
 
-                <div class="tarjeta-platillo categoria-comida reveal">
-                    <div class="foto-platillo" style="background-image: url('img/corte_premium.jpg');"></div>
-                    <div class="info-platillo">
-                        <div>
-                            <h3>Corte Premium Finca</h3>
-                            <p>Jugosa arrachera marinada al grill, acompañada de elote dulce entero, papas a la francesa y chiles toreados.</p>
-                        </div>
-                        <a href="https://wa.me/5565796506?text=Hola,%20quiero%20info%20sobre%20el%20Corte%20Premium" target="_blank" class="btn-cotizar-platillo">Cotizar Platillo</a>
+                <div class="tarjeta-interactiva categoria-comida reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/corte_premium.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Corte Premium</h3>
+                        <p class="tarjeta-desc">Arrachera marinada al grill, acompañada de elote dulce entero, papas a la francesa y chiles toreados.</p>
                     </div>
                 </div>
 
-                <div class="tarjeta-platillo categoria-comida reveal">
-                    <div class="foto-platillo" style="background-image: url('img/parrillada_mixta.jpg');"></div>
-                    <div class="info-platillo">
-                        <div>
-                            <h3>Parrillada Norteña</h3>
-                            <p>La favorita para compartir. Carne asada al carbón con cebollitas cambray, nopales y guarniciones clásicas.</p>
-                        </div>
-                        <a href="https://wa.me/5565796506?text=Hola,%20info%20sobre%20la%20Parrillada" target="_blank" class="btn-cotizar-platillo">Cotizar para grupo</a>
+                <div class="tarjeta-interactiva categoria-comida reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/parrillada_mixta.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Parrillada Norteña</h3>
+                        <p class="tarjeta-desc">La favorita para compartir. Carne asada al carbón con cebollitas cambray, nopales y guarniciones.</p>
                     </div>
                 </div>
 
-                <div class="tarjeta-platillo categoria-bebida reveal">
-                    <div class="foto-platillo" style="background-image: url('img/jarra_clericot.jpg');"></div>
-                    <div class="info-platillo">
-                        <div>
-                            <h3>Jarra de Clericot</h3>
-                            <p>Nuestra mezcla especial de vino tinto joven con trozos de manzana, melón y frutas de temporada. Ideal para el calor.</p>
-                        </div>
-                        <a href="https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20jarra%20de%20Clericot" target="_blank" class="btn-cotizar-platillo">Pedir Jarra</a>
+                <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/jarra_clericot.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Jarra de Clericot</h3>
+                        <p class="tarjeta-desc">Mezcla especial de vino tinto joven con trozos de manzana, melón y frutas de temporada.</p>
                     </div>
                 </div>
 
-                <div class="tarjeta-platillo categoria-bebida reveal">
-                    <div class="foto-platillo" style="background-image: url('img/carajillo.jpg');"></div>
-                    <div class="info-platillo">
-                        <div>
-                            <h3>Carajillo Shakeado</h3>
-                            <p>El digestivo perfecto. Licor 43 shakeado con hielo y una carga de espresso recién extraído. Espuma densa y cremosa.</p>
-                        </div>
-                        <a href="https://wa.me/5565796506?text=Hola,%20quiero%20un%20Carajillo" target="_blank" class="btn-cotizar-platillo">Pedir Ahora</a>
+                <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/carajillo.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Carajillo Shakeado</h3>
+                        <p class="tarjeta-desc">Digestivo perfecto. Licor 43 shakeado con hielo y una carga de espresso recién extraído.</p>
                     </div>
                 </div>
 
-                <div class="tarjeta-platillo categoria-bebida reveal">
-                    <div class="foto-platillo" style="background-image: url('img/coctel_azul.jpg');"></div>
-                    <div class="info-platillo">
-                        <div>
-                            <h3>Blue Mystique</h3>
-                            <p>Coctelería de autor. Una infusión refrescante color azul profundo con notas cítricas, menta fresca y granos de café.</p>
-                        </div>
-                        <a href="https://wa.me/5565796506?text=Hola,%20me%20llamó%20la%20atención%20el%20Coctel%20Azul" target="_blank" class="btn-cotizar-platillo">Probar</a>
+                <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/coctel_azul.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Blue Mystique</h3>
+                        <p class="tarjeta-desc">Infusión refrescante color azul profundo con notas cítricas, menta fresca y granos de café.</p>
                     </div>
                 </div>
 
-                <div class="tarjeta-platillo categoria-bebida reveal">
-                    <div class="foto-platillo" style="background-image: url('img/frappe_rojo.jpg');"></div>
-                    <div class="info-platillo">
-                        <div>
-                            <h3>Frappé Frutos Rojos</h3>
-                            <p>Escarchado con chamoy y miguelito, una explosión helada de fresas naturales. Disponible con o sin alcohol.</p>
-                        </div>
-                        <a href="https://wa.me/5565796506?text=Hola,%20quiero%20un%20Frappé" target="_blank" class="btn-cotizar-platillo">Pedir Ahora</a>
+                <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/frappe_rojo.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Frappé Frutos Rojos</h3>
+                        <p class="tarjeta-desc">Escarchado con chamoy y miguelito, una explosión helada de fresas naturales.</p>
                     </div>
                 </div>
 
             </div>
-            
+
+            <div style="text-align: center; margin-top: 40px; margin-bottom: 60px;">
+                <p style="color: #999; margin-bottom: 15px; font-size: 0.9rem;">* Toca las tarjetas para ver detalles</p>
+                <a href="https://wa.me/5565796506?text=Hola,%20vi%20el%20menú%20y%20quisiera%20hacer%20una%20reservación." target="_blank" class="btn-dorado" style="font-size: 1.2rem; padding: 20px 50px; border-radius: 50px;">
+                    <i class="fab fa-whatsapp"></i> RESERVAR MESA
+                </a>
+            </div>
+
         </section>
     </div>
 
@@ -471,14 +522,25 @@
             let botones = document.querySelectorAll('.btn-menu');
             botones.forEach(btn => btn.classList.remove('activo'));
             if(event) event.currentTarget.classList.add('activo');
-            let platillos = document.querySelectorAll('.tarjeta-platillo');
+            let platillos = document.querySelectorAll('.tarjeta-interactiva'); // Cambiado a tarjeta-interactiva
             platillos.forEach(plat => { 
                 if(categoria === 'todos' || plat.classList.contains('categoria-' + categoria)) { 
-                    plat.style.display = 'flex'; // Usamos flex para mantener el diseño de tarjeta
+                    plat.style.display = 'block'; 
                 } else { 
                     plat.style.display = 'none'; 
                 } 
             });
+        }
+        
+        // --- FUNCIÓN PARA TARJETAS INTERACTIVAS ---
+        function toggleTarjeta(elemento) {
+            if (elemento.classList.contains('activa')) {
+                elemento.classList.remove('activa');
+            } else {
+                let todas = document.querySelectorAll('.tarjeta-interactiva');
+                todas.forEach(t => t.classList.remove('activa'));
+                elemento.classList.add('activa');
+            }
         }
 
         // --- ANIMACIONES ---
@@ -538,8 +600,7 @@
         }
     </script>
 </body>
-</html> 
-
+</html>
 
 
 
