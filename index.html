@@ -343,13 +343,20 @@
     </div> 
 
     <div id="vista-restaurante" class="vista-seccion">
-        <div class="hero" style="height: 50vh; background-image: url('img/comida1.jpg');">
-            <div class="overlay"></div>
-            <div class="hero-content reveal">
-                <h1>El Sabor de la Finca</h1>
-                <p>Gastronomía Mexicana de Alta Calidad</p>
+       <div class="hero" style="height: 60vh; background-image: url('img/parrillada_mixta.jpg'); background-attachment: fixed;">
+        <div class="overlay" style="background: rgba(0,0,0,0.6);"></div>
+        <div class="hero-content reveal">
+            <h1 style="font-size: 3.5rem; color: var(--dorado); text-shadow: 0 5px 15px black;">Cocina de la Finca</h1>
+            <p style="font-size: 1.2rem; color: #fff; letter-spacing: 2px;">Sabores auténticos en un entorno exclusivo</p>
+            <div style="margin-top: 30px;">
+                <i class="fas fa-chevron-down" style="color: var(--dorado); font-size: 2rem; animation: flotar 2s infinite;"></i>
             </div>
         </div>
+    </div>
+    
+    <style>
+        @keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+    </style>
 
         <section class="seccion-restaurante reveal">
             <h2 class="titulo-restaurante">Experiencia Culinaria</h2>
@@ -607,6 +614,7 @@
     </script>
 </body>
 </html>
+
 
 
 
