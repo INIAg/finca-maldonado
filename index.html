@@ -35,7 +35,7 @@
             font-family: var(--fuente-texto);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: 85px;
+            padding-top: 125px; /* Ajustado para la Top Bar */
         }
 
         h1, h2, h3 { font-family: var(--fuente-titulo); letter-spacing: 2px; }
@@ -56,15 +56,27 @@
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* --- TOP BAR (NUEVO) --- */
+        .top-bar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 40px;
+            background: var(--gradient-oro); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.85rem; z-index: 1001;
+            text-transform: uppercase; letter-spacing: 2px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-align: center; padding: 0 10px;
+        }
+
         /* --- NAVBAR --- */
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 85px; background-color: rgba(5, 5, 5, 0.95); border-bottom: 1px solid var(--dorado); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
+        .navbar { position: fixed; top: 40px; left: 0; width: 100%; height: 85px; background-color: rgba(5, 5, 5, 0.95); border-bottom: 1px solid var(--dorado); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
         .nav-logo { font-family: var(--fuente-titulo); color: var(--dorado); font-size: 1.2rem; font-weight: bold; text-transform: uppercase; }
         .hamburger { display: none; font-size: 1.8rem; color: var(--dorado); cursor: pointer; }
         .nav-menu { display: flex; gap: 20px; transition: 0.3s; }
         @media (max-width: 768px) {
             .hamburger { display: block; } 
-            .nav-menu { position: fixed; top: 85px; left: -100%; width: 100%; height: calc(100vh - 85px); background-color: rgba(0, 0, 0, 0.98); flex-direction: column; align-items: center; justify-content: center; gap: 40px; transition: 0.4s ease; border-top: 1px solid #333; }
+            .nav-menu { position: fixed; top: 125px; left: -100%; width: 100%; height: calc(100vh - 125px); background-color: rgba(0, 0, 0, 0.98); flex-direction: column; align-items: center; justify-content: center; gap: 40px; transition: 0.4s ease; border-top: 1px solid #333; }
             .nav-menu.active { left: 0; }
+            .top-bar { font-size: 0.7rem; }
         }
 
         /* --- BOTONES STAR --- */
@@ -80,7 +92,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- HERO --- */
-        .hero { height: calc(100vh - 85px); background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; transition: background-image 1.2s ease-in-out; }
+        .hero { height: calc(100vh - 125px); background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; transition: background-image 1.2s ease-in-out; }
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%); }
         .hero-content { position: relative; z-index: 2; padding: 20px; max-width: 800px; }
         .logo-principal { width: 180px; margin-bottom: 30px; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); }
@@ -109,9 +121,7 @@
         .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .card-salon:hover .img-container img { transform: scale(1.1); }
         
-        .flecha-galeria {
-            position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: var(--dorado); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-size: 1.2rem; border: 1px solid var(--dorado); transition: 0.3s; user-select: none;
-        }
+        .flecha-galeria { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: var(--dorado); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-size: 1.2rem; border: 1px solid var(--dorado); transition: 0.3s; user-select: none; }
         .flecha-galeria:hover { background: var(--dorado); color: black; }
         .flecha-galeria.izquierda { left: 10px; }
         .flecha-galeria.derecha { right: 10px; }
@@ -124,179 +134,40 @@
         .seccion-carrusel-3d { padding: 80px 0; background: rgba(8, 8, 8, 0.85); text-align: center; overflow: hidden; }
         .seccion-carrusel-3d h2 { margin-bottom: 50px; }
         
-        .carrusel-contenedor {
-            position: relative;
-            width: 100%;
-            height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .carousel-track {
-            --left: -350px;
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-            height: 300px;
-        }
-        .carousel-track .carousel-item {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            left: 100%;
-            display: flex;
-            justify-content: center;
-            perspective: 1000px;
-            transform-style: preserve-3d;
-            animation: scroll-left var(--time) linear infinite;
-            animation-delay: calc(var(--time) / var(--total) * (var(--i) - 1) - var(--time));
-            will-change: left;
-            transition: 0.5s ease-in-out;
-            cursor: pointer;
-        }
-        .carousel-track .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 1px solid var(--dorado);
-            transform: rotateY(-35deg);
-            transition: 0.5s ease-in-out;
-            -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
-            mask-image: linear-gradient(to right, black 70%, transparent 100%);
-            box-shadow: -10px 10px 20px rgba(0,0,0,0.8);
-        }
-        .carousel-track .carousel-item:hover {
-            z-index: 100;
-        }
-        .carousel-track .carousel-item:hover img {
-            transform: rotateY(0deg) translateY(-15px) scale(1.05);
-            -webkit-mask-image: none;
-            mask-image: none;
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
-            border-color: #fff;
-        }
-        @keyframes scroll-left {
-            to { left: var(--left); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .carousel-track .carousel-item { animation-play-state: paused; }
-        }
+        .carrusel-contenedor { position: relative; width: 100%; height: 350px; display: flex; align-items: center; justify-content: center; }
+        .carousel-track { --left: -350px; position: relative; width: 100%; max-width: 1200px; height: 300px; }
+        .carousel-track .carousel-item { position: absolute; width: 300px; height: 300px; left: 100%; display: flex; justify-content: center; perspective: 1000px; transform-style: preserve-3d; animation: scroll-left var(--time) linear infinite; animation-delay: calc(var(--time) / var(--total) * (var(--i) - 1) - var(--time)); will-change: left; transition: 0.5s ease-in-out; cursor: pointer; }
+        .carousel-track .carousel-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; border: 1px solid var(--dorado); transform: rotateY(-35deg); transition: 0.5s ease-in-out; -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%); mask-image: linear-gradient(to right, black 70%, transparent 100%); box-shadow: -10px 10px 20px rgba(0,0,0,0.8); }
+        .carousel-track .carousel-item:hover { z-index: 100; }
+        .carousel-track .carousel-item:hover img { transform: rotateY(0deg) translateY(-15px) scale(1.05); -webkit-mask-image: none; mask-image: none; box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4); border-color: #fff; }
+        @keyframes scroll-left { to { left: var(--left); } }
+        @media (prefers-reduced-motion: reduce) { .carousel-track .carousel-item { animation-play-state: paused; } }
 
-        /* --- NUEVA SECCIÓN SERVICIOS (FEATURES) --- */
-        .section-features {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 100px 20px;
-            background: transparent;
-            overflow: hidden;
-        }
-        .section-features .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: auto;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-        .section-features .title {
-            font-size: 3rem;
-            font-family: var(--fuente-titulo);
-            font-weight: 700;
-            margin-bottom: 25px;
-            background: var(--gradient-oro);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
-            position: relative;
-        }
-        .section-features .title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--gradient-oro);
-            border-radius: 2px;
-        }
-        .section-features .subtitle {
-            font-size: 1.2rem;
-            color: var(--gris-texto);
-            margin-bottom: 50px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .section-features .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .section-features .feature {
-            background: rgba(18, 18, 18, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer; 
-        }
-        .section-features .feature::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        .section-features .feature:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(18, 18, 18, 0.9);
-            border-color: rgba(212, 175, 55, 0.6);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
+        /* --- SECCIÓN SERVICIOS (FEATURES) --- */
+        .section-features { position: relative; display: flex; justify-content: center; align-items: center; padding: 100px 20px; background: transparent; overflow: hidden; }
+        .section-features .container { width: 100%; max-width: 1200px; margin: auto; text-align: center; position: relative; z-index: 2; }
+        .section-features .title { font-size: 3rem; font-family: var(--fuente-titulo); font-weight: 700; margin-bottom: 25px; background: var(--gradient-oro); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-transform: uppercase; position: relative; }
+        .section-features .title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 100px; height: 3px; background: var(--gradient-oro); border-radius: 2px; }
+        .section-features .subtitle { font-size: 1.2rem; color: var(--gris-texto); margin-bottom: 50px; letter-spacing: 2px; text-transform: uppercase; }
+        .section-features .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .section-features .feature { background: rgba(18, 18, 18, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 40px 30px; text-align: center; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: pointer; }
+        .section-features .feature::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent); transition: left 0.6s ease; }
+        .section-features .feature:hover { transform: translateY(-10px) scale(1.02); background: rgba(18, 18, 18, 0.9); border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .section-features .feature:hover::before { left: 100%; }
-        .section-features .feature-icon {
-            font-size: 3.5rem;
-            display: block;
-            margin-bottom: 20px;
-            color: var(--dorado);
-            transition: transform 0.3s ease;
-        }
+        .section-features .feature-icon { font-size: 3.5rem; display: block; margin-bottom: 20px; color: var(--dorado); transition: transform 0.3s ease; }
         .section-features .feature:hover .feature-icon { transform: scale(1.1) rotate(5deg); }
-        .section-features .feature h3 {
-            font-size: 1.5rem;
-            font-family: var(--fuente-titulo);
-            color: var(--blanco);
-            margin-bottom: 15px;
-        }
-        .section-features .feature p {
-            font-size: 1rem;
-            color: var(--gris-texto);
-            line-height: 1.6;
-        }
+        .section-features .feature h3 { font-size: 1.5rem; font-family: var(--fuente-titulo); color: var(--blanco); margin-bottom: 15px; }
+        .section-features .feature p { font-size: 1rem; color: var(--gris-texto); line-height: 1.6; }
 
         /* --- ESTILOS COMPARTIDOS (ROBOT Y FOLCLORE) --- */
         .robot-space-section, .folclore-section { padding: 100px 20px; background: transparent; text-align: center; display: flex; flex-direction: column; align-items: center; }
         .robot-title { font-size: 3rem; color: #fff; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
         .robot-subtitle { color: var(--neon-azul); margin-bottom: 50px; opacity: 0.8; }
-
-        .video-card-container {
-            position: relative; max-width: 350px; width: 100%; margin: 40px auto; aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; border: 2px solid var(--dorado); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); cursor: pointer; transition: transform 0.3s ease; background: #000;
-        }
+        .video-card-container { position: relative; max-width: 350px; width: 100%; margin: 40px auto; aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; border: 2px solid var(--dorado); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); cursor: pointer; transition: transform 0.3s ease; background: #000; }
         .video-card-container:hover { transform: scale(1.02); }
         .media-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
         .media-video { width: 100%; height: 100%; object-fit: cover; display: none; }
-        .play-icon {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; color: var(--dorado); background: rgba(0,0,0,0.6); border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--dorado); transition: 0.3s; z-index: 10; backdrop-filter: blur(2px);
-        }
+        .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; color: var(--dorado); background: rgba(0,0,0,0.6); border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--dorado); transition: 0.3s; z-index: 10; backdrop-filter: blur(2px); }
         .video-card-container:hover .play-icon { background: var(--dorado); color: #000; transform: translate(-50%, -50%) scale(1.1); }
         .video-card-container.playing .media-cover, .video-card-container.playing .play-icon { display: none; }
         .video-card-container.playing .media-video { display: block; }
@@ -342,6 +213,10 @@
         <div class="spinner-dorado"></div>
     </div>
 
+    <div class="top-bar">
+        ✨ Agenda abierta para Graduaciones y Eventos de Primavera 2026 ✨
+    </div>
+
     <div class="fondo-animado"><div id="stars"></div><div id="stars2"></div><div id="stars3"></div></div>
 
     <nav class="navbar">
@@ -365,7 +240,7 @@
         </div>
     </nav>
 
-    <a href="https://wa.me/5565796506" class="btn-whatsapp-flotante" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/5565796506?text=Hola%20Finca%20Maldonado,%20vengo%20de%20su%20sitio%20web%20y%20me%20interesa%20informaci%C3%B3n%20para%20un%20evento%20de%20Primavera%2FGraduaci%C3%B3n.%20%E2%9C%A8" class="btn-whatsapp-flotante" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <div id="vista-eventos" class="vista-seccion vista-activa">
         
@@ -540,6 +415,7 @@
                 <button class="btn-menu" onclick="filtrarMenu('desayuno', event)">Desayunos</button>
                 <button class="btn-menu" onclick="filtrarMenu('comida', event)">Comidas</button>
                 <button class="btn-menu" onclick="filtrarMenu('bebida', event)">Bebidas</button>
+                <button class="btn-menu" onclick="filtrarMenu('temporada', event)">Primavera / Cuaresma</button>
             </div>
 
             <div class="menu-grid">
@@ -589,12 +465,21 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
+                <div class="tarjeta-interactiva categoria-comida categoria-temporada reveal" onclick="toggleTarjeta(this)">
+                    <div class="tarjeta-bg" style="background-image: url('img/ceviche.jpg');"></div>
+                    <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
+                    <div class="tarjeta-overlay">
+                        <h3 class="tarjeta-titulo">Ceviche Finca</h3>
+                        <p class="tarjeta-desc">Especial de temporada. Pescado fresco marinado en cítricos con mango, aguacate y un toque de chile habanero.</p>
+                    </div>
+                </div>
+
+                <div class="tarjeta-interactiva categoria-bebida categoria-temporada reveal" onclick="toggleTarjeta(this)">
                     <div class="tarjeta-bg" style="background-image: url('img/jarra_clericot.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
                         <h3 class="tarjeta-titulo">Jarra de Clericot</h3>
-                        <p class="tarjeta-desc">Mezcla especial de vino tinto joven con trozos de manzana, melón y frutas de temporada.</p>
+                        <p class="tarjeta-desc">Mezcla especial de vino tinto joven con trozos de manzana, melón y frutas frescas de temporada.</p>
                     </div>
                 </div>
 
@@ -607,7 +492,7 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
+                <div class="tarjeta-interactiva categoria-bebida categoria-temporada reveal" onclick="toggleTarjeta(this)">
                     <div class="tarjeta-bg" style="background-image: url('img/coctel_azul.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
@@ -753,10 +638,10 @@
             document.getElementById(imgID).src = arr[indiceActual];
         }
 
-        // --- NUEVA FUNCIÓN: COTIZAR DIRECTO (SIN CALENDARIO) ---
+        // --- COTIZAR DIRECTO (MENSAJE OPTIMIZADO) ---
         function cotizarSalon(nombreSalon) {
             const telefono = "5565796506";
-            let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${nombreSalon}*.\nQuisiera saber disponibilidad y precios. ¡Gracias! ✨`;
+            let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${nombreSalon}*.\nQuisiera saber disponibilidad y precios para un evento. ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
@@ -779,4 +664,5 @@
     </script>
 </body>
 </html>
+
 
