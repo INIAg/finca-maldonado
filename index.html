@@ -130,15 +130,36 @@
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
-        /* --- ESTILOS DEL CARRUSEL ANILLO 3D (REEMPLAZADO) --- */
+        /* --- ESTILOS DEL CARRUSEL ANILLO 3D (ADAPTADO PARA MÓVIL) --- */
         .stage { width: 100%; height: 600px; overflow: hidden; background: transparent; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 50px;}
-        .container-3d { perspective: 2000px; width: 250px; height: 350px; position: relative; top: 5%; }
+        
+        /* Variables por defecto (PC) */
+        .container-3d { 
+            --z: 350px; /* Profundidad en Escritorio */
+            perspective: 2000px; width: 250px; height: 350px; position: relative; top: 5%; 
+        }
+        
         .ring { width: 100%; height: 100%; transform-style: preserve-3d; animation: rotarAnillo 25s linear infinite; }
         .ring:hover { animation-play-state: paused; }
-        .img-3d { position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; user-select: none; cursor: pointer; transition: transform 0.3s; }
+        
+        .img-3d { 
+            position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; user-select: none; cursor: pointer; transition: transform 0.3s; 
+            transform: rotateY(var(--r)) translateZ(var(--z)); /* Usamos las variables para el tamaño */
+        }
         .img-3d img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; border: 2px solid var(--dorado); box-shadow: 0 0 20px rgba(0,0,0,0.8); transition: 0.3s; }
         .img-3d:hover img { border-color: #fff; box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
+        
         @keyframes rotarAnillo { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
+
+        /* MAGIA RESPONSIVE PARA EL CARRUSEL EN CELULARES */
+        @media (max-width: 768px) {
+            .stage { height: 400px; padding-top: 20px; }
+            .container-3d { 
+                --z: 150px; /* Profundidad reducida para celular */
+                width: 140px; /* Tarjetas más delgadas */
+                height: 200px; /* Tarjetas más cortas */
+            }
+        }
 
         /* --- ESTILOS DEL VISOR DE FOTOS (LIGHTBOX) --- */
         #visor-lightbox {
@@ -266,8 +287,8 @@
             <div class="qs-grid">
                 <div class="qs-texto">
                     <h2>Nuestra Historia</h2>
-                    <p>En Finca Maldonado, fusionamos la tradición mexicana con la elegancia contemporánea. Somos más que un lugar de eventos; somos creadores de momentos inolvidables.</p>
-                    <p>Desde bodas de ensueño hasta reuniones corporativas de alto nivel, nuestro compromiso es brindar un servicio impecable y un entorno mágico bajo las estrellas.</p>
+                    <p>Nacida en Cuautitlán, Finca Maldonado surgió con el propósito de crear un espacio donde la tradición mexicana y la elegancia contemporánea se unieran. Hoy, somos mucho más que un recinto de eventos; somos el escenario de tus mejores recuerdos.</p>
+                    <p>Ya sea celebrando una boda de ensueño bajo las estrellas, unos XV años inolvidables, o disfrutando de una tarde en nuestro exclusivo restaurante con platillos de alta cocina, nuestro compromiso es hacerte sentir en casa con un servicio impecable.</p>
                 </div>
                 <div class="qs-img"><img src="img/fondo.jpg" alt="Nosotros"></div>
             </div>
@@ -351,19 +372,19 @@
             <h2 class="title" style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase; text-align: center; margin-bottom: 20px; position: relative; z-index: 10;">Recorrido Virtual</h2>
             <div class="container-3d">
                 <div class="ring">
-                    <div class="img-3d" style="transform: rotateY(0deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/salon.jpg" alt="Salón"></div>
-                    <div class="img-3d" style="transform: rotateY(51.4deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/pista.jpg" alt="Pista"></div>
-                    <div class="img-3d" style="transform: rotateY(102.8deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/jardin.jpg" alt="Jardín"></div>
-                    <div class="img-3d" style="transform: rotateY(154.2deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/candybar.jpg" alt="Candy Bar"></div>
-                    <div class="img-3d" style="transform: rotateY(205.6deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/corazon.jpg" alt="Corazón"></div>
-                    <div class="img-3d" style="transform: rotateY(257deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/fuente.jpg" alt="Fuente"></div>
-                    <div class="img-3d" style="transform: rotateY(308.4deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/pasillo.jpg" alt="Pasillo"></div>
+                    <div class="img-3d" style="--r: 0deg;" onclick="abrirFoto(this)"><img src="img/salon.jpg" alt="Salón"></div>
+                    <div class="img-3d" style="--r: 51.4deg;" onclick="abrirFoto(this)"><img src="img/pista.jpg" alt="Pista"></div>
+                    <div class="img-3d" style="--r: 102.8deg;" onclick="abrirFoto(this)"><img src="img/jardin.jpg" alt="Jardín"></div>
+                    <div class="img-3d" style="--r: 154.2deg;" onclick="abrirFoto(this)"><img src="img/candybar.jpg" alt="Candy Bar"></div>
+                    <div class="img-3d" style="--r: 205.6deg;" onclick="abrirFoto(this)"><img src="img/corazon.jpg" alt="Corazón"></div>
+                    <div class="img-3d" style="--r: 257deg;" onclick="abrirFoto(this)"><img src="img/fuente.jpg" alt="Fuente"></div>
+                    <div class="img-3d" style="--r: 308.4deg;" onclick="abrirFoto(this)"><img src="img/pasillo.jpg" alt="Pasillo"></div>
                 </div>
             </div>
         </section>
 
         <div id="visor-lightbox">
-            <span class="cerrar-visor" onclick="cerrarFoto()">&times;</span>
+            <span class="cerrar-visor" onclick="cerrarFoto()">×</span>
             <img id="img-ampliada" src="" alt="Vista ampliada">
         </div>
 
