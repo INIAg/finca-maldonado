@@ -35,7 +35,7 @@
             font-family: var(--fuente-texto);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: 125px; /* Ajustado para la Top Bar */
+            padding-top: 125px;
         }
 
         h1, h2, h3 { font-family: var(--fuente-titulo); letter-spacing: 2px; }
@@ -56,7 +56,7 @@
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- TOP BAR (NUEVO) --- */
+        /* --- TOP BAR --- */
         .top-bar {
             position: fixed; top: 0; left: 0; width: 100%; height: 40px;
             background: var(--gradient-oro); color: #000;
@@ -130,18 +130,26 @@
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
-        /* --- NUEVO CARRUSEL 3D CSS --- */
-        .seccion-carrusel-3d { padding: 80px 0; background: rgba(8, 8, 8, 0.85); text-align: center; overflow: hidden; }
-        .seccion-carrusel-3d h2 { margin-bottom: 50px; }
-        
-        .carrusel-contenedor { position: relative; width: 100%; height: 350px; display: flex; align-items: center; justify-content: center; }
-        .carousel-track { --left: -350px; position: relative; width: 100%; max-width: 1200px; height: 300px; }
-        .carousel-track .carousel-item { position: absolute; width: 300px; height: 300px; left: 100%; display: flex; justify-content: center; perspective: 1000px; transform-style: preserve-3d; animation: scroll-left var(--time) linear infinite; animation-delay: calc(var(--time) / var(--total) * (var(--i) - 1) - var(--time)); will-change: left; transition: 0.5s ease-in-out; cursor: pointer; }
-        .carousel-track .carousel-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; border: 1px solid var(--dorado); transform: rotateY(-35deg); transition: 0.5s ease-in-out; -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%); mask-image: linear-gradient(to right, black 70%, transparent 100%); box-shadow: -10px 10px 20px rgba(0,0,0,0.8); }
-        .carousel-track .carousel-item:hover { z-index: 100; }
-        .carousel-track .carousel-item:hover img { transform: rotateY(0deg) translateY(-15px) scale(1.05); -webkit-mask-image: none; mask-image: none; box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4); border-color: #fff; }
-        @keyframes scroll-left { to { left: var(--left); } }
-        @media (prefers-reduced-motion: reduce) { .carousel-track .carousel-item { animation-play-state: paused; } }
+        /* --- ESTILOS DEL CARRUSEL ANILLO 3D (REEMPLAZADO) --- */
+        .stage { width: 100%; height: 600px; overflow: hidden; background: transparent; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 50px;}
+        .container-3d { perspective: 2000px; width: 250px; height: 350px; position: relative; top: 5%; }
+        .ring { width: 100%; height: 100%; transform-style: preserve-3d; animation: rotarAnillo 25s linear infinite; }
+        .ring:hover { animation-play-state: paused; }
+        .img-3d { position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; user-select: none; cursor: pointer; transition: transform 0.3s; }
+        .img-3d img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; border: 2px solid var(--dorado); box-shadow: 0 0 20px rgba(0,0,0,0.8); transition: 0.3s; }
+        .img-3d:hover img { border-color: #fff; box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
+        @keyframes rotarAnillo { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
+
+        /* --- ESTILOS DEL VISOR DE FOTOS (LIGHTBOX) --- */
+        #visor-lightbox {
+            display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95); backdrop-filter: blur(8px);
+            justify-content: center; align-items: center; flex-direction: column;
+        }
+        #img-ampliada { max-width: 90%; max-height: 80vh; border: 2px solid var(--dorado); border-radius: 10px; box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); animation: zoomIn 0.3s ease-out; }
+        .cerrar-visor { position: absolute; top: 30px; right: 40px; color: var(--dorado); font-size: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .cerrar-visor:hover { color: #fff; transform: scale(1.2); }
+        @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         /* --- SECCIÓN SERVICIOS (FEATURES) --- */
         .section-features { position: relative; display: flex; justify-content: center; align-items: center; padding: 100px 20px; background: transparent; overflow: hidden; }
@@ -339,20 +347,25 @@
             </div>
         </section>
 
-        <section class="seccion-carrusel-3d reveal" style="--total: 7; --time: 20s;">
-            <h2 class="title" style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase;">Recorrido Virtual</h2>
-            <div class="carrusel-contenedor">
-                <div class="carousel-track">
-                    <div class="carousel-item" style="--i: 1;"><img src="img/salon.jpg" alt="Vista Salón"></div>
-                    <div class="carousel-item" style="--i: 2;"><img src="img/pista.jpg" alt="Vista Pista"></div>
-                    <div class="carousel-item" style="--i: 3;"><img src="img/jardin.jpg" alt="Vista Jardín"></div>
-                    <div class="carousel-item" style="--i: 4;"><img src="img/candybar.jpg" alt="Candy Bar"></div>
-                    <div class="carousel-item" style="--i: 5;"><img src="img/corazon.jpg" alt="Decoración Corazón"></div>
-                    <div class="carousel-item" style="--i: 6;"><img src="img/fuente.jpg" alt="Fuente"></div>
-                    <div class="carousel-item" style="--i: 7;"><img src="img/pasillo.jpg" alt="Pasillo Iluminado"></div>
+        <section class="stage reveal">
+            <h2 class="title" style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase; text-align: center; margin-bottom: 20px; position: relative; z-index: 10;">Recorrido Virtual</h2>
+            <div class="container-3d">
+                <div class="ring">
+                    <div class="img-3d" style="transform: rotateY(0deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/salon.jpg" alt="Salón"></div>
+                    <div class="img-3d" style="transform: rotateY(51.4deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/pista.jpg" alt="Pista"></div>
+                    <div class="img-3d" style="transform: rotateY(102.8deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/jardin.jpg" alt="Jardín"></div>
+                    <div class="img-3d" style="transform: rotateY(154.2deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/candybar.jpg" alt="Candy Bar"></div>
+                    <div class="img-3d" style="transform: rotateY(205.6deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/corazon.jpg" alt="Corazón"></div>
+                    <div class="img-3d" style="transform: rotateY(257deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/fuente.jpg" alt="Fuente"></div>
+                    <div class="img-3d" style="transform: rotateY(308.4deg) translateZ(350px);" onclick="abrirFoto(this)"><img src="img/pasillo.jpg" alt="Pasillo"></div>
                 </div>
             </div>
         </section>
+
+        <div id="visor-lightbox">
+            <span class="cerrar-visor" onclick="cerrarFoto()">&times;</span>
+            <img id="img-ampliada" src="" alt="Vista ampliada">
+        </div>
 
         <section class="robot-space-section reveal">
             <h2 class="robot-title">Show Robot LED</h2>
@@ -638,7 +651,7 @@
             document.getElementById(imgID).src = arr[indiceActual];
         }
 
-        // --- COTIZAR DIRECTO (MENSAJE OPTIMIZADO) ---
+        // --- COTIZAR DIRECTO ---
         function cotizarSalon(nombreSalon) {
             const telefono = "5565796506";
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${nombreSalon}*.\nQuisiera saber disponibilidad y precios para un evento. ¡Gracias! ✨`;
@@ -661,8 +674,27 @@
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
         function cambiarPortadaAleatoria() { const hero = document.getElementById('hero-principal'); if(hero) { const indice = Math.floor(Math.random() * imagenesPortada.length); hero.style.backgroundImage = `url('${imagenesPortada[indice]}')`; } }
         cambiarPortadaAleatoria();
+
+        // --- FUNCIONES DEL VISOR DE FOTOS (LIGHTBOX) ---
+        function abrirFoto(elemento) {
+            const rutaImagen = elemento.querySelector('img').src;
+            const lightbox = document.getElementById('visor-lightbox');
+            const imgAmpliada = document.getElementById('img-ampliada');
+            
+            imgAmpliada.src = rutaImagen;
+            lightbox.style.display = 'flex';
+        }
+
+        function cerrarFoto() {
+            document.getElementById('visor-lightbox').style.display = 'none';
+        }
+
+        // Cerrar visor al hacer clic fuera de la foto
+        document.getElementById('visor-lightbox').addEventListener('click', function(event) {
+            if (event.target !== document.getElementById('img-ampliada')) {
+                cerrarFoto();
+            }
+        });
     </script>
 </body>
 </html>
-
-
