@@ -11,6 +11,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         /* --- VARIABLES --- */
@@ -147,8 +149,16 @@
         .section-features .feature h3 { font-size: 1.5rem; font-family: var(--fuente-titulo); color: var(--blanco); margin-bottom: 15px; }
         .section-features .feature p { font-size: 1rem; color: var(--gris-texto); line-height: 1.6; }
 
+        /* --- CARRUSEL ORIGINAL (SWIPER) --- */
+        .galeria-section { padding: 80px 20px; background: rgba(8, 8, 8, 0.85); text-align: center; }
+        .swiper { width: 100%; max-width: 1000px; height: 500px; margin: 40px auto; border-radius: 10px; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .swiper-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .swiper-button-next, .swiper-button-prev { color: var(--dorado) !important; text-shadow: 0 0 5px black; }
+        .swiper-pagination-bullet { background: #fff !important; opacity: 0.5; }
+        .swiper-pagination-bullet-active { background: var(--dorado) !important; opacity: 1; }
+
         /* --- CARRUSEL ANILLO 3D INTERACTIVO --- */
-        .stage { width: 100%; height: 600px; overflow: hidden; background: rgba(8, 8, 8, 0.85); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 50px;}
+        .stage { width: 100%; height: 600px; overflow: hidden; background: transparent; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 50px;}
         .container-3d { --z: 350px; perspective: 2000px; width: 250px; height: 350px; position: relative; top: 5%; }
         .ring { width: 100%; height: 100%; transform-style: preserve-3d; animation: rotarAnillo 25s linear infinite; }
         .ring:hover { animation-play-state: paused; }
@@ -168,75 +178,18 @@
         /* ==========================================================================
            NUEVA SECCIÓN DE SHOWS (FLIP CARDS 3D) ADAPTADA A F. MALDONADO
            ========================================================================== */
-        .shows-section {
-            display: flex; flex-direction: column; align-items: center;
-            padding: 100px 20px; background: transparent;
-        }
+        .shows-section { display: flex; flex-direction: column; align-items: center; padding: 100px 20px; background: transparent; }
+        .shows-section .main-title { font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--dorado); text-transform: uppercase; margin-bottom: 50px; font-family: var(--fuente-titulo); text-align: center; }
 
-        .shows-section .main-title {
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 700;
-            color: var(--dorado);
-            text-transform: uppercase;
-            margin-bottom: 50px;
-            font-family: var(--fuente-titulo);
-            text-align: center;
-        }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; }
+        .card { perspective: 1000px; cursor: pointer; position: relative; transform-style: preserve-3d; }
+        .card-inner { position: relative; width: 100%; min-height: 380px; transform-style: preserve-3d; border-radius: var(--radius); transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1); }
+        
+        .card.flipped .card-inner { transform: rotateY(180deg); }
 
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .card {
-            perspective: 1000px;
-            cursor: pointer;
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-        .card-inner {
-            position: relative;
-            width: 100%;
-            min-height: 380px;
-            transform-style: preserve-3d;
-            border-radius: var(--radius);
-            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-        }
-
-        /* Clase para voltear */
-        .card.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-face {
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius);
-            background: var(--card-bg);
-            box-shadow: var(--shadow);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            backface-visibility: hidden;
-            transform-style: preserve-3d;
-            transition: box-shadow 0.3s, filter 0.3s;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .card-face::before {
-            content: ""; position: absolute; inset: 0; border-radius: var(--radius);
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset;
-            opacity: 0; transition: opacity 0.4s;
-        }
-
-        .card:hover .card-face::before, .card.flipped .card-face::before {
-            opacity: 1; animation: pulse 2s infinite alternate;
-        }
+        .card-face { position: absolute; inset: 0; border-radius: var(--radius); background: var(--card-bg); box-shadow: var(--shadow); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; backface-visibility: hidden; transform-style: preserve-3d; transition: box-shadow 0.3s, filter 0.3s; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .card-face::before { content: ""; position: absolute; inset: 0; border-radius: var(--radius); box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; opacity: 0; transition: opacity 0.4s; }
+        .card:hover .card-face::before, .card.flipped .card-face::before { opacity: 1; animation: pulse 2s infinite alternate; }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; }
@@ -244,66 +197,29 @@
             100% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; }
         }
 
-        .card-front {
-            /* Asegura que el texto sea legible sobre la imagen de fondo */
-            background-blend-mode: overlay;
-            background-color: rgba(0, 0, 0, 0.6);
-            justify-content: flex-end; /* Texto abajo */
-            text-align: center;
-        }
+        .card-front { background-blend-mode: overlay; background-color: rgba(0, 0, 0, 0.6); justify-content: flex-end; text-align: center; }
+        .card-front h2 { font-family: var(--fuente-titulo); font-size: 1.6rem; color: var(--dorado); margin-bottom: 0.5rem; text-shadow: 0 2px 5px black; }
+        .card-front p { font-size: 0.95rem; color: #fff; line-height: 1.5; text-shadow: 0 2px 5px black; }
 
-        .card-front h2 {
-            font-family: var(--fuente-titulo);
-            font-size: 1.6rem;
-            color: var(--dorado);
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 5px black;
-        }
-
-        .card-front p {
-            font-size: 0.95rem;
-            color: #fff;
-            line-height: 1.5;
-            text-shadow: 0 2px 5px black;
-        }
-
-        /* Imágenes de fondo para cada tarjeta */
+        /* Imágenes de fondo para cada tarjeta de show */
         .bg-uno { background-image: url('img/robot.jpg'); background-size: cover; background-position: center; }
         .bg-dos { background-image: url('img/folclorico.jpg'); background-size: cover; background-position: center; }
         .bg-tres { background-image: url('img/canto1.jpg'); background-size: cover; background-position: center; }
         .bg-cuatro { background-image: url('img/canto2.jpg'); background-size: cover; background-position: center; }
 
-        .card-back {
-            transform: rotateY(180deg);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: rgba(10, 10, 10, 0.95);
-        }
+        .card-back { transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: space-between; background: rgba(10, 10, 10, 0.95); }
+        .card-back h3 { font-family: var(--fuente-titulo); font-size: 1.4rem; color: var(--dorado); margin-bottom: 1rem; text-align: center; transform: translateZ(30px); }
 
-        .card-back h3 {
-            font-family: var(--fuente-titulo);
-            font-size: 1.4rem;
-            color: var(--dorado);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
+        ul.features { list-style: none; padding: 0; margin: 0; flex-grow: 1; transform: translateZ(20px); }
+        ul.features li { margin-bottom: 0.8rem; padding-left: 1.4rem; position: relative; color: var(--gris-texto); font-size: 0.95rem; }
+        ul.features li::before { content: "✨"; position: absolute; left: 0; color: var(--dorado); font-size: 0.9rem; }
 
-        ul.features { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
-        ul.features li {
-            margin-bottom: 0.8rem; padding-left: 1.4rem; position: relative;
-            color: var(--gris-texto); font-size: 0.95rem;
-        }
-        ul.features li::before {
-            content: "✨"; position: absolute; left: 0; color: var(--dorado); font-size: 0.9rem;
-        }
-
-        .cta-buttons { display: flex; gap: 12px; margin-top: 1.5rem; }
+        /* ESTILOS DE LOS BOTONES DE SHOWS CORREGIDOS */
+        .cta-buttons { display: flex; gap: 12px; margin-top: 1.5rem; transform: translateZ(40px); }
         .cta-buttons a {
-            flex: 1; text-align: center; text-decoration: none; padding: 10px;
-            border-radius: 8px; font-weight: 600; transition: all 0.3s; font-size: 0.9rem;
+            flex: 1; text-align: center; text-decoration: none; padding: 10px; display: inline-block;
+            border-radius: 8px; font-weight: 600; transition: all 0.3s; font-size: 0.9rem; font-family: var(--fuente-texto);
         }
-        
         .cta-buttons a.primary { background: var(--dorado); color: #000; }
         .cta-buttons a.primary:hover { background: #fff; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
 
@@ -480,6 +396,24 @@
             </div>
         </section>
 
+        <section class="galeria-section reveal">
+            <h2 class="title" style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase;">Galería de Fotos</h2>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="img/salon.jpg" alt="Vista Salón"></div>
+                    <div class="swiper-slide"><img src="img/pista.jpg" alt="Vista Pista"></div>
+                    <div class="swiper-slide"><img src="img/jardin.jpg" alt="Vista Jardín"></div>
+                    <div class="swiper-slide"><img src="img/candybar.jpg" alt="Candy Bar"></div>
+                    <div class="swiper-slide"><img src="img/corazon.jpg" alt="Decoración Corazón"></div>
+                    <div class="swiper-slide"><img src="img/fuente.jpg" alt="Fuente"></div>
+                    <div class="swiper-slide"><img src="img/pasillo.jpg" alt="Pasillo Iluminado"></div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
         <section class="stage reveal">
             <h2 class="title" style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase; text-align: center; margin-bottom: 20px; position: relative; z-index: 10;">Recorrido 3D</h2>
             <div class="container-3d">
@@ -504,7 +438,7 @@
             <h2 class="main-title">Shows & Entretenimiento</h2>
             <div class="card-grid">
                 
-                <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card" onclick="voltearTarjeta(event, this)">
                     <div class="card-inner">
                         <div class="card-face card-front bg-uno">
                             <div>
@@ -520,13 +454,13 @@
                                 <li>Disparos de humo</li>
                             </ul>
                             <div class="cta-buttons">
-                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20de%20Robot%20LED" target="_blank" class="primary" onclick="event.stopPropagation()">Cotizar Show</a>
+                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20de%20Robot%20LED" target="_blank" class="primary">Cotizar Show</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card" onclick="voltearTarjeta(event, this)">
                     <div class="card-inner">
                         <div class="card-face card-front bg-dos">
                             <div>
@@ -542,13 +476,13 @@
                                 <li>Ambiente 100% mexicano</li>
                             </ul>
                             <div class="cta-buttons">
-                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20Folcl%C3%B3rico" target="_blank" class="primary" onclick="event.stopPropagation()">Cotizar Show</a>
+                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20Folcl%C3%B3rico" target="_blank" class="primary">Cotizar Show</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card" onclick="voltearTarjeta(event, this)">
                     <div class="card-inner">
                         <div class="card-face card-front bg-tres">
                             <div>
@@ -564,13 +498,13 @@
                                 <li>Ideal para la hora de la cena</li>
                             </ul>
                             <div class="cta-buttons">
-                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20de%20M%C3%BAsica%20Regional" target="_blank" class="primary" onclick="event.stopPropagation()">Cotizar Show</a>
+                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20de%20M%C3%BAsica%20Regional" target="_blank" class="primary">Cotizar Show</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card" onclick="this.classList.toggle('flipped')">
+                <div class="card" onclick="voltearTarjeta(event, this)">
                     <div class="card-inner">
                         <div class="card-face card-front bg-cuatro">
                             <div>
@@ -586,7 +520,7 @@
                                 <li>Perfecto para recepción o cena</li>
                             </ul>
                             <div class="cta-buttons">
-                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20de%20Baladas" target="_blank" class="primary" onclick="event.stopPropagation()">Cotizar Show</a>
+                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20de%20Baladas" target="_blank" class="primary">Cotizar Show</a>
                             </div>
                         </div>
                     </div>
@@ -752,6 +686,8 @@
         <p>FINCA MALDONADO © 2026</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script>
         // --- PRELOADER ---
         window.addEventListener("load", function() { 
@@ -824,6 +760,15 @@
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
+        // --- INICIALIZAR CARRUSEL ORIGINAL (SWIPER) ---
+        var swiper = new Swiper(".mySwiper", { 
+            effect: "fade", 
+            loop: true, 
+            autoplay: { delay: 3500, disableOnInteraction: false }, 
+            pagination: { el: ".swiper-pagination", clickable: true }, 
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, 
+        });
+
         // --- FUNCIONES DEL ANILLO 3D (LIGHTBOX) ---
         function abrirFoto(elemento) {
             const rutaImagen = elemento.querySelector('img').src;
@@ -844,6 +789,15 @@
             }
         });
 
+        // --- FUNCIÓN PARA VOLTEAR TARJETAS DE SHOWS SIN BLOQUEAR EL BOTÓN ---
+        function voltearTarjeta(event, tarjeta) {
+            // Si el clic fue en un enlace (el botón), dejamos que el enlace haga su trabajo y no volteamos la tarjeta
+            if(event.target.tagName.toLowerCase() === 'a' || event.target.closest('a')) {
+                return;
+            }
+            tarjeta.classList.toggle('flipped');
+        }
+
         // --- ANIMACIONES ON SCROLL ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
@@ -863,3 +817,4 @@
     </script>
 </body>
 </html>
+
