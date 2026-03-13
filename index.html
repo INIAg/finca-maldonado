@@ -11,8 +11,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         /* --- VARIABLES --- */
@@ -147,16 +145,8 @@
         .section-features .feature h3 { font-size: 1.5rem; font-family: var(--fuente-titulo); color: var(--blanco); margin-bottom: 15px; }
         .section-features .feature p { font-size: 1rem; color: var(--gris-texto); line-height: 1.6; }
 
-        /* --- CARRUSEL ORIGINAL (SWIPER) --- */
-        .galeria-section { padding: 80px 20px; background: rgba(8, 8, 8, 0.85); text-align: center; }
-        .swiper { width: 100%; max-width: 1000px; height: 500px; margin: 40px auto; border-radius: 10px; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
-        .swiper-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
-        .swiper-button-next, .swiper-button-prev { color: var(--dorado) !important; text-shadow: 0 0 5px black; }
-        .swiper-pagination-bullet { background: #fff !important; opacity: 0.5; }
-        .swiper-pagination-bullet-active { background: var(--dorado) !important; opacity: 1; }
-
         /* --- ESTILOS DEL CARRUSEL ANILLO 3D (ADAPTADO PARA MÓVIL) --- */
-        .stage { width: 100%; height: 600px; overflow: hidden; background: transparent; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 50px;}
+        .stage { width: 100%; height: 600px; overflow: hidden; background: rgba(8, 8, 8, 0.85); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 50px;}
         .container-3d { --z: 350px; perspective: 2000px; width: 250px; height: 350px; position: relative; top: 5%; }
         .ring { width: 100%; height: 100%; transform-style: preserve-3d; animation: rotarAnillo 25s linear infinite; }
         .ring:hover { animation-play-state: paused; }
@@ -174,7 +164,7 @@
         @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         /* --- NUEVA SECCIÓN DE ENTRETENIMIENTO (SLIDER DE TARJETAS) --- */
-        .seccion-entretenimiento { position: relative; padding: 100px 20px; background: rgba(8, 8, 8, 0.85); display: flex; flex-direction: column; align-items: center; overflow: hidden; user-select: none; }
+        .seccion-entretenimiento { position: relative; padding: 100px 20px; background: #000; display: flex; flex-direction: column; align-items: center; overflow: hidden; user-select: none; }
         .seccion-entretenimiento .subtitle { color: var(--dorado); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
         .seccion-entretenimiento .main-title { font-size: clamp(36px, 5vw, 56px); font-family: var(--fuente-titulo); font-weight: 700; color: var(--blanco); line-height: 1.1; margin-bottom: 50px; text-transform: uppercase; text-align: center; }
         
@@ -371,24 +361,6 @@
                     </div>
                 </div>
 
-            </div>
-        </section>
-
-        <section class="galeria-section reveal">
-            <h2 class="title" style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase;">Galería de Fotos</h2>
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="img/salon.jpg" alt="Vista Salón"></div>
-                    <div class="swiper-slide"><img src="img/pista.jpg" alt="Vista Pista"></div>
-                    <div class="swiper-slide"><img src="img/jardin.jpg" alt="Vista Jardín"></div>
-                    <div class="swiper-slide"><img src="img/candybar.jpg" alt="Candy Bar"></div>
-                    <div class="swiper-slide"><img src="img/corazon.jpg" alt="Decoración Corazón"></div>
-                    <div class="swiper-slide"><img src="img/fuente.jpg" alt="Fuente"></div>
-                    <div class="swiper-slide"><img src="img/pasillo.jpg" alt="Pasillo Iluminado"></div>
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
             </div>
         </section>
 
@@ -607,8 +579,6 @@
         <p>FINCA MALDONADO © 2026</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <script>
         // --- PRELOADER ---
         window.addEventListener("load", function() { 
@@ -680,15 +650,6 @@
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${nombreSalon}*.\nQuisiera saber disponibilidad y precios para un evento. ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
-
-        // --- INICIALIZAR CARRUSEL ORIGINAL (SWIPER) ---
-        var swiper = new Swiper(".mySwiper", { 
-            effect: "fade", 
-            loop: true, 
-            autoplay: { delay: 3500, disableOnInteraction: false }, 
-            pagination: { el: ".swiper-pagination", clickable: true }, 
-            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, 
-        });
 
         // --- FUNCIONES DEL ANILLO 3D (LIGHTBOX) ---
         function abrirFoto(elemento) {
