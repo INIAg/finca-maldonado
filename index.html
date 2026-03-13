@@ -120,7 +120,6 @@
         .img-container { position: relative; height: 280px; overflow: hidden; }
         .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .card-salon:hover .img-container img { transform: scale(1.1); }
-        
         .flecha-galeria { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: var(--dorado); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-size: 1.2rem; border: 1px solid var(--dorado); transition: 0.3s; user-select: none; }
         .flecha-galeria:hover { background: var(--dorado); color: black; }
         .flecha-galeria.izquierda { left: 10px; }
@@ -129,48 +128,6 @@
         .info-salon { padding: 30px; text-align: left; }
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
-
-        /* --- ESTILOS DEL CARRUSEL ANILLO 3D (ADAPTADO PARA MÓVIL) --- */
-        .stage { width: 100%; height: 600px; overflow: hidden; background: transparent; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 50px;}
-        
-        /* Variables por defecto (PC) */
-        .container-3d { 
-            --z: 350px; /* Profundidad en Escritorio */
-            perspective: 2000px; width: 250px; height: 350px; position: relative; top: 5%; 
-        }
-        
-        .ring { width: 100%; height: 100%; transform-style: preserve-3d; animation: rotarAnillo 25s linear infinite; }
-        .ring:hover { animation-play-state: paused; }
-        
-        .img-3d { 
-            position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; user-select: none; cursor: pointer; transition: transform 0.3s; 
-            transform: rotateY(var(--r)) translateZ(var(--z)); /* Usamos las variables para el tamaño */
-        }
-        .img-3d img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; border: 2px solid var(--dorado); box-shadow: 0 0 20px rgba(0,0,0,0.8); transition: 0.3s; }
-        .img-3d:hover img { border-color: #fff; box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
-        
-        @keyframes rotarAnillo { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
-
-        /* MAGIA RESPONSIVE PARA EL CARRUSEL EN CELULARES */
-        @media (max-width: 768px) {
-            .stage { height: 400px; padding-top: 20px; }
-            .container-3d { 
-                --z: 150px; /* Profundidad reducida para celular */
-                width: 140px; /* Tarjetas más delgadas */
-                height: 200px; /* Tarjetas más cortas */
-            }
-        }
-
-        /* --- ESTILOS DEL VISOR DE FOTOS (LIGHTBOX) --- */
-        #visor-lightbox {
-            display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.95); backdrop-filter: blur(8px);
-            justify-content: center; align-items: center; flex-direction: column;
-        }
-        #img-ampliada { max-width: 90%; max-height: 80vh; border: 2px solid var(--dorado); border-radius: 10px; box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); animation: zoomIn 0.3s ease-out; }
-        .cerrar-visor { position: absolute; top: 30px; right: 40px; color: var(--dorado); font-size: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .cerrar-visor:hover { color: #fff; transform: scale(1.2); }
-        @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         /* --- SECCIÓN SERVICIOS (FEATURES) --- */
         .section-features { position: relative; display: flex; justify-content: center; align-items: center; padding: 100px 20px; background: transparent; overflow: hidden; }
@@ -188,20 +145,169 @@
         .section-features .feature h3 { font-size: 1.5rem; font-family: var(--fuente-titulo); color: var(--blanco); margin-bottom: 15px; }
         .section-features .feature p { font-size: 1rem; color: var(--gris-texto); line-height: 1.6; }
 
-        /* --- ESTILOS COMPARTIDOS (ROBOT Y FOLCLORE) --- */
-        .robot-space-section, .folclore-section { padding: 100px 20px; background: transparent; text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .robot-title { font-size: 3rem; color: #fff; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
-        .robot-subtitle { color: var(--neon-azul); margin-bottom: 50px; opacity: 0.8; }
-        .video-card-container { position: relative; max-width: 350px; width: 100%; margin: 40px auto; aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; border: 2px solid var(--dorado); box-shadow: 0 0 30px rgba(212, 175, 55, 0.15); cursor: pointer; transition: transform 0.3s ease; background: #000; }
-        .video-card-container:hover { transform: scale(1.02); }
-        .media-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .media-video { width: 100%; height: 100%; object-fit: cover; display: none; }
-        .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; color: var(--dorado); background: rgba(0,0,0,0.6); border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--dorado); transition: 0.3s; z-index: 10; backdrop-filter: blur(2px); }
-        .video-card-container:hover .play-icon { background: var(--dorado); color: #000; transform: translate(-50%, -50%) scale(1.1); }
-        .video-card-container.playing .media-cover, .video-card-container.playing .play-icon { display: none; }
-        .video-card-container.playing .media-video { display: block; }
+        /* --- NUEVA SECCIÓN DE ENTRETENIMIENTO (SLIDER DE TARJETAS) --- */
+        .seccion-entretenimiento {
+            position: relative;
+            padding: 100px 20px;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            user-select: none;
+        }
 
-        /* --- TARJETAS INTERACTIVAS (FORMATO VERTICAL) --- */
+        .seccion-entretenimiento .subtitle {
+            color: var(--dorado);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .seccion-entretenimiento .main-title {
+            font-size: clamp(36px, 5vw, 56px);
+            font-family: var(--fuente-titulo);
+            font-weight: 700;
+            color: var(--blanco);
+            line-height: 1.1;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .slider-container {
+            perspective: 1500px;
+            perspective-origin: 50% 50%;
+            cursor: grab;
+            width: 100%;
+            max-width: 1200px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            padding: 40px 0;
+            scroll-behavior: smooth;
+        }
+        .slider-container::-webkit-scrollbar { display: none; }
+        .slider-container.dragging { cursor: grabbing; scroll-behavior: auto; }
+
+        .slider-track {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            transform-style: preserve-3d;
+            padding: 0 20px;
+            width: max-content;
+            margin: 0 auto;
+        }
+
+        .card-show {
+            flex-shrink: 0;
+            width: 260px;
+            height: 380px;
+            background: var(--negro-card);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            border: 2px solid var(--dorado);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .card-show img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-show .hover-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease; z-index: 2;
+            backdrop-filter: blur(3px);
+        }
+
+        .card-show:hover .hover-overlay { opacity: 1; }
+
+        .card-show .hover-overlay span {
+            color: var(--dorado); font-size: 1.2rem; font-weight: bold; text-transform: uppercase;
+            letter-spacing: 2px; font-family: var(--fuente-titulo); text-align: center;
+            padding: 0 15px; text-shadow: 0 2px 10px black;
+        }
+
+        .slider-track.blurred .card-show:not(.expanded) {
+            filter: blur(5px) brightness(0.4);
+            transform: scale(0.9);
+        }
+
+        /* TARJETA EXPANDIDA (MODAL) */
+        .card-show.expanded {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.15);
+            z-index: 2000;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.6);
+            border-color: #fff;
+            cursor: default;
+        }
+        
+        .card-show.expanded .hover-overlay { display: none; }
+
+        /* PANEL DE INFORMACIÓN INFERIOR */
+        .card-info {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            z-index: 2001;
+            max-width: 600px;
+            width: 90%;
+            padding: 2rem;
+            background: rgba(15, 15, 15, 0.98);
+            border: 1px solid var(--dorado);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .card-info.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: all; }
+        .card-info h2 { font-size: 26px; font-weight: 700; color: var(--dorado); font-family: var(--fuente-titulo); margin-bottom: 12px; }
+        .card-info p { font-size: 15px; color: var(--blanco); line-height: 1.7; margin-bottom: 20px; }
+        
+        .btn-cotizar-info {
+            display: inline-block; padding: 10px 25px; background: var(--dorado); color: #000;
+            text-decoration: none; font-weight: bold; text-transform: uppercase; border-radius: 5px;
+            font-size: 0.9rem; transition: 0.3s;
+        }
+        .btn-cotizar-info:hover { background: #fff; transform: scale(1.05); }
+
+        /* BOTÓN CERRAR */
+        .close-btn {
+            position: fixed; top: 30px; right: 30px; width: 50px; height: 50px;
+            background: rgba(0,0,0,0.8); border: 2px solid var(--dorado); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 2002; opacity: 0; pointer-events: none;
+            transition: all 0.3s ease; color: var(--dorado); font-size: 30px;
+        }
+
+        .close-btn.visible { opacity: 1; pointer-events: all; }
+        .close-btn:hover { background: var(--dorado); color: black; transform: rotate(90deg) scale(1.1); }
+
+
+        /* --- TARJETAS INTERACTIVAS (FORMATO VERTICAL RESTAURANTE) --- */
         .seccion-restaurante { padding: 50px 20px 100px 20px; color: var(--blanco); text-align: center; }
         .titulo-restaurante { font-size: 3rem; color: var(--dorado); margin-bottom: 10px; text-transform: uppercase; }
         .subtitulo-restaurante { color: var(--gris-texto); margin-bottom: 20px; font-size: 1.1rem; }
@@ -368,57 +474,42 @@
             </div>
         </section>
 
-        <section class="stage reveal">
-            <h2 class="title" style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase; text-align: center; margin-bottom: 20px; position: relative; z-index: 10;">Recorrido Virtual</h2>
-            <div class="container-3d">
-                <div class="ring">
-                    <div class="img-3d" style="--r: 0deg;" onclick="abrirFoto(this)"><img src="img/salon.jpg" alt="Salón"></div>
-                    <div class="img-3d" style="--r: 51.4deg;" onclick="abrirFoto(this)"><img src="img/pista.jpg" alt="Pista"></div>
-                    <div class="img-3d" style="--r: 102.8deg;" onclick="abrirFoto(this)"><img src="img/jardin.jpg" alt="Jardín"></div>
-                    <div class="img-3d" style="--r: 154.2deg;" onclick="abrirFoto(this)"><img src="img/candybar.jpg" alt="Candy Bar"></div>
-                    <div class="img-3d" style="--r: 205.6deg;" onclick="abrirFoto(this)"><img src="img/corazon.jpg" alt="Corazón"></div>
-                    <div class="img-3d" style="--r: 257deg;" onclick="abrirFoto(this)"><img src="img/fuente.jpg" alt="Fuente"></div>
-                    <div class="img-3d" style="--r: 308.4deg;" onclick="abrirFoto(this)"><img src="img/pasillo.jpg" alt="Pasillo"></div>
+        <section class="seccion-entretenimiento reveal">
+            <h2 class="main-title">Shows & Extras</h2>
+            <p class="subtitle">Toca para descubrir la magia</p>
+            
+            <div class="slider-container" id="shows-slider">
+                <div class="slider-track">
+                    
+                    <div class="card-show" data-title="Show Robot LED" data-desc="Una explosión de energía con tecnología LED, humo y luces láser. El show perfecto para levantar el ambiente en la pista de baile y sorprender a todos tus invitados.">
+                        <img src="img/robot.jpg" alt="Robot LED">
+                        <div class="hover-overlay"><span>Ver Detalles</span></div>
+                    </div>
+
+                    <div class="card-show" data-title="Show Folclórico" data-desc="Tradición, color y pasión mexicana. Un espectáculo vibrante con bailarines profesionales que llenarán tu evento de orgullo y cultura.">
+                        <img src="img/folclorico.jpg" alt="Show Folclórico">
+                        <div class="hover-overlay"><span>Ver Detalles</span></div>
+                    </div>
+
+                    <div class="card-show" data-title="Cabina 360°" data-desc="Captura los mejores momentos de tu fiesta en videos en cámara lenta y 360 grados. Un recuerdo interactivo y súper divertido que todos querrán compartir en sus redes.">
+                        <img src="img/pista.jpg" alt="Cabina 360"> <div class="hover-overlay"><span>Ver Detalles</span></div>
+                    </div>
+
+                    <div class="card-show" data-title="Pirotecnia en Frío" data-desc="Ilumina tu entrada triunfal o el primer baile con impresionantes chisperos de pirotecnia en frío. Totalmente seguros para interiores y con un efecto visual de película.">
+                        <img src="img/salon.jpg" alt="Pirotecnia"> <div class="hover-overlay"><span>Ver Detalles</span></div>
+                    </div>
+
                 </div>
             </div>
-        </section>
 
-        <div id="visor-lightbox">
-            <span class="cerrar-visor" onclick="cerrarFoto()">×</span>
-            <img id="img-ampliada" src="" alt="Vista ampliada">
-        </div>
-
-        <section class="robot-space-section reveal">
-            <h2 class="robot-title">Show Robot LED</h2>
-            <p class="robot-subtitle">Tecnología y Diversión</p>
-            
-            <div class="video-card-container" onclick="reproducirVideo(this)">
-                <img src="img/robot.jpg?v=2" alt="Robot LED" class="media-cover">
-                <div class="play-icon"><i class="fas fa-play"></i></div>
-                <video class="media-video" muted loop playsinline>
-                    <source src="img/video_robot.mp4" type="video/mp4">
-                    Tu navegador no soporta videos.
-                </video>
+            <div class="card-info" id="card-info">
+                <h2 id="info-title">Título</h2>
+                <p id="info-desc">Descripción del show.</p>
+                <a href="https://wa.me/5565796506?text=Hola%20Finca%20Maldonado,%20quisiera%20agregar%20un%20show%20extra%20a%20mi%20evento.%20%C2%BFMe%20dan%20informaci%C3%B3n%3F" target="_blank" class="btn-cotizar-info">Cotizar este Show</a>
             </div>
-        </section>
-
-        <section class="folclore-section reveal">
-            <h2 class="robot-title" style="color: var(--dorado); text-shadow: 0 0 10px rgba(212,175,55,0.3);">Show Folclórico</h2>
-            <p class="robot-subtitle" style="color: #fff;">Tradición Viva y Cultura</p>
             
-            <p style="color: var(--gris-texto); max-width: 600px; margin: 0 auto 20px auto;">
-                Sorprende a tus invitados con un espectáculo lleno de color y pasión mexicana. 
-                Haz clic para ver una muestra.
-            </p>
+            <button class="close-btn" id="close-card-btn">&times;</button>
 
-            <div class="video-card-container" onclick="reproducirVideo(this)">
-                <img src="img/folclorico.jpg?v=2" alt="Show Folclore" class="media-cover">
-                <div class="play-icon"><i class="fas fa-play"></i></div>
-                <video class="media-video" muted loop playsinline>
-                    <source src="img/video_folclore.mp4" type="video/mp4">
-                    Tu navegador no soporta videos.
-                </video>
-            </div>
         </section>
 
     </div> 
@@ -625,61 +716,84 @@
             }
         }
 
-        // --- FUNCIÓN PARA REPRODUCIR VIDEO (FOLCLORE Y ROBOT) ---
-        function reproducirVideo(elemento) {
-            let video = elemento.querySelector('video');
-            elemento.classList.add('playing');
-            video.play();
-        }
-
         // --- GALERÍA DE SALONES (LÓGICA DE FLECHAS) ---
         const imgsGrande = ['img/salongrande.jpg', 'img/salongrande2.jpg', 'img/salongrande3.jpg', 'img/salongrande4.jpg'];
         const imgsChico = ['img/salonchico.jpg', 'img/salonchico2.jpg', 'img/salonchico3.jpg'];
         const imgsBaby = ['img/salonbaby.jpg', 'img/salonbaby2.jpg', 'img/salonbaby3.jpg', 'img/salonbaby4.jpg', 'img/salonbaby5.jpg', 'img/salonbaby6.jpg'];
 
-        let iGrande = 0;
-        let iChico = 0;
-        let iBaby = 0;
+        let iGrande = 0; let iChico = 0; let iBaby = 0;
 
         function cambiarFotoSalon(salon, direccion, event) {
-            event.stopPropagation(); // Evita que se abra el cotizador al tocar la flecha
-
+            event.stopPropagation();
             let arr, indiceActual, imgID;
 
-            if (salon === 'grande') {
-                arr = imgsGrande;
-                iGrande += direccion;
-                if (iGrande < 0) iGrande = arr.length - 1;
-                if (iGrande >= arr.length) iGrande = 0;
-                indiceActual = iGrande;
-                imgID = 'img-grande';
-            } else if (salon === 'chico') {
-                arr = imgsChico;
-                iChico += direccion;
-                if (iChico < 0) iChico = arr.length - 1;
-                if (iChico >= arr.length) iChico = 0;
-                indiceActual = iChico;
-                imgID = 'img-chico';
-            } else if (salon === 'baby') {
-                arr = imgsBaby;
-                iBaby += direccion;
-                if (iBaby < 0) iBaby = arr.length - 1;
-                if (iBaby >= arr.length) iBaby = 0;
-                indiceActual = iBaby;
-                imgID = 'img-baby';
-            }
-
+            if (salon === 'grande') { arr = imgsGrande; iGrande += direccion; if (iGrande < 0) iGrande = arr.length - 1; if (iGrande >= arr.length) iGrande = 0; indiceActual = iGrande; imgID = 'img-grande';
+            } else if (salon === 'chico') { arr = imgsChico; iChico += direccion; if (iChico < 0) iChico = arr.length - 1; if (iChico >= arr.length) iChico = 0; indiceActual = iChico; imgID = 'img-chico';
+            } else if (salon === 'baby') { arr = imgsBaby; iBaby += direccion; if (iBaby < 0) iBaby = arr.length - 1; if (iBaby >= arr.length) iBaby = 0; indiceActual = iBaby; imgID = 'img-baby'; }
+            
             document.getElementById(imgID).src = arr[indiceActual];
         }
 
-        // --- COTIZAR DIRECTO ---
         function cotizarSalon(nombreSalon) {
             const telefono = "5565796506";
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${nombreSalon}*.\nQuisiera saber disponibilidad y precios para un evento. ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // --- ANIMACIONES ---
+        // --- LOGICA DEL NUEVO CARRUSEL DE SHOWS (DRAG & CLICK) ---
+        const sliderContainer = document.getElementById('shows-slider');
+        const trackShow = document.querySelector('.slider-track');
+        const showCards = document.querySelectorAll('.card-show');
+        const closeBtn = document.getElementById('close-card-btn');
+        const cardInfo = document.getElementById('card-info');
+        const infoTitle = document.getElementById('info-title');
+        const infoDesc = document.getElementById('info-desc');
+
+        let isDragging = false; let startX; let scrollLeft;
+
+        // Arrastrar en PC
+        sliderContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            sliderContainer.classList.add('dragging');
+            startX = e.pageX - sliderContainer.offsetLeft;
+            scrollLeft = sliderContainer.scrollLeft;
+        });
+        sliderContainer.addEventListener('mouseleave', () => { isDragging = false; sliderContainer.classList.remove('dragging'); });
+        sliderContainer.addEventListener('mouseup', () => { isDragging = false; sliderContainer.classList.remove('dragging'); });
+        sliderContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - sliderContainer.offsetLeft;
+            const walk = (x - startX) * 2; // Velocidad de arrastre
+            sliderContainer.scrollLeft = scrollLeft - walk;
+        });
+
+        // Expandir Tarjeta al hacer clic
+        showCards.forEach(card => {
+            card.addEventListener('click', () => {
+                if(isDragging) return; // Si estaba arrastrando, no hacer clic
+                
+                // Extraer la información de la tarjeta (data-title y data-desc)
+                infoTitle.textContent = card.getAttribute('data-title');
+                infoDesc.textContent = card.getAttribute('data-desc');
+
+                // Aplicar clases de expansión y desenfoque
+                card.classList.add('expanded');
+                trackShow.classList.add('blurred');
+                cardInfo.classList.add('visible');
+                closeBtn.classList.add('visible');
+            });
+        });
+
+        // Cerrar Tarjeta
+        closeBtn.addEventListener('click', () => {
+            showCards.forEach(c => c.classList.remove('expanded'));
+            trackShow.classList.remove('blurred');
+            cardInfo.classList.remove('visible');
+            closeBtn.classList.remove('visible');
+        });
+
+        // --- ANIMACIONES ON SCROLL ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -695,27 +809,7 @@
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
         function cambiarPortadaAleatoria() { const hero = document.getElementById('hero-principal'); if(hero) { const indice = Math.floor(Math.random() * imagenesPortada.length); hero.style.backgroundImage = `url('${imagenesPortada[indice]}')`; } }
         cambiarPortadaAleatoria();
-
-        // --- FUNCIONES DEL VISOR DE FOTOS (LIGHTBOX) ---
-        function abrirFoto(elemento) {
-            const rutaImagen = elemento.querySelector('img').src;
-            const lightbox = document.getElementById('visor-lightbox');
-            const imgAmpliada = document.getElementById('img-ampliada');
-            
-            imgAmpliada.src = rutaImagen;
-            lightbox.style.display = 'flex';
-        }
-
-        function cerrarFoto() {
-            document.getElementById('visor-lightbox').style.display = 'none';
-        }
-
-        // Cerrar visor al hacer clic fuera de la foto
-        document.getElementById('visor-lightbox').addEventListener('click', function(event) {
-            if (event.target !== document.getElementById('img-ampliada')) {
-                cerrarFoto();
-            }
-        });
     </script>
 </body>
 </html>
+
