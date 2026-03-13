@@ -11,6 +11,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         /* --- VARIABLES --- */
@@ -19,18 +21,20 @@
             --dorado-light: #f1d592;
             --gradient-oro: linear-gradient(135deg, #af8910 0%, #D4AF37 50%, #f1d592 100%);
             --negro-fondo: #050505;
-            --negro-card: rgba(18, 18, 18, 0.95);
+            --negro-card: rgba(20, 25, 35, 0.9);
             --blanco: #ffffff;
-            --gris-texto: #b0b0b0;
+            --gris-texto: #c6c7cc;
             --fuente-titulo: 'Cinzel', serif;
             --fuente-texto: 'Montserrat', sans-serif;
             --neon-azul: #00f3ff;
+            --radius: 15px;
+            --shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            background-color: #000;
+            background-color: var(--negro-fondo);
             color: var(--blanco);
             font-family: var(--fuente-texto);
             line-height: 1.6;
@@ -115,7 +119,7 @@
         /* --- SALONES --- */
         .salones { padding: 100px 20px; text-align: center; }
         .grid-salones { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
-        .card-salon { background: var(--negro-card); border: 1px solid #222; overflow: hidden; transition: 0.5s; position: relative; border-radius: 4px; }
+        .card-salon { background: rgba(18, 18, 18, 0.95); border: 1px solid #222; overflow: hidden; transition: 0.5s; position: relative; border-radius: 4px; }
         .card-salon:hover { transform: translateY(-10px); border-color: var(--dorado); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .img-container { position: relative; height: 280px; overflow: hidden; }
         .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
@@ -145,7 +149,7 @@
         .section-features .feature h3 { font-size: 1.5rem; font-family: var(--fuente-titulo); color: var(--blanco); margin-bottom: 15px; }
         .section-features .feature p { font-size: 1rem; color: var(--gris-texto); line-height: 1.6; }
 
-        /* --- ESTILOS DEL CARRUSEL ANILLO 3D (ADAPTADO PARA MÓVIL) --- */
+        /* --- CARRUSEL ANILLO 3D INTERACTIVO --- */
         .stage { width: 100%; height: 600px; overflow: hidden; background: rgba(8, 8, 8, 0.85); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 50px;}
         .container-3d { --z: 350px; perspective: 2000px; width: 250px; height: 350px; position: relative; top: 5%; }
         .ring { width: 100%; height: 100%; transform-style: preserve-3d; animation: rotarAnillo 25s linear infinite; }
@@ -163,40 +167,154 @@
         .cerrar-visor:hover { color: #fff; transform: scale(1.2); }
         @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* --- NUEVA SECCIÓN DE ENTRETENIMIENTO (SLIDER DE TARJETAS) --- */
-        .seccion-entretenimiento { position: relative; padding: 100px 20px; background: #000; display: flex; flex-direction: column; align-items: center; overflow: hidden; user-select: none; }
-        .seccion-entretenimiento .subtitle { color: var(--dorado); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
-        .seccion-entretenimiento .main-title { font-size: clamp(36px, 5vw, 56px); font-family: var(--fuente-titulo); font-weight: 700; color: var(--blanco); line-height: 1.1; margin-bottom: 50px; text-transform: uppercase; text-align: center; }
-        
-        .slider-container { perspective: 1500px; perspective-origin: 50% 50%; cursor: grab; width: 100%; max-width: 1200px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; padding: 40px 0; scroll-behavior: smooth; }
-        .slider-container::-webkit-scrollbar { display: none; }
-        .slider-container.dragging { cursor: grabbing; scroll-behavior: auto; }
-        
-        .slider-track { display: flex; align-items: center; justify-content: center; gap: 20px; transform-style: preserve-3d; padding: 0 20px; width: max-content; margin: 0 auto; }
-        
-        .card-show { flex-shrink: 0; width: 260px; height: 380px; background: var(--negro-card); overflow: hidden; position: relative; cursor: pointer; border-radius: 10px; border: 2px solid var(--dorado); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .card-show img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; position: relative; z-index: 1; }
-        .card-show .hover-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; z-index: 2; backdrop-filter: blur(3px); }
-        .card-show:hover .hover-overlay { opacity: 1; }
-        .card-show .hover-overlay span { color: var(--dorado); font-size: 1.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; font-family: var(--fuente-titulo); text-align: center; padding: 0 15px; text-shadow: 0 2px 10px black; }
-        .slider-track.blurred .card-show:not(.expanded) { filter: blur(5px) brightness(0.4); transform: scale(0.9); }
-        
-        /* TARJETA EXPANDIDA (MODAL) */
-        .card-show.expanded { position: fixed; top: 40%; left: 50%; transform: translate(-50%, -50%) scale(1.15); z-index: 2000; box-shadow: 0 0 50px rgba(212, 175, 55, 0.6); border-color: #fff; cursor: default; }
-        .card-show.expanded .hover-overlay { display: none; }
+        /* ==========================================================================
+           NUEVA SECCIÓN DE SHOWS (FLIP CARDS 3D) ADAPTADA A F. MALDONADO
+           ========================================================================== */
+        .shows-section {
+            display: flex; flex-direction: column; align-items: center;
+            padding: 100px 20px; background: transparent;
+        }
 
-        /* PANEL DE INFORMACIÓN INFERIOR */
-        .card-info { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px); text-align: center; opacity: 0; pointer-events: none; transition: all 0.5s ease; z-index: 2001; max-width: 600px; width: 90%; padding: 2rem; background: rgba(15, 15, 15, 0.98); border: 1px solid var(--dorado); border-radius: 15px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9); }
-        .card-info.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: all; }
-        .card-info h2 { font-size: 26px; font-weight: 700; color: var(--dorado); font-family: var(--fuente-titulo); margin-bottom: 12px; }
-        .card-info p { font-size: 15px; color: var(--blanco); line-height: 1.7; margin-bottom: 20px; }
-        .btn-cotizar-info { display: inline-block; padding: 10px 25px; background: var(--dorado); color: #000; text-decoration: none; font-weight: bold; text-transform: uppercase; border-radius: 5px; font-size: 0.9rem; transition: 0.3s; }
-        .btn-cotizar-info:hover { background: #fff; transform: scale(1.05); }
+        .shows-section .main-title {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            color: var(--dorado);
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            font-family: var(--fuente-titulo);
+            text-align: center;
+        }
 
-        /* BOTÓN CERRAR */
-        .close-btn { position: fixed; top: 30px; right: 30px; width: 50px; height: 50px; background: rgba(0,0,0,0.8); border: 2px solid var(--dorado); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2002; opacity: 0; pointer-events: none; transition: all 0.3s ease; color: var(--dorado); font-size: 30px; }
-        .close-btn.visible { opacity: 1; pointer-events: all; }
-        .close-btn:hover { background: var(--dorado); color: black; transform: rotate(90deg) scale(1.1); }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .card {
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            min-height: 380px;
+            transform-style: preserve-3d;
+            border-radius: var(--radius);
+            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+
+        /* Clase para voltear */
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            transition: box-shadow 0.3s, filter 0.3s;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .card-face::before {
+            content: ""; position: absolute; inset: 0; border-radius: var(--radius);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset;
+            opacity: 0; transition: opacity 0.4s;
+        }
+
+        .card:hover .card-face::before, .card.flipped .card-face::before {
+            opacity: 1; animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; }
+            50% { box-shadow: 0 0 22px rgba(212, 175, 55, 0.4), 0 0 35px rgba(212, 175, 55, 0.25) inset; }
+            100% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; }
+        }
+
+        .card-front {
+            /* Asegura que el texto sea legible sobre la imagen de fondo */
+            background-blend-mode: overlay;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: flex-end; /* Texto abajo */
+            text-align: center;
+        }
+
+        .card-front h2 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.6rem;
+            color: var(--dorado);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 5px black;
+        }
+
+        .card-front p {
+            font-size: 0.95rem;
+            color: #fff;
+            line-height: 1.5;
+            text-shadow: 0 2px 5px black;
+        }
+
+        /* Imágenes de fondo para cada tarjeta */
+        .bg-uno { background-image: url('img/robot.jpg'); background-size: cover; background-position: center; }
+        .bg-dos { background-image: url('img/folclorico.jpg'); background-size: cover; background-position: center; }
+        .bg-tres { background-image: url('img/pista.jpg'); background-size: cover; background-position: center; }
+        .bg-cuatro { background-image: url('img/salon.jpg'); background-size: cover; background-position: center; }
+
+        .card-back {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .card-back h3 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.4rem;
+            color: var(--dorado);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        ul.features { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        ul.features li {
+            margin-bottom: 0.8rem; padding-left: 1.4rem; position: relative;
+            color: var(--gris-texto); font-size: 0.95rem;
+        }
+        ul.features li::before {
+            content: "✨"; position: absolute; left: 0; color: var(--dorado); font-size: 0.9rem;
+        }
+
+        .cta-buttons { display: flex; gap: 12px; margin-top: 1.5rem; }
+        .cta-buttons a {
+            flex: 1; text-align: center; text-decoration: none; padding: 10px;
+            border-radius: 8px; font-weight: 600; transition: all 0.3s; font-size: 0.9rem;
+        }
+        
+        .cta-buttons a.primary { background: var(--dorado); color: #000; }
+        .cta-buttons a.primary:hover { background: #fff; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+
+        @media (max-width: 768px) {
+            .card-inner { min-height: 320px; }
+            .card-face { padding: 18px; }
+            .card-front h2 { font-size: 1.4rem; }
+            .card-back h3 { font-size: 1.2rem; }
+        }
 
         /* --- TARJETAS INTERACTIVAS (FORMATO VERTICAL RESTAURANTE) --- */
         .seccion-restaurante { padding: 50px 20px 100px 20px; color: var(--blanco); text-align: center; }
@@ -384,42 +502,99 @@
             <img id="img-ampliada" src="" alt="Vista ampliada">
         </div>
 
-        <section class="seccion-entretenimiento reveal">
-            <h2 class="main-title">Shows & Extras</h2>
-            <p class="subtitle">Toca para descubrir la magia</p>
-            
-            <div class="slider-container" id="shows-slider">
-                <div class="slider-track">
-                    
-                    <div class="card-show" data-title="Show Robot LED" data-desc="Una explosión de energía con tecnología LED, humo y luces láser. El show perfecto para levantar el ambiente en la pista de baile y sorprender a todos tus invitados.">
-                        <img src="img/robot.jpg" alt="Robot LED">
-                        <div class="hover-overlay"><span>Ver Detalles</span></div>
+        <section class="shows-section reveal">
+            <h2 class="main-title">Shows & Entretenimiento</h2>
+            <div class="card-grid">
+                
+                <div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-face card-front bg-uno">
+                            <div>
+                                <h2>Robot LED</h2>
+                                <p>Toque para ver detalles</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3>Robot LED</h3>
+                            <ul class="features">
+                                <li>Show interactivo en pista</li>
+                                <li>Efectos láser y luces LED</li>
+                                <li>Disparos de humo</li>
+                            </ul>
+                            <div class="cta-buttons">
+                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20de%20Robot%20LED" target="_blank" class="primary" onclick="event.stopPropagation()">Cotizar Show</a>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="card-show" data-title="Show Folclórico" data-desc="Tradición, color y pasión mexicana. Un espectáculo vibrante con bailarines profesionales que llenarán tu evento de orgullo y cultura.">
-                        <img src="img/folclorico.jpg" alt="Show Folclórico">
-                        <div class="hover-overlay"><span>Ver Detalles</span></div>
-                    </div>
-
-                    <div class="card-show" data-title="Cabina 360°" data-desc="Captura los mejores momentos de tu fiesta en videos en cámara lenta y 360 grados. Un recuerdo interactivo y súper divertido que todos querrán compartir en sus redes.">
-                        <img src="img/pista.jpg" alt="Cabina 360"> <div class="hover-overlay"><span>Ver Detalles</span></div>
-                    </div>
-
-                    <div class="card-show" data-title="Pirotecnia en Frío" data-desc="Ilumina tu entrada triunfal o el primer baile con impresionantes chisperos de pirotecnia en frío. Totalmente seguros para interiores y con un efecto visual de película.">
-                        <img src="img/salon.jpg" alt="Pirotecnia"> <div class="hover-overlay"><span>Ver Detalles</span></div>
-                    </div>
-
                 </div>
-            </div>
 
-            <div class="card-info" id="card-info">
-                <h2 id="info-title">Título</h2>
-                <p id="info-desc">Descripción del show.</p>
-                <a href="https://wa.me/5565796506?text=Hola%20Finca%20Maldonado,%20quisiera%20agregar%20un%20show%20extra%20a%20mi%20evento.%20%C2%BFMe%20dan%20informaci%C3%B3n%3F" target="_blank" class="btn-cotizar-info">Cotizar este Show</a>
-            </div>
-            
-            <button class="close-btn" id="close-card-btn">×</button>
+                <div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-face card-front bg-dos">
+                            <div>
+                                <h2>Show Folclórico</h2>
+                                <p>Toque para ver detalles</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3>Show Folclórico</h3>
+                            <ul class="features">
+                                <li>Bailarines profesionales</li>
+                                <li>Trajes típicos regionales</li>
+                                <li>Ambiente 100% mexicano</li>
+                            </ul>
+                            <div class="cta-buttons">
+                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20el%20Show%20Folcl%C3%B3rico" target="_blank" class="primary" onclick="event.stopPropagation()">Cotizar Show</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-face card-front bg-tres">
+                            <div>
+                                <h2>Cabina 360°</h2>
+                                <p>Toque para ver detalles</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3>Cabina 360°</h3>
+                            <ul class="features">
+                                <li>Videos en Slow Motion</li>
+                                <li>Descarga al instante</li>
+                                <li>Accesorios divertidos</li>
+                            </ul>
+                            <div class="cta-buttons">
+                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20la%20Cabina%20360" target="_blank" class="primary" onclick="event.stopPropagation()">Cotizar Show</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-face card-front bg-cuatro">
+                            <div>
+                                <h2>Pirotecnia</h2>
+                                <p>Toque para ver detalles</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3>Pirotecnia</h3>
+                            <ul class="features">
+                                <li>Chisperos en frío seguros</li>
+                                <li>Perfecto para el vals</li>
+                                <li>Efecto visual increíble</li>
+                            </ul>
+                            <div class="cta-buttons">
+                                <a href="https://wa.me/5565796506?text=Hola%20me%20interesa%20cotizar%20la%20Pirotecnia%20en%20fr%C3%ADo" target="_blank" class="primary" onclick="event.stopPropagation()">Cotizar Show</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
     </div> 
@@ -669,57 +844,6 @@
             if (event.target !== document.getElementById('img-ampliada')) {
                 cerrarFoto();
             }
-        });
-
-        // --- LOGICA DEL NUEVO CARRUSEL DE SHOWS (DRAG & CLICK) ---
-        const sliderContainer = document.getElementById('shows-slider');
-        const trackShow = document.querySelector('.slider-track');
-        const showCards = document.querySelectorAll('.card-show');
-        const closeBtn = document.getElementById('close-card-btn');
-        const cardInfo = document.getElementById('card-info');
-        const infoTitle = document.getElementById('info-title');
-        const infoDesc = document.getElementById('info-desc');
-
-        let isDragging = false; let startX; let scrollLeft;
-
-        // Arrastrar en PC
-        sliderContainer.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            sliderContainer.classList.add('dragging');
-            startX = e.pageX - sliderContainer.offsetLeft;
-            scrollLeft = sliderContainer.scrollLeft;
-        });
-        sliderContainer.addEventListener('mouseleave', () => { isDragging = false; sliderContainer.classList.remove('dragging'); });
-        sliderContainer.addEventListener('mouseup', () => { isDragging = false; sliderContainer.classList.remove('dragging'); });
-        sliderContainer.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - sliderContainer.offsetLeft;
-            const walk = (x - startX) * 2; 
-            sliderContainer.scrollLeft = scrollLeft - walk;
-        });
-
-        // Expandir Tarjeta al hacer clic
-        showCards.forEach(card => {
-            card.addEventListener('click', () => {
-                if(isDragging) return; 
-                
-                infoTitle.textContent = card.getAttribute('data-title');
-                infoDesc.textContent = card.getAttribute('data-desc');
-
-                card.classList.add('expanded');
-                trackShow.classList.add('blurred');
-                cardInfo.classList.add('visible');
-                closeBtn.classList.add('visible');
-            });
-        });
-
-        // Cerrar Tarjeta
-        closeBtn.addEventListener('click', () => {
-            showCards.forEach(c => c.classList.remove('expanded'));
-            trackShow.classList.remove('blurred');
-            cardInfo.classList.remove('visible');
-            closeBtn.classList.remove('visible');
         });
 
         // --- ANIMACIONES ON SCROLL ---
