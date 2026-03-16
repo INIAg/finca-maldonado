@@ -340,6 +340,17 @@
         .tarjeta-interactiva.activa .tarjeta-desc { max-height: 300px; opacity: 1; }
         .icono-touch { position: absolute; top: 20px; right: 20px; color: var(--dorado); background: rgba(0,0,0,0.6); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; border: 1px solid var(--dorado); animation: parpadeo 2.5s infinite; z-index: 5; }
 
+        /* --- PROMOCIONES RESTAURANTE --- */
+        .seccion-promociones { padding: 80px 20px; background: linear-gradient(135deg, rgba(15,15,15,0.95) 0%, rgba(30,25,10,0.8) 100%); border-top: 1px solid rgba(212, 175, 55, 0.3); border-bottom: 1px solid rgba(212, 175, 55, 0.3); text-align: center; margin: 40px 0; }
+        .promos-grid { display: flex; justify-content: center; gap: 30px; max-width: 1100px; margin: 40px auto 0; flex-wrap: wrap; }
+        .tarjeta-promo { background: rgba(5, 5, 5, 0.8); border: 1px dashed var(--dorado); border-radius: 10px; padding: 40px 30px; width: 320px; transition: all 0.4s ease; position: relative; overflow: hidden; }
+        .tarjeta-promo:hover { transform: translateY(-5px); background: rgba(212, 175, 55, 0.05); border-style: solid; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
+        .tarjeta-promo i { font-size: 2.5rem; color: var(--dorado); margin-bottom: 20px; display: inline-block; transition: transform 0.3s ease; }
+        .tarjeta-promo:hover i { transform: scale(1.1) rotate(5deg); }
+        .tarjeta-promo h3 { color: var(--dorado); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase; font-family: var(--fuente-titulo); }
+        .tarjeta-promo p { color: var(--gris-texto); font-size: 0.95rem; line-height: 1.6; }
+        .etiqueta-promo { position: absolute; top: 20px; right: -40px; background: var(--dorado); color: #000; font-weight: bold; font-size: 0.75rem; padding: 5px 45px; transform: rotate(45deg); text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+
         /* --- UBICACIÓN --- */
         .ubicacion-section { padding: 100px 20px; background: rgba(0, 0, 0, 0.85); text-align: center; }
         .contenedor-mapa { max-width: 1000px; margin: 40px auto 0; padding: 10px; border: 1px solid var(--dorado); background: rgba(212, 175, 55, 0.05); }
@@ -626,6 +637,40 @@
                     <p>En la cocina de Finca Maldonado, creemos que cada platillo debe contar una historia. Nuestro equipo de chefs trabaja en conjunto para fusionar la riqueza de la gastronomía tradicional con la elegancia de la alta cocina.</p>
                     <p>Seleccionando diariamente los mejores ingredientes frescos de temporada, su dedicación y pasión por el fuego se reflejan en cada detalle, desde nuestros desayunos hasta los banquetes más exclusivos. Es un honor para nosotros llevar a tu mesa una experiencia que se quede en tu memoria.</p>
                 </div>
+            </div>
+        </section>
+
+        <section class="seccion-promociones reveal">
+            <h2 class="titulo-restaurante" style="font-size: 2.5rem;">Promociones Exclusivas</h2>
+            <p class="subtitulo-restaurante" style="color: #fff;">No es solo comer, es compartir y quedarse un poco más.</p>
+            
+            <div class="promos-grid">
+                <div class="tarjeta-promo">
+                    <div class="etiqueta-promo">Mar a Jue</div>
+                    <i class="fas fa-glass-martini-alt"></i>
+                    <h3>2x1 en Cócteles</h3>
+                    <p>Disfruta de nuestra coctelería de autor al doble. Válido de martes a jueves para darle un toque especial a tu tarde.</p>
+                </div>
+                
+                <div class="tarjeta-promo">
+                    <div class="etiqueta-promo">Cortesía</div>
+                    <i class="fas fa-wine-glass"></i>
+                    <h3>Copa de Bienvenida</h3>
+                    <p>Al realizar tu reserva con anticipación por WhatsApp, te recibimos con una copa de vino tinto o blanco de la casa.</p>
+                </div>
+
+                <div class="tarjeta-promo">
+                    <div class="etiqueta-promo">Festejo</div>
+                    <i class="fas fa-birthday-cake"></i>
+                    <h3>Postre de Cumpleaños</h3>
+                    <p>Ven a celebrar tu vuelta al sol con nosotros y el Chef te consentirá con un postre sorpresa de temporada.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px;">
+                <a href="https://wa.me/5565796506?text=Hola,%20quisiera%20hacer%20una%20reserva%20en%20el%20restaurante%20y%20aprovechar%20sus%20promociones.%20✨" target="_blank" class="btn-dorado" style="border-radius: 5px;">
+                    <i class="fab fa-whatsapp"></i> Reservar y Aprovechar
+                </a>
             </div>
         </section>
 
