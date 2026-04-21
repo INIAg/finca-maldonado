@@ -246,10 +246,9 @@
         }
 
         .card-front {
-            /* Asegura que el texto sea legible sobre la imagen de fondo */
             background-blend-mode: overlay;
             background-color: rgba(0, 0, 0, 0.6);
-            justify-content: flex-end; /* Texto abajo */
+            justify-content: flex-end; 
             text-align: center;
         }
 
@@ -288,7 +287,7 @@
             color: var(--dorado);
             margin-bottom: 1rem;
             text-align: center;
-            transform: translateZ(30px); /* Efecto pop en el texto interior */
+            transform: translateZ(30px); 
         }
 
         ul.features { list-style: none; padding: 0; margin: 0; flex-grow: 1; transform: translateZ(20px); }
@@ -300,14 +299,13 @@
             content: "✨"; position: absolute; left: 0; color: var(--dorado); font-size: 0.9rem;
         }
 
-        /* CORRECCIÓN DE LOS BOTONES PARA QUE SEAN CLICKABLES EN 3D */
         .cta-buttons { display: flex; gap: 12px; margin-top: 1.5rem; transform: translateZ(40px); }
         
         .cta-buttons button {
             flex: 1; text-align: center; padding: 10px; border: none; cursor: pointer;
             border-radius: 8px; font-weight: 600; transition: all 0.3s; font-size: 0.9rem;
             font-family: var(--fuente-texto); position: relative; z-index: 20;
-            pointer-events: auto; /* Asegura que detecte el clic */
+            pointer-events: auto; 
         }
         
         .cta-buttons button.primary { background: var(--dorado); color: #000; }
@@ -372,7 +370,7 @@
     </div>
 
     <div class="top-bar">
-        ✨ Agenda abierta para Graduaciones y Eventos de Primavera 2026 ✨
+        ✨ Agenda abierta para Día de las Madres y Graduaciones 2026 ✨
     </div>
 
     <div class="fondo-animado"><div id="stars"></div><div id="stars2"></div><div id="stars3"></div></div>
@@ -398,7 +396,7 @@
         </div>
     </nav>
 
-    <a href="https://wa.me/5565796506?text=Hola%20Finca%20Maldonado,%20vengo%20de%20su%20sitio%20web%20y%20me%20interesa%20informaci%C3%B3n%20para%20un%20evento%20de%20Primavera%2FGraduaci%C3%B3n.%20%E2%9C%A8" class="btn-whatsapp-flotante" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/5565796506?text=Hola%20Finca%20Maldonado,%20vengo%20de%20su%20sitio%20web%20y%20me%20interesa%20informaci%C3%B3n.%20%E2%9C%A8" class="btn-whatsapp-flotante" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <div id="vista-eventos" class="vista-seccion vista-activa">
         
@@ -494,6 +492,36 @@
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <section class="paquetes-graduacion reveal" style="padding: 80px 20px; background: rgba(15, 15, 15, 0.95); text-align: center; border-top: 1px solid var(--dorado); border-bottom: 1px solid var(--dorado);">
+            <h2 class="title" style="font-size: 3rem; color: var(--dorado); font-family: var(--fuente-titulo); text-transform: uppercase; margin-bottom: 15px;">Paquetes de Graduación 2026</h2>
+            <p class="subtitle" style="color: var(--gris-texto); margin-bottom: 40px; font-size: 1.1rem;">Cerramos ciclos a lo grande. Reserva la fecha para tu generación.</p>
+            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto;">
+                <div style="background: black; border: 1px solid var(--dorado); padding: 40px 30px; border-radius: 10px; width: 320px;">
+                    <h3 style="color: var(--dorado); font-family: var(--fuente-titulo); font-size: 1.5rem; margin-bottom: 15px;">Paquete Clásico</h3>
+                    <ul style="list-style: none; padding: 0; color: #ddd; text-align: left; margin-bottom: 30px;">
+                        <li style="margin-bottom: 10px;">✨ Menú a 3 tiempos</li>
+                        <li style="margin-bottom: 10px;">✨ Descorche libre</li>
+                        <li style="margin-bottom: 10px;">✨ DJ y pista iluminada</li>
+                        <li style="margin-bottom: 10px;">✨ Centros de mesa florales</li>
+                        <li style="margin-bottom: 10px;">✨ Personal de servicio</li>
+                    </ul>
+                    <button class="btn-seleccionar" style="width: 100%; border-radius: 5px;" onclick="window.open('https://wa.me/5565796506?text=Hola,%20me%20interesa%20el%20Paquete%20Clásico%20de%20Graduación%202026', '_blank')">Consultar Precio</button>
+                </div>
+                <div style="background: var(--gradient-oro); color: black; border: 1px solid var(--dorado); padding: 40px 30px; border-radius: 10px; width: 320px; transform: scale(1.05); box-shadow: 0 10px 30px rgba(212,175,55,0.4);">
+                    <div style="background: black; color: var(--dorado); font-size: 0.8rem; font-weight: bold; padding: 5px 15px; display: inline-block; border-radius: 20px; margin-bottom: 15px; text-transform: uppercase;">Más Popular</div>
+                    <h3 style="font-family: var(--fuente-titulo); font-size: 1.6rem; margin-bottom: 15px; color: black;">Paquete Premium</h3>
+                    <ul style="list-style: none; padding: 0; text-align: left; margin-bottom: 30px; font-weight: 600;">
+                        <li style="margin-bottom: 10px;">✨ Menú a 4 tiempos</li>
+                        <li style="margin-bottom: 10px;">✨ Mixología de bienvenida</li>
+                        <li style="margin-bottom: 10px;">✨ Grupo musical y DJ</li>
+                        <li style="margin-bottom: 10px;">✨ Cabina de fotos 360</li>
+                        <li style="margin-bottom: 10px;">✨ Decoración temática</li>
+                    </ul>
+                    <button style="background: black; color: var(--dorado); border: none; padding: 12px 25px; cursor: pointer; text-transform: uppercase; font-weight: bold; width: 100%; border-radius: 5px; transition: 0.3s;" onmouseover="this.style.background='#222'" onmouseout="this.style.background='black'" onclick="window.open('https://wa.me/5565796506?text=Hola,%20me%20interesa%20el%20Paquete%20Premium%20de%20Graduación%202026', '_blank')">Consultar Precio</button>
+                </div>
             </div>
         </section>
 
@@ -629,6 +657,12 @@
         <style>
             @keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
         </style>
+
+        <section class="banner-madres reveal" style="background: var(--gradient-oro); color: black; padding: 40px 20px; text-align: center; margin-top: 40px; position: relative; overflow: hidden; border-radius: 10px; max-width: 1100px; margin-left: auto; margin-right: auto; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);">
+            <h2 style="font-family: var(--fuente-titulo); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px;"><i class="fas fa-heart" style="color: #d11a2a; margin-right: 10px;"></i>Especial Día de las Madres</h2>
+            <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px;">Celebra a mamá este 10 de Mayo. Menú especial a 3 tiempos, música en vivo y coctelería de cortesía para ella.</p>
+            <a href="https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20mesa%20para%20festejar%20el%20Día%20de%20las%20Madres." target="_blank" class="btn-dorado" style="background: black; color: var(--dorado); border-color: black; border-radius: 5px;">Reservar Mesa</a>
+        </section>
 
         <section class="quienes-somos reveal" style="background: transparent; border-bottom: none;">
             <div class="qs-grid">
@@ -885,9 +919,9 @@
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // --- FUNCION PARA ABRIR WHATSAPP DESDE TARJETAS DE SHOWS (CORREGIDO PARA 3D) ---
+        // --- FUNCION PARA ABRIR WHATSAPP DESDE TARJETAS DE SHOWS ---
         function abrirShowWhatsApp(event, mensaje) {
-            event.stopPropagation(); // Evita que la tarjeta se vuelva a voltear
+            event.stopPropagation();
             const telefono = "5565796506";
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
@@ -912,9 +946,8 @@
             }
         });
 
-        // --- FUNCIÓN PARA VOLTEAR TARJETAS DE SHOWS SIN BLOQUEAR EL BOTÓN ---
+        // --- FUNCIÓN PARA VOLTEAR TARJETAS DE SHOWS ---
         function voltearTarjeta(event, tarjeta) {
-            // Si el clic fue en un enlace o botón, dejamos que haga su trabajo y no volteamos la tarjeta
             if(event.target.tagName.toLowerCase() === 'button' || event.target.tagName.toLowerCase() === 'a' || event.target.closest('button')) {
                 return;
             }
