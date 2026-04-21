@@ -132,6 +132,23 @@
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
+        /* --- BANNERS TEMPORADA (NUEVO ESTILO) --- */
+        .banners-temporada { padding: 80px 20px; text-align: center; background: rgba(5,5,5,0.9); border-top: 1px solid rgba(212, 175, 55, 0.3); border-bottom: 1px solid rgba(212, 175, 55, 0.3); }
+        .grid-banners { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+        .banner-item { position: relative; border-radius: 15px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.4s ease; padding: 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; min-height: 260px; background-size: cover; background-position: center; }
+        .banner-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,20,20,0.7)); z-index: 1; transition: 0.4s; }
+        .banner-item:hover { transform: translateY(-10px); border-color: var(--dorado); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
+        .banner-item:hover::before { background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(20,20,20,0.5)); }
+        .banner-content { position: relative; z-index: 2; pointer-events: none; }
+        .banner-content h3 { color: var(--dorado); font-size: 1.8rem; margin-bottom: 10px; text-transform: uppercase; font-family: var(--fuente-titulo); text-shadow: 0 2px 5px #000; }
+        .banner-content p { color: #fff; font-size: 1rem; margin-bottom: 25px; line-height: 1.4; text-shadow: 0 2px 5px #000; }
+        .btn-banner { display: inline-block; padding: 12px 30px; background: rgba(0,0,0,0.6); border: 1px solid var(--dorado); color: var(--dorado); text-transform: uppercase; font-size: 0.85rem; font-weight: bold; border-radius: 5px; transition: 0.3s; backdrop-filter: blur(5px); pointer-events: auto; cursor: pointer; }
+        .btn-banner:hover { background: var(--gradient-oro); color: black; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+        
+        .bg-ninos { background-image: url('img/jardin.jpg'); }
+        .bg-madres { background-image: url('img/fondo.jpg'); }
+        .bg-graduaciones { background-image: url('img/pista.jpg'); }
+
         /* --- SECCIÓN SERVICIOS (FEATURES) --- */
         .section-features { position: relative; display: flex; justify-content: center; align-items: center; padding: 100px 20px; background: transparent; overflow: hidden; }
         .section-features .container { width: 100%; max-width: 1200px; margin: auto; text-align: center; position: relative; z-index: 2; }
@@ -166,157 +183,34 @@
         .cerrar-visor:hover { color: #fff; transform: scale(1.2); }
         @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* ==========================================================================
-           NUEVA SECCIÓN DE SHOWS (FLIP CARDS 3D) ADAPTADA A F. MALDONADO
-           ========================================================================== */
-        .shows-section {
-            display: flex; flex-direction: column; align-items: center;
-            padding: 100px 20px; background: transparent;
-        }
-
-        .shows-section .main-title {
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 700;
-            color: var(--dorado);
-            text-transform: uppercase;
-            margin-bottom: 50px;
-            font-family: var(--fuente-titulo);
-            text-align: center;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .card {
-            perspective: 1000px;
-            cursor: pointer;
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-        .card-inner {
-            position: relative;
-            width: 100%;
-            min-height: 380px;
-            transform-style: preserve-3d;
-            border-radius: var(--radius);
-            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-        }
-
-        /* Clase para voltear */
-        .card.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-face {
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius);
-            background: var(--card-bg);
-            box-shadow: var(--shadow);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            backface-visibility: hidden;
-            transform-style: preserve-3d;
-            transition: box-shadow 0.3s, filter 0.3s;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .card-face::before {
-            content: ""; position: absolute; inset: 0; border-radius: var(--radius);
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset;
-            opacity: 0; transition: opacity 0.4s;
-        }
-
-        .card:hover .card-face::before, .card.flipped .card-face::before {
-            opacity: 1; animation: pulse 2s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; }
-            50% { box-shadow: 0 0 22px rgba(212, 175, 55, 0.4), 0 0 35px rgba(212, 175, 55, 0.25) inset; }
-            100% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; }
-        }
-
-        .card-front {
-            background-blend-mode: overlay;
-            background-color: rgba(0, 0, 0, 0.6);
-            justify-content: flex-end; 
-            text-align: center;
-        }
-
-        .card-front h2 {
-            font-family: var(--fuente-titulo);
-            font-size: 1.6rem;
-            color: var(--dorado);
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 5px black;
-        }
-
-        .card-front p {
-            font-size: 0.95rem;
-            color: #fff;
-            line-height: 1.5;
-            text-shadow: 0 2px 5px black;
-        }
-
-        /* Imágenes de fondo para cada tarjeta */
+        /* --- SHOWS (FLIP CARDS) --- */
+        .shows-section { display: flex; flex-direction: column; align-items: center; padding: 100px 20px; background: transparent; }
+        .shows-section .main-title { font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--dorado); text-transform: uppercase; margin-bottom: 50px; font-family: var(--fuente-titulo); text-align: center; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; }
+        .card { perspective: 1000px; cursor: pointer; position: relative; transform-style: preserve-3d; }
+        .card-inner { position: relative; width: 100%; min-height: 380px; transform-style: preserve-3d; border-radius: var(--radius); transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1); }
+        .card.flipped .card-inner { transform: rotateY(180deg); }
+        .card-face { position: absolute; inset: 0; border-radius: var(--radius); background: var(--card-bg); box-shadow: var(--shadow); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; backface-visibility: hidden; transform-style: preserve-3d; transition: box-shadow 0.3s, filter 0.3s; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .card-face::before { content: ""; position: absolute; inset: 0; border-radius: var(--radius); box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; opacity: 0; transition: opacity 0.4s; }
+        .card:hover .card-face::before, .card.flipped .card-face::before { opacity: 1; animation: pulse 2s infinite alternate; }
+        @keyframes pulse { 0% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; } 50% { box-shadow: 0 0 22px rgba(212, 175, 55, 0.4), 0 0 35px rgba(212, 175, 55, 0.25) inset; } 100% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 25px rgba(212, 175, 55, 0.15) inset; } }
+        .card-front { background-blend-mode: overlay; background-color: rgba(0, 0, 0, 0.6); justify-content: flex-end; text-align: center; }
+        .card-front h2 { font-family: var(--fuente-titulo); font-size: 1.6rem; color: var(--dorado); margin-bottom: 0.5rem; text-shadow: 0 2px 5px black; }
+        .card-front p { font-size: 0.95rem; color: #fff; line-height: 1.5; text-shadow: 0 2px 5px black; }
         .bg-uno { background-image: url('img/robot.jpg'); background-size: cover; background-position: center; }
         .bg-dos { background-image: url('img/folclorico.jpg'); background-size: cover; background-position: center; }
         .bg-tres { background-image: url('img/canto1.jpg'); background-size: cover; background-position: center; }
         .bg-cuatro { background-image: url('img/canto2.jpg'); background-size: cover; background-position: center; }
-
-        .card-back {
-            transform: rotateY(180deg);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: rgba(10, 10, 10, 0.95);
-        }
-
-        .card-back h3 {
-            font-family: var(--fuente-titulo);
-            font-size: 1.4rem;
-            color: var(--dorado);
-            margin-bottom: 1rem;
-            text-align: center;
-            transform: translateZ(30px); 
-        }
-
+        .card-back { transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: space-between; background: rgba(10, 10, 10, 0.95); }
+        .card-back h3 { font-family: var(--fuente-titulo); font-size: 1.4rem; color: var(--dorado); margin-bottom: 1rem; text-align: center; transform: translateZ(30px); }
         ul.features { list-style: none; padding: 0; margin: 0; flex-grow: 1; transform: translateZ(20px); }
-        ul.features li {
-            margin-bottom: 0.8rem; padding-left: 1.4rem; position: relative;
-            color: var(--gris-texto); font-size: 0.95rem;
-        }
-        ul.features li::before {
-            content: "✨"; position: absolute; left: 0; color: var(--dorado); font-size: 0.9rem;
-        }
-
+        ul.features li { margin-bottom: 0.8rem; padding-left: 1.4rem; position: relative; color: var(--gris-texto); font-size: 0.95rem; }
+        ul.features li::before { content: "✨"; position: absolute; left: 0; color: var(--dorado); font-size: 0.9rem; }
         .cta-buttons { display: flex; gap: 12px; margin-top: 1.5rem; transform: translateZ(40px); }
-        
-        .cta-buttons button {
-            flex: 1; text-align: center; padding: 10px; border: none; cursor: pointer;
-            border-radius: 8px; font-weight: 600; transition: all 0.3s; font-size: 0.9rem;
-            font-family: var(--fuente-texto); position: relative; z-index: 20;
-            pointer-events: auto; 
-        }
-        
+        .cta-buttons button { flex: 1; text-align: center; padding: 10px; border: none; cursor: pointer; border-radius: 8px; font-weight: 600; transition: all 0.3s; font-size: 0.9rem; font-family: var(--fuente-texto); position: relative; z-index: 20; pointer-events: auto; }
         .cta-buttons button.primary { background: var(--dorado); color: #000; }
         .cta-buttons button.primary:hover { background: #fff; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-
-        @media (max-width: 768px) {
-            .card-inner { min-height: 320px; }
-            .card-face { padding: 18px; }
-            .card-front h2 { font-size: 1.4rem; }
-            .card-back h3 { font-size: 1.2rem; }
-        }
+        @media (max-width: 768px) { .card-inner { min-height: 320px; } .card-face { padding: 18px; } .card-front h2 { font-size: 1.4rem; } .card-back h3 { font-size: 1.2rem; } }
 
         /* --- TARJETAS INTERACTIVAS (FORMATO VERTICAL RESTAURANTE) --- */
         .seccion-restaurante { padding: 50px 20px 100px 20px; color: var(--blanco); text-align: center; }
@@ -370,7 +264,7 @@
     </div>
 
     <div class="top-bar">
-        ✨ Agenda abierta para Día de las Madres y Graduaciones 2026 ✨
+        ✨ Celebraciones especiales: Día del Niño • Día de las Madres • Graduaciones 2026 ✨
     </div>
 
     <div class="fondo-animado"><div id="stars"></div><div id="stars2"></div><div id="stars3"></div></div>
@@ -495,32 +389,31 @@
             </div>
         </section>
 
-        <section class="paquetes-graduacion reveal" style="padding: 80px 20px; background: rgba(15, 15, 15, 0.95); text-align: center; border-top: 1px solid var(--dorado); border-bottom: 1px solid var(--dorado);">
-            <h2 class="title" style="font-size: 3rem; color: var(--dorado); font-family: var(--fuente-titulo); text-transform: uppercase; margin-bottom: 15px;">Paquetes de Graduación 2026</h2>
-            <p class="subtitle" style="color: var(--gris-texto); margin-bottom: 40px; font-size: 1.1rem;">Cerramos ciclos a lo grande. Reserva la fecha para tu generación.</p>
-            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto;">
-                <div style="background: black; border: 1px solid var(--dorado); padding: 40px 30px; border-radius: 10px; width: 320px;">
-                    <h3 style="color: var(--dorado); font-family: var(--fuente-titulo); font-size: 1.5rem; margin-bottom: 15px;">Paquete Clásico</h3>
-                    <ul style="list-style: none; padding: 0; color: #ddd; text-align: left; margin-bottom: 30px;">
-                        <li style="margin-bottom: 10px;">✨ Menú a 3 tiempos</li>
-                        <li style="margin-bottom: 10px;">✨ Descorche libre</li>
-                        <li style="margin-bottom: 10px;">✨ DJ y pista iluminada</li>
-                        <li style="margin-bottom: 10px;">✨ Centros de mesa florales</li>
-                        <li style="margin-bottom: 10px;">✨ Personal de servicio</li>
-                    </ul>
-                    <button class="btn-seleccionar" style="width: 100%; border-radius: 5px;" onclick="window.open('https://wa.me/5565796506?text=Hola,%20me%20interesa%20el%20Paquete%20Clásico%20de%20Graduación%202026', '_blank')">Consultar Precio</button>
+        <section class="banners-temporada reveal">
+            <h2 style="font-size: 3rem; color: var(--dorado); font-family: var(--fuente-titulo); text-transform: uppercase; margin-bottom: 40px;">Fechas Especiales</h2>
+            <div class="grid-banners">
+                <div class="banner-item bg-ninos" onclick="window.open('https://wa.me/5565796506?text=Hola,%20quisiera%20información%20para%20festejar%20el%20Día%20del%20Niño.%20🎈', '_blank')">
+                    <div class="banner-content">
+                        <h3><i class="fas fa-child"></i> Día del Niño</h3>
+                        <p>Haz de su día una aventura inolvidable en nuestros jardines. Reserva tu fecha este mes de abril.</p>
+                        <button class="btn-banner">Cotizar Evento</button>
+                    </div>
                 </div>
-                <div style="background: var(--gradient-oro); color: black; border: 1px solid var(--dorado); padding: 40px 30px; border-radius: 10px; width: 320px; transform: scale(1.05); box-shadow: 0 10px 30px rgba(212,175,55,0.4);">
-                    <div style="background: black; color: var(--dorado); font-size: 0.8rem; font-weight: bold; padding: 5px 15px; display: inline-block; border-radius: 20px; margin-bottom: 15px; text-transform: uppercase;">Más Popular</div>
-                    <h3 style="font-family: var(--fuente-titulo); font-size: 1.6rem; margin-bottom: 15px; color: black;">Paquete Premium</h3>
-                    <ul style="list-style: none; padding: 0; text-align: left; margin-bottom: 30px; font-weight: 600;">
-                        <li style="margin-bottom: 10px;">✨ Menú a 4 tiempos</li>
-                        <li style="margin-bottom: 10px;">✨ Mixología de bienvenida</li>
-                        <li style="margin-bottom: 10px;">✨ Grupo musical y DJ</li>
-                        <li style="margin-bottom: 10px;">✨ Cabina de fotos 360</li>
-                        <li style="margin-bottom: 10px;">✨ Decoración temática</li>
-                    </ul>
-                    <button style="background: black; color: var(--dorado); border: none; padding: 12px 25px; cursor: pointer; text-transform: uppercase; font-weight: bold; width: 100%; border-radius: 5px; transition: 0.3s;" onmouseover="this.style.background='#222'" onmouseout="this.style.background='black'" onclick="window.open('https://wa.me/5565796506?text=Hola,%20me%20interesa%20el%20Paquete%20Premium%20de%20Graduación%202026', '_blank')">Consultar Precio</button>
+
+                <div class="banner-item bg-madres" onclick="window.open('https://wa.me/5565796506?text=Hola,%20me%20interesa%20organizar%20un%20evento%20para%20el%20Día%20de%20las%20Madres.%20🌹', '_blank')">
+                    <div class="banner-content">
+                        <h3><i class="fas fa-heart" style="color: #d11a2a;"></i> Día de las Madres</h3>
+                        <p>Consiente a mamá como se merece este 10 de Mayo con una experiencia exclusiva y elegante.</p>
+                        <button class="btn-banner">Apartar Fecha</button>
+                    </div>
+                </div>
+
+                <div class="banner-item bg-graduaciones" onclick="window.open('https://wa.me/5565796506?text=Hola,%20estamos%20buscando%20salón%20para%20nuestra%20Graduación%202026.%20🎓', '_blank')">
+                    <div class="banner-content">
+                        <h3><i class="fas fa-graduation-cap"></i> Graduaciones 2026</h3>
+                        <p>Cerramos ciclos a lo grande. Paquetes completos con menú, DJ y pista iluminada para tu generación.</p>
+                        <button class="btn-banner">Ver Paquetes</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -658,10 +551,24 @@
             @keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
         </style>
 
-        <section class="banner-madres reveal" style="background: var(--gradient-oro); color: black; padding: 40px 20px; text-align: center; margin-top: 40px; position: relative; overflow: hidden; border-radius: 10px; max-width: 1100px; margin-left: auto; margin-right: auto; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);">
-            <h2 style="font-family: var(--fuente-titulo); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px;"><i class="fas fa-heart" style="color: #d11a2a; margin-right: 10px;"></i>Especial Día de las Madres</h2>
-            <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px;">Celebra a mamá este 10 de Mayo. Menú especial a 3 tiempos, música en vivo y coctelería de cortesía para ella.</p>
-            <a href="https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20mesa%20para%20festejar%20el%20Día%20de%20las%20Madres." target="_blank" class="btn-dorado" style="background: black; color: var(--dorado); border-color: black; border-radius: 5px;">Reservar Mesa</a>
+        <section class="reveal" style="display: flex; gap: 20px; justify-content: center; max-width: 1100px; margin: 60px auto 20px; flex-wrap: wrap; padding: 0 20px;">
+            <div class="banner-item bg-ninos" style="flex: 1; min-width: 300px; border-radius: 15px; padding: 40px 20px; text-align: center; border: 1px solid var(--dorado); cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" onclick="window.open('https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20mesa%20para%20festejar%20el%20Día%20del%20Niño.', '_blank')">
+                 <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,20,20,0.7)); z-index: 1;"></div>
+                 <div style="position: relative; z-index: 2;">
+                     <h2 style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2rem; margin-bottom: 10px;"><i class="fas fa-child"></i> Día del Niño</h2>
+                     <p style="color: #fff; margin-bottom: 20px; font-weight: 500;">Consiente a los pequeños con un menú especial, sorpresas y mucha diversión.</p>
+                     <button class="btn-dorado" style="background: rgba(0,0,0,0.5); border-color: var(--dorado); color: var(--dorado); padding: 10px 20px;">Reservar Mesa</button>
+                 </div>
+            </div>
+
+            <div class="banner-item bg-madres" style="flex: 1; min-width: 300px; border-radius: 15px; padding: 40px 20px; text-align: center; border: 1px solid var(--dorado); cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" onclick="window.open('https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20mesa%20para%20festejar%20el%20Día%20de%20las%20Madres.', '_blank')">
+                 <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,20,20,0.7)); z-index: 1;"></div>
+                 <div style="position: relative; z-index: 2;">
+                     <h2 style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2rem; margin-bottom: 10px;"><i class="fas fa-heart" style="color: #d11a2a;"></i> Día de las Madres</h2>
+                     <p style="color: #fff; margin-bottom: 20px; font-weight: 500;">Menú especial a 3 tiempos, música en vivo y coctelería de cortesía para ella.</p>
+                     <button class="btn-dorado" style="background: rgba(0,0,0,0.5); border-color: var(--dorado); color: var(--dorado); padding: 10px 20px;">Reservar Mesa</button>
+                 </div>
+            </div>
         </section>
 
         <section class="quienes-somos reveal" style="background: transparent; border-bottom: none;">
@@ -715,10 +622,10 @@
             <p class="nota-temporada">Nuestra cocina trabaja con ingredientes frescos de temporada. Contáctanos para consultar disponibilidad del día.</p>
             
             <div class="submenu-restaurante">
+                <button class="btn-menu activo" onclick="filtrarMenu('todos', event)">Todos</button>
                 <button class="btn-menu" onclick="filtrarMenu('desayuno', event)">Desayunos</button>
                 <button class="btn-menu" onclick="filtrarMenu('comida', event)">Comidas</button>
                 <button class="btn-menu" onclick="filtrarMenu('bebida', event)">Bebidas</button>
-                <button class="btn-menu" onclick="filtrarMenu('temporada', event)">Primavera / Cuaresma</button>
             </div>
 
             <div class="menu-grid">
@@ -768,16 +675,16 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-interactiva categoria-comida categoria-temporada reveal" onclick="toggleTarjeta(this)">
+                <div class="tarjeta-interactiva categoria-comida reveal" onclick="toggleTarjeta(this)">
                     <div class="tarjeta-bg" style="background-image: url('img/ceviche.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
                         <h3 class="tarjeta-titulo">Ceviche Finca</h3>
-                        <p class="tarjeta-desc">Especial de temporada. Pescado fresco marinado en cítricos con mango, aguacate y un toque de chile habanero.</p>
+                        <p class="tarjeta-desc">Pescado fresco marinado en cítricos con mango, aguacate y un toque de chile habanero.</p>
                     </div>
                 </div>
 
-                <div class="tarjeta-interactiva categoria-bebida categoria-temporada reveal" onclick="toggleTarjeta(this)">
+                <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
                     <div class="tarjeta-bg" style="background-image: url('img/jarra_clericot.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
@@ -795,7 +702,7 @@
                     </div>
                 </div>
 
-                <div class="tarjeta-interactiva categoria-bebida categoria-temporada reveal" onclick="toggleTarjeta(this)">
+                <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
                     <div class="tarjeta-bg" style="background-image: url('img/coctel_azul.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
