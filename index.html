@@ -215,11 +215,11 @@
 
         /* --- SECCIÓN DE RESEÑAS INTEGRADAS --- */
         .seccion-resenas-integrada {
-            padding: 80px 20px;
-            background: linear-gradient(180deg, rgba(5,5,5,0) 0%, rgba(10,10,10,0.9) 100%);
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 50px 20px;
+            background: transparent;
             text-align: center;
             overflow: hidden;
+            width: 100%;
         }
         .unique-client-carousel {
             position: relative;
@@ -386,6 +386,10 @@
             </button>
             <button class="btn-star" onclick="cambiarVista('restaurante', this)">
                 RESTAURANTE
+                <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
+            </button>
+            <button class="btn-star" onclick="cambiarVista('resenas', this)">
+                RESEÑAS
                 <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
             </button>
         </div>
@@ -627,116 +631,6 @@
 
             </div>
         </section>
-
-        <section class="seccion-resenas-integrada reveal">
-            <h2 style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px;">Lo que dicen de nosotros</h2>
-            <p style="color: #c6c7cc; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px;">Experiencias reales de nuestros clientes</p>
-            
-            <div class="unique-client-carousel">
-                <div class="carousel-wrapper">
-                    <div class="carousel-track">
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"Maravillosa! Si están pensando en un lugar accesible, bonito, elegante, con la mejor atención, Finca Maldonado es la opción, todo el staff es increíblemente atento..."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Gisela</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"El lugar es muy bonito, la comida estuvo rica y muy accesibles, la atención de Raquel fue excepcional para nuestra celebración. Súper recomendados."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Belem</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"Mi boda fue un día increíble sin preocupaciones. No tuvimos que preocuparnos por nada, desde los meseros hasta los administradores excelente servicio."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Anahi</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"Excelente servicio. Un servicio muy bueno, meseros excelentes, comida rica. En realidad todo estuvo muy muy bien para nuestro evento."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Fernanda</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"Sueño realizado. Excelente servicio. Cumple las expectativas. Calidad excelente en comida y un precio bastante justo. Totalmente agradecidos."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Cristel</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"Maravillosa! Si están pensando en un lugar accesible, bonito, elegante, con la mejor atención, Finca Maldonado es la opción, todo el staff es increíblemente atento..."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Gisela</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"El lugar es muy bonito, la comida estuvo rica y muy accesibles, la atención de Raquel fue excepcional para nuestra celebración. Súper recomendados."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Belem</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"Mi boda fue un día increíble sin preocupaciones. No tuvimos que preocuparnos por nada, desde los meseros hasta los administradores excelente servicio."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Anahi</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"Excelente servicio. Un servicio muy bueno, meseros excelentes, comida rica. En realidad todo estuvo muy muy bien para nuestro evento."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Fernanda</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="review-card">
-                                <p class="review-text">"Sueño realizado. Excelente servicio. Cumple las expectativas. Calidad excelente en comida y un precio bastante justo. Totalmente agradecidos."</p>
-                                <div class="reviewer-info">
-                                    <span class="reviewer-name">Cristel</span>
-                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="fade-overlay left"></div>
-                <div class="fade-overlay right"></div>
-            </div>
-            
-            <a href="https://www.google.com/search?q=finca+maldonado#lrd=0x85d1e2e42a988d8b:0x5f0a00df8281c5f,1" target="_blank" class="btn-dorado" style="margin-top: 30px; border-radius: 5px;">
-                <i class="fab fa-google"></i> Ver más reseñas en Google
-            </a>
-        </section>
-        
     </div>
 
     <div id="vista-restaurante" class="vista-seccion">
@@ -905,6 +799,119 @@
             <p style="text-align: center; color: var(--dorado); font-size: 0.9rem; margin-top: 20px;"><i class="fas fa-hand-pointer"></i> Toca las tarjetas para descubrir los ingredientes</p>
             <div style="margin-top: 40px;">
                 <a href="https://wa.me/5565796506?text=Hola,%20me%20gustaría%20saber%20si%20tienen%20disponibilidad%20en%20el%20restaurante%20para%20probar%20su%20menú.%20🍽️" target="_blank" class="btn-dorado">Cotizar Reserva Especial</a>
+            </div>
+        </section>
+    </div>
+
+    <div id="vista-resenas" class="vista-seccion">
+        <section class="seccion-resenas-integrada reveal" style="min-height: 85vh; display: flex; flex-direction: column; justify-content: center;">
+            <h2 style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px;">Lo que dicen de nosotros</h2>
+            <p style="color: #c6c7cc; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px;">Experiencias reales de nuestros clientes</p>
+            
+            <div class="unique-client-carousel">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track">
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Maravillosa! Si están pensando en un lugar accesible, bonito, elegante, con la mejor atención, Finca Maldonado es la opción, todo el staff es increíblemente atento..."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Gisela</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"El lugar es muy bonito, la comida estuvo rica y muy accesibles, la atención de Raquel fue excepcional para nuestra celebración. Súper recomendados."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Belem</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Mi boda fue un día increíble sin preocupaciones. No tuvimos que preocuparnos por nada, desde los meseros hasta los administradores excelente servicio."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Anahi</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Excelente servicio. Un servicio muy bueno, meseros excelentes, comida rica. En realidad todo estuvo muy muy bien para nuestro evento."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Fernanda</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Sueño realizado. Excelente servicio. Cumple las expectativas. Calidad excelente en comida y un precio bastante justo. Totalmente agradecidos."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Cristel</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Maravillosa! Si están pensando en un lugar accesible, bonito, elegante, con la mejor atención, Finca Maldonado es la opción, todo el staff es increíblemente atento..."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Gisela</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"El lugar es muy bonito, la comida estuvo rica y muy accesibles, la atención de Raquel fue excepcional para nuestra celebración. Súper recomendados."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Belem</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Mi boda fue un día increíble sin preocupaciones. No tuvimos que preocuparnos por nada, desde los meseros hasta los administradores excelente servicio."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Anahi</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Excelente servicio. Un servicio muy bueno, meseros excelentes, comida rica. En realidad todo estuvo muy muy bien para nuestro evento."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Fernanda</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Sueño realizado. Excelente servicio. Cumple las expectativas. Calidad excelente en comida y un precio bastante justo. Totalmente agradecidos."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Cristel</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-overlay left"></div>
+                <div class="fade-overlay right"></div>
+            </div>
+            
+            <div>
+                <a href="https://www.google.com/search?q=finca+maldonado#lrd=0x85d1e2e42a988d8b:0x5f0a00df8281c5f,1" target="_blank" class="btn-dorado" style="margin-top: 30px; border-radius: 5px;">
+                    <i class="fab fa-google"></i> Ver más reseñas en Google
+                </a>
             </div>
         </section>
     </div>
