@@ -132,7 +132,7 @@
         .btn-seleccionar { background: transparent; border: 1px solid #444; color: #fff; padding: 10px 25px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-seleccionar:hover { border-color: var(--dorado); color: var(--dorado); }
 
-        /* --- BANNERS TEMPORADA (NUEVO ESTILO) --- */
+        /* --- BANNERS TEMPORADA --- */
         .banners-temporada { padding: 80px 20px; text-align: center; background: rgba(5,5,5,0.9); border-top: 1px solid rgba(212, 175, 55, 0.3); border-bottom: 1px solid rgba(212, 175, 55, 0.3); }
         .grid-banners { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
         .banner-item { position: relative; border-radius: 15px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.4s ease; padding: 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; min-height: 260px; background-size: cover; background-position: center; }
@@ -145,9 +145,8 @@
         .btn-banner { display: inline-block; padding: 12px 30px; background: rgba(0,0,0,0.6); border: 1px solid var(--dorado); color: var(--dorado); text-transform: uppercase; font-size: 0.85rem; font-weight: bold; border-radius: 5px; transition: 0.3s; backdrop-filter: blur(5px); pointer-events: auto; cursor: pointer; }
         .btn-banner:hover { background: var(--gradient-oro); color: black; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
         
-        .bg-ninos { background-image: url('img/jardin.jpg'); }
-        .bg-madres { background-image: url('img/fondo.jpg'); }
         .bg-graduaciones { background-image: url('img/pista.jpg'); }
+        .bg-padre { background-image: url('img/parrillada.jpg'); }
 
         /* --- SECCIÓN SERVICIOS (FEATURES) --- */
         .section-features { position: relative; display: flex; justify-content: center; align-items: center; padding: 100px 20px; background: transparent; overflow: hidden; }
@@ -264,7 +263,7 @@
     </div>
 
     <div class="top-bar">
-        ✨ Celebraciones especiales: Día del Niño • Día de las Madres • Graduaciones 2026 ✨
+        ✨ Celebraciones especiales: Graduaciones 2026 • Día del Padre ✨
     </div>
 
     <div class="fondo-animado"><div id="stars"></div><div id="stars2"></div><div id="stars3"></div></div>
@@ -278,14 +277,10 @@
             <button class="btn-star activo" onclick="cambiarVista('eventos', this)">
                 EVENTOS
                 <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
-                <div class="star-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
-                <div class="star-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
             </button>
             <button class="btn-star" onclick="cambiarVista('restaurante', this)">
                 RESTAURANTE
                 <div class="star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
-                <div class="star-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
-                <div class="star-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path class="fil0" d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"></path></svg></div>
             </button>
         </div>
     </nav>
@@ -319,7 +314,6 @@
             <div class="container">
                 <h2 class="title">Servicios Exclusivos</h2>
                 <p class="subtitle">Detalles que marcan la diferencia</p>
-                
                 <div class="features">
                     <div class="feature">
                         <i class="fas fa-music feature-icon"></i>
@@ -343,7 +337,6 @@
         <section id="salones" class="salones">
             <h2 class="reveal">Nuestros Espacios</h2>
             <div class="grid-salones">
-                
                 <div class="card-salon reveal" onclick="cotizarSalon('Salón Grande')">
                     <div class="img-container">
                         <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('grande', -1, event)">❮</div>
@@ -357,7 +350,6 @@
                         <button class="btn-seleccionar">COTIZAR AHORA</button>
                     </div>
                 </div>
-
                 <div class="card-salon reveal" onclick="cotizarSalon('Salón Chico')">
                     <div class="img-container">
                         <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('chico', -1, event)">❮</div>
@@ -371,7 +363,6 @@
                         <button class="btn-seleccionar">COTIZAR AHORA</button>
                     </div>
                 </div>
-
                 <div class="card-salon reveal" onclick="cotizarSalon('Salón Baby')">
                     <div class="img-container">
                         <div class="flecha-galeria izquierda" onclick="cambiarFotoSalon('baby', -1, event)">❮</div>
@@ -385,29 +376,12 @@
                         <button class="btn-seleccionar">COTIZAR AHORA</button>
                     </div>
                 </div>
-
             </div>
         </section>
 
         <section class="banners-temporada reveal">
-            <h2 style="font-size: 3rem; color: var(--dorado); font-family: var(--fuente-titulo); text-transform: uppercase; margin-bottom: 40px;">Fechas Especiales</h2>
-            <div class="grid-banners">
-                <div class="banner-item bg-ninos" onclick="window.open('https://wa.me/5565796506?text=Hola,%20quisiera%20información%20para%20festejar%20el%20Día%20del%20Niño.%20🎈', '_blank')">
-                    <div class="banner-content">
-                        <h3><i class="fas fa-child"></i> Día del Niño</h3>
-                        <p>Haz de su día una aventura inolvidable en nuestros jardines. Reserva tu fecha este mes de abril.</p>
-                        <button class="btn-banner">Cotizar Evento</button>
-                    </div>
-                </div>
-
-                <div class="banner-item bg-madres" onclick="window.open('https://wa.me/5565796506?text=Hola,%20me%20interesa%20organizar%20un%20evento%20para%20el%20Día%20de%20las%20Madres.%20🌹', '_blank')">
-                    <div class="banner-content">
-                        <h3><i class="fas fa-heart" style="color: #d11a2a;"></i> Día de las Madres</h3>
-                        <p>Consiente a mamá como se merece este 10 de Mayo con una experiencia exclusiva y elegante.</p>
-                        <button class="btn-banner">Apartar Fecha</button>
-                    </div>
-                </div>
-
+            <h2 style="color: var(--dorado); margin-bottom: 40px; font-size: 2.5rem;">Fechas Especiales</h2>
+            <div class="grid-banners" style="grid-template-columns: 1fr; max-width: 800px;">
                 <div class="banner-item bg-graduaciones" onclick="window.open('https://wa.me/5565796506?text=Hola,%20estamos%20buscando%20salón%20para%20nuestra%20Graduación%202026.%20🎓', '_blank')">
                     <div class="banner-content">
                         <h3><i class="fas fa-graduation-cap"></i> Graduaciones 2026</h3>
@@ -431,10 +405,11 @@
                     <div class="img-3d" style="--r: 308.4deg;" onclick="abrirFoto(this)"><img src="img/pasillo.jpg" alt="Pasillo"></div>
                 </div>
             </div>
+            <p style="text-align: center; color: var(--dorado); font-size: 0.9rem; margin-top: 20px; position: relative; z-index: 10;"><i class="fas fa-search-plus"></i> Toque la imagen para ver detalles</p>
         </section>
 
-        <div id="visor-lightbox">
-            <span class="cerrar-visor" onclick="cerrarFoto()">×</span>
+        <div id="visor-lightbox" onclick="cerrarFoto()">
+            <span class="cerrar-visor" onclick="cerrarFoto()">&times;</span>
             <img id="img-ampliada" src="" alt="Vista ampliada">
         </div>
 
@@ -458,7 +433,7 @@
                                 <li>Disparos de humo</li>
                             </ul>
                             <div class="cta-buttons">
-                                <button class="primary" onclick="abrirShowWhatsApp(event, 'Hola me interesa cotizar el Show de Robot LED')">Cotizar Show</button>
+                                <button class="primary" onclick="abrirShowWhatsApp(event, 'Hola me interesa cotizar el show del Robot LED')">Cotizar Show</button>
                             </div>
                         </div>
                     </div>
@@ -532,8 +507,7 @@
 
             </div>
         </section>
-
-    </div> 
+    </div>
 
     <div id="vista-restaurante" class="vista-seccion">
         <div class="hero" style="height: 60vh; background-image: url('img/parrillada_mixta.jpg'); background-attachment: fixed;">
@@ -546,28 +520,18 @@
                 </div>
             </div>
         </div>
-        
+
         <style>
             @keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
         </style>
 
-        <section class="reveal" style="display: flex; gap: 20px; justify-content: center; max-width: 1100px; margin: 60px auto 20px; flex-wrap: wrap; padding: 0 20px;">
-            <div class="banner-item bg-ninos" style="flex: 1; min-width: 300px; border-radius: 15px; padding: 40px 20px; text-align: center; border: 1px solid var(--dorado); cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" onclick="window.open('https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20mesa%20para%20festejar%20el%20Día%20del%20Niño.', '_blank')">
-                 <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,20,20,0.7)); z-index: 1;"></div>
-                 <div style="position: relative; z-index: 2;">
-                     <h2 style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2rem; margin-bottom: 10px;"><i class="fas fa-child"></i> Día del Niño</h2>
-                     <p style="color: #fff; margin-bottom: 20px; font-weight: 500;">Consiente a los pequeños con un menú especial, sorpresas y mucha diversión.</p>
-                     <button class="btn-dorado" style="background: rgba(0,0,0,0.5); border-color: var(--dorado); color: var(--dorado); padding: 10px 20px;">Reservar Mesa</button>
-                 </div>
-            </div>
-
-            <div class="banner-item bg-madres" style="flex: 1; min-width: 300px; border-radius: 15px; padding: 40px 20px; text-align: center; border: 1px solid var(--dorado); cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" onclick="window.open('https://wa.me/5565796506?text=Hola,%20quiero%20reservar%20una%20mesa%20para%20festejar%20el%20Día%20de%20las%20Madres.', '_blank')">
-                 <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,20,20,0.7)); z-index: 1;"></div>
-                 <div style="position: relative; z-index: 2;">
-                     <h2 style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2rem; margin-bottom: 10px;"><i class="fas fa-heart" style="color: #d11a2a;"></i> Día de las Madres</h2>
-                     <p style="color: #fff; margin-bottom: 20px; font-weight: 500;">Menú especial a 3 tiempos, música en vivo y coctelería de cortesía para ella.</p>
-                     <button class="btn-dorado" style="background: rgba(0,0,0,0.5); border-color: var(--dorado); color: var(--dorado); padding: 10px 20px;">Reservar Mesa</button>
-                 </div>
+        <section class="reveal" style="display: flex; gap: 20px; justify-content: center; max-width: 900px; margin: 60px auto 20px; flex-wrap: wrap; padding: 0 20px;">
+            <div class="banner-item bg-padre" style="flex: 1; min-width: 300px; border-radius: 15px; padding: 40px 20px; text-align: center; border: 1px solid var(--dorado); cursor: pointer; position: relative; overflow: hidden;" onclick="window.open('https://wa.me/5565796506?text=Hola,%20me%20interesa%20reservar%20una%20mesa%20para%20celebrar%20el%20Día%20del%20Padre.%20👔', '_blank')">
+                <div class="banner-content">
+                    <h3 style="font-size: 2rem;"><i class="fas fa-user-tie"></i> Especial Día del Padre</h3>
+                    <p style="font-size: 1.1rem;">Celebra a papá con un ambiente inigualable. Pregunta por nuestra Parrillada Norteña y obtén una cortesía al reservar en mayo para su día en junio.</p>
+                    <button class="btn-banner" style="background: rgba(0,0,0,0.8); border: 2px solid var(--dorado); padding: 10px 20px;">Reservar Mesa para Papá</button>
+                </div>
             </div>
         </section>
 
@@ -585,7 +549,6 @@
         <section class="seccion-promociones reveal">
             <h2 class="titulo-restaurante" style="font-size: 2.5rem;">Promociones Exclusivas</h2>
             <p class="subtitulo-restaurante" style="color: #fff;">No es solo comer, es compartir y quedarse un poco más.</p>
-            
             <div class="promos-grid">
                 <div class="tarjeta-promo">
                     <div class="etiqueta-promo">Mar a Jue</div>
@@ -593,14 +556,12 @@
                     <h3>2x1 en Cócteles</h3>
                     <p>Disfruta de nuestra coctelería de autor al doble. Válido de martes a jueves para darle un toque especial a tu tarde.</p>
                 </div>
-                
                 <div class="tarjeta-promo">
                     <div class="etiqueta-promo">Cortesía</div>
                     <i class="fas fa-wine-glass"></i>
                     <h3>Copa de Bienvenida</h3>
                     <p>Al realizar tu reserva con anticipación por WhatsApp, te recibimos con una copa de vino tinto o blanco de la casa.</p>
                 </div>
-
                 <div class="tarjeta-promo">
                     <div class="etiqueta-promo">Festejo</div>
                     <i class="fas fa-birthday-cake"></i>
@@ -608,7 +569,6 @@
                     <p>Ven a celebrar tu vuelta al sol con nosotros y el Chef te consentirá con un postre sorpresa de temporada.</p>
                 </div>
             </div>
-            
             <div style="margin-top: 50px;">
                 <a href="https://wa.me/5565796506?text=Hola,%20quisiera%20hacer%20una%20reserva%20en%20el%20restaurante%20y%20aprovechar%20sus%20promociones.%20✨" target="_blank" class="btn-dorado" style="border-radius: 5px;">
                     <i class="fab fa-whatsapp"></i> Reservar y Aprovechar
@@ -622,13 +582,13 @@
             <p class="nota-temporada">Nuestra cocina trabaja con ingredientes frescos de temporada. Contáctanos para consultar disponibilidad del día.</p>
             
             <div class="submenu-restaurante">
-                <button class="btn-menu activo" onclick="filtrarMenu('todos', event)">Todos</button>
-                <button class="btn-menu" onclick="filtrarMenu('desayuno', event)">Desayunos</button>
-                <button class="btn-menu" onclick="filtrarMenu('comida', event)">Comidas</button>
-                <button class="btn-menu" onclick="filtrarMenu('bebida', event)">Bebidas</button>
+                <button class="btn-menu activo" onclick="filtrarMenu('todos')">Todos</button>
+                <button class="btn-menu" onclick="filtrarMenu('desayuno')">Desayunos</button>
+                <button class="btn-menu" onclick="filtrarMenu('comida')">Comidas</button>
+                <button class="btn-menu" onclick="filtrarMenu('bebida')">Bebidas</button>
             </div>
 
-            <div class="menu-grid">
+            <div class="menu-grid" id="grid-menu-restaurante">
                 
                 <div class="tarjeta-interactiva categoria-desayuno reveal" onclick="toggleTarjeta(this)">
                     <div class="tarjeta-bg" style="background-image: url('img/desayuno_patron.jpg');"></div>
@@ -640,7 +600,7 @@
                 </div>
 
                 <div class="tarjeta-interactiva categoria-desayuno reveal" onclick="toggleTarjeta(this)">
-                    <div class="tarjeta-bg" style="background-image: url('img/omelette_fit.jpg');"></div>
+                    <div class="tarjeta-bg" style="background-image: url('img/omelette_huerto.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
                         <h3 class="tarjeta-titulo">Omelette del Huerto</h3>
@@ -692,7 +652,7 @@
                         <p class="tarjeta-desc">Mezcla especial de vino tinto joven con trozos de manzana, melón y frutas frescas de temporada.</p>
                     </div>
                 </div>
-
+                
                 <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
                     <div class="tarjeta-bg" style="background-image: url('img/carajillo.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
@@ -703,7 +663,7 @@
                 </div>
 
                 <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
-                    <div class="tarjeta-bg" style="background-image: url('img/coctel_azul.jpg');"></div>
+                    <div class="tarjeta-bg" style="background-image: url('img/blue_mystique.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
                         <h3 class="tarjeta-titulo">Blue Mystique</h3>
@@ -712,7 +672,7 @@
                 </div>
 
                 <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
-                    <div class="tarjeta-bg" style="background-image: url('img/frappe_rojo.jpg');"></div>
+                    <div class="tarjeta-bg" style="background-image: url('img/frappe_frutos.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
                         <h3 class="tarjeta-titulo">Frappé Frutos Rojos</h3>
@@ -721,18 +681,10 @@
                 </div>
 
             </div>
-
-            <div style="text-align: center; margin-top: 40px; margin-bottom: 60px;">
-                <p style="color: #999; margin-bottom: 15px; font-size: 0.9rem;">* Toca las tarjetas para descubrir los ingredientes</p>
-                
-                <a href="https://wa.me/5565796506?text=Hola,%20estoy%20buscando%20un%20lugar%20especial%20y%20me%20gustó%20mucho%20su%20propuesta.%20Quisiera%20cotizar%20una%20reserva%20en%20el%20restaurante.%20✨" 
-                   target="_blank" 
-                   class="btn-dorado" 
-                   style="font-size: 1.1rem; padding: 20px 40px; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); text-decoration: none;">
-                    <i class="fas fa-wine-glass-alt"></i> Cotizar Reserva Especial
-                </a>
+            <p style="text-align: center; color: var(--dorado); font-size: 0.9rem; margin-top: 20px;"><i class="fas fa-hand-pointer"></i> Toca las tarjetas para descubrir los ingredientes</p>
+            <div style="margin-top: 40px;">
+                <a href="https://wa.me/5565796506?text=Hola,%20me%20gustaría%20saber%20si%20tienen%20disponibilidad%20en%20el%20restaurante%20para%20probar%20su%20menú.%20🍽️" target="_blank" class="btn-dorado">Cotizar Reserva Especial</a>
             </div>
-
         </section>
     </div>
 
@@ -756,67 +708,40 @@
 
     <script>
         // --- PRELOADER ---
-        window.addEventListener("load", function() { 
-            const preloader = document.getElementById("preloader"); 
-            preloader.style.opacity = "0"; 
-            setTimeout(function() { preloader.style.display = "none"; }, 500); 
+        window.addEventListener("load", function() {
+            const preloader = document.getElementById("preloader");
+            preloader.style.opacity = "0";
+            setTimeout(function() { preloader.style.display = "none"; }, 500);
         });
 
         // --- MENU ---
-        function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
-
-        function cambiarVista(vista, boton) {
-            document.getElementById('vista-eventos').classList.remove('vista-activa');
-            document.getElementById('vista-restaurante').classList.remove('vista-activa');
+        function toggleMenu() {
+            document.getElementById("navMenu").classList.toggle("active");
+        }
+        function cambiarVista(vista, btn) {
+            document.querySelectorAll('.vista-seccion').forEach(function(el) { el.classList.remove('vista-activa'); });
+            document.querySelectorAll('.btn-star').forEach(function(el) { el.classList.remove('activo'); });
             document.getElementById('vista-' + vista).classList.add('vista-activa');
-            let botones = document.querySelectorAll('.btn-star');
-            botones.forEach(btn => btn.classList.remove('activo'));
-            boton.classList.add('activo');
-            document.getElementById("navMenu").classList.remove("active");
+            btn.classList.add('activo');
+            if(window.innerWidth <= 768) { toggleMenu(); }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function filtrarMenu(categoria, event) {
-            let botones = document.querySelectorAll('.btn-menu');
-            botones.forEach(btn => btn.classList.remove('activo'));
-            if(event) event.currentTarget.classList.add('activo');
-            let platillos = document.querySelectorAll('.tarjeta-interactiva'); 
-            platillos.forEach(plat => { 
-                if(categoria === 'todos' || plat.classList.contains('categoria-' + categoria)) { 
-                    plat.style.display = 'block'; 
-                } else { 
-                    plat.style.display = 'none'; 
-                } 
-            });
-        }
-        
-        // --- FUNCIÓN PARA TARJETAS INTERACTIVAS (RESTAURANTE) ---
-        function toggleTarjeta(elemento) {
-            if (elemento.classList.contains('activa')) {
-                elemento.classList.remove('activa');
-            } else {
-                let todas = document.querySelectorAll('.tarjeta-interactiva');
-                todas.forEach(t => t.classList.remove('activa'));
-                elemento.classList.add('activa');
-            }
-        }
-
-        // --- GALERÍA DE SALONES (LÓGICA DE FLECHAS) ---
-        const imgsGrande = ['img/salongrande.jpg', 'img/salongrande2.jpg', 'img/salongrande3.jpg', 'img/salongrande4.jpg'];
-        const imgsChico = ['img/salonchico.jpg', 'img/salonchico2.jpg', 'img/salonchico3.jpg'];
-        const imgsBaby = ['img/salonbaby.jpg', 'img/salonbaby2.jpg', 'img/salonbaby3.jpg', 'img/salonbaby4.jpg', 'img/salonbaby5.jpg', 'img/salonbaby6.jpg'];
-
-        let iGrande = 0; let iChico = 0; let iBaby = 0;
+        // --- GALERIA SALONES ---
+        const fotosSalones = {
+            'grande': ['img/salongrande.jpg', 'img/salon.jpg', 'img/salongrande2.jpg'],
+            'chico': ['img/salonchico.jpg', 'img/pista.jpg'],
+            'baby': ['img/salonbaby.jpg', 'img/jardin.jpg']
+        };
+        const indicesFotos = { 'grande': 0, 'chico': 0, 'baby': 0 };
 
         function cambiarFotoSalon(salon, direccion, event) {
             event.stopPropagation();
-            let arr, indiceActual, imgID;
-
-            if (salon === 'grande') { arr = imgsGrande; iGrande += direccion; if (iGrande < 0) iGrande = arr.length - 1; if (iGrande >= arr.length) iGrande = 0; indiceActual = iGrande; imgID = 'img-grande';
-            } else if (salon === 'chico') { arr = imgsChico; iChico += direccion; if (iChico < 0) iChico = arr.length - 1; if (iChico >= arr.length) iChico = 0; indiceActual = iChico; imgID = 'img-chico';
-            } else if (salon === 'baby') { arr = imgsBaby; iBaby += direccion; if (iBaby < 0) iBaby = arr.length - 1; if (iBaby >= arr.length) iBaby = 0; indiceActual = iBaby; imgID = 'img-baby'; }
-            
-            document.getElementById(imgID).src = arr[indiceActual];
+            let arr = fotosSalones[salon];
+            indicesFotos[salon] += direccion;
+            if(indicesFotos[salon] >= arr.length) indicesFotos[salon] = 0;
+            if(indicesFotos[salon] < 0) indicesFotos[salon] = arr.length - 1;
+            document.getElementById('img-' + salon).src = arr[indicesFotos[salon]];
         }
 
         // --- COTIZAR DIRECTO ---
@@ -833,24 +758,41 @@
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
 
-        // --- FUNCIONES DEL ANILLO 3D (LIGHTBOX) ---
+        // --- FUNCIONES RESTAURANTE ---
+        function toggleTarjeta(elemento) {
+            const estaActiva = elemento.classList.contains('activa');
+            document.querySelectorAll('.tarjeta-interactiva').forEach(t => t.classList.remove('activa'));
+            if (!estaActiva) { elemento.classList.add('activa'); }
+        }
+
+        function filtrarMenu(categoria) {
+            const tarjetas = document.querySelectorAll('.tarjeta-interactiva');
+            const botones = document.querySelectorAll('.btn-menu');
+            botones.forEach(btn => btn.classList.remove('activo'));
+            event.target.classList.add('activo');
+            tarjetas.forEach(tarjeta => {
+                if (categoria === 'todos' || tarjeta.classList.contains('categoria-' + categoria)) {
+                    tarjeta.style.display = 'block';
+                    setTimeout(() => { tarjeta.style.opacity = '1'; tarjeta.style.transform = 'scale(1)'; }, 50);
+                } else {
+                    tarjeta.style.opacity = '0';
+                    tarjeta.style.transform = 'scale(0.8)';
+                    setTimeout(() => { tarjeta.style.display = 'none'; }, 300);
+                }
+            });
+        }
+
+        // --- LIGHTBOX 3D ---
         function abrirFoto(elemento) {
-            const rutaImagen = elemento.querySelector('img').src;
-            const lightbox = document.getElementById('visor-lightbox');
+            const img = elemento.querySelector('img');
+            const visor = document.getElementById('visor-lightbox');
             const imgAmpliada = document.getElementById('img-ampliada');
-            
-            imgAmpliada.src = rutaImagen;
-            lightbox.style.display = 'flex';
+            imgAmpliada.src = img.src;
+            visor.style.display = 'flex';
         }
-
-        function cerrarFoto() {
-            document.getElementById('visor-lightbox').style.display = 'none';
-        }
-
+        function cerrarFoto() { document.getElementById('visor-lightbox').style.display = 'none'; }
         document.getElementById('visor-lightbox').addEventListener('click', function(event) {
-            if (event.target !== document.getElementById('img-ampliada')) {
-                cerrarFoto();
-            }
+            if (event.target !== document.getElementById('img-ampliada')) { cerrarFoto(); }
         });
 
         // --- FUNCIÓN PARA VOLTEAR TARJETAS DE SHOWS ---
@@ -875,8 +817,15 @@
         reveal();
 
         const imagenesPortada = ['img/salon.jpg', 'img/pista.jpg', 'img/jardin.jpg', 'img/fondo.jpg'];
-        function cambiarPortadaAleatoria() { const hero = document.getElementById('hero-principal'); if(hero) { const indice = Math.floor(Math.random() * imagenesPortada.length); hero.style.backgroundImage = `url('${imagenesPortada[indice]}')`; } }
+        function cambiarPortadaAleatoria() { 
+            const hero = document.getElementById('hero-principal'); 
+            if(hero) { 
+                const indice = Math.floor(Math.random() * imagenesPortada.length); 
+                hero.style.backgroundImage = `url('${imagenesPortada[indice]}')`; 
+            } 
+        }
         cambiarPortadaAleatoria();
+        setInterval(cambiarPortadaAleatoria, 8000);
     </script>
 </body>
 </html>
