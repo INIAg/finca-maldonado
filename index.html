@@ -213,6 +213,110 @@
         .cta-buttons button.primary:hover { background: #fff; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
         @media (max-width: 768px) { .card-inner { min-height: 320px; } .card-face { padding: 18px; } .card-front h2 { font-size: 1.4rem; } .card-back h3 { font-size: 1.2rem; } }
 
+        /* --- SECCIÓN DE RESEÑAS INTEGRADAS --- */
+        .seccion-resenas-integrada {
+            padding: 80px 20px;
+            background: linear-gradient(180deg, rgba(5,5,5,0) 0%, rgba(10,10,10,0.9) 100%);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+            overflow: hidden;
+        }
+        .unique-client-carousel {
+            position: relative;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 20px 0;
+            z-index: 5;
+        }
+        .carousel-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+        .carousel-track {
+            display: flex;
+            width: calc(320px * 10); /* 5 items duplicados */
+            animation: scroll-resenas 35s linear infinite;
+        }
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        .carousel-item {
+            min-width: 300px;
+            margin: 0 10px;
+            box-sizing: border-box;
+        }
+        .review-card {
+            background-color: rgba(18, 18, 18, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+            text-align: left;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .review-card:hover {
+            border-color: var(--dorado);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+        }
+        .review-text {
+            font-size: 0.95rem;
+            color: #c6c7cc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        .reviewer-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+        }
+        .reviewer-name {
+            font-weight: bold;
+            color: var(--dorado);
+            font-family: var(--fuente-titulo);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .stars {
+            color: var(--dorado);
+            font-size: 1.1rem;
+        }
+        .fade-overlay {
+            position: absolute;
+            top: 0;
+            width: 15%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .fade-overlay.left {
+            left: 0;
+            background: linear-gradient(to right, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
+        }
+        .fade-overlay.right {
+            right: 0;
+            background: linear-gradient(to left, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
+        }
+        @keyframes scroll-resenas {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @media (max-width: 768px) {
+            .carousel-item { min-width: 260px; margin: 0 10px; }
+            .fade-overlay { width: 10%; }
+        }
+
         /* --- TARJETAS INTERACTIVAS (FORMATO VERTICAL RESTAURANTE) --- */
         .seccion-restaurante { padding: 50px 20px 100px 20px; color: var(--blanco); text-align: center; }
         .titulo-restaurante { font-size: 3rem; color: var(--dorado); margin-bottom: 10px; text-transform: uppercase; }
@@ -523,6 +627,116 @@
 
             </div>
         </section>
+
+        <section class="seccion-resenas-integrada reveal">
+            <h2 style="font-family: var(--fuente-titulo); color: var(--dorado); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px;">Lo que dicen de nosotros</h2>
+            <p style="color: #c6c7cc; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px;">Experiencias reales de nuestros clientes</p>
+            
+            <div class="unique-client-carousel">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track">
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Maravillosa! Si están pensando en un lugar accesible, bonito, elegante, con la mejor atención, Finca Maldonado es la opción, todo el staff es increíblemente atento..."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Gisela</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"El lugar es muy bonito, la comida estuvo rica y muy accesibles, la atención de Raquel fue excepcional para nuestra celebración. Súper recomendados."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Belem</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Mi boda fue un día increíble sin preocupaciones. No tuvimos que preocuparnos por nada, desde los meseros hasta los administradores excelente servicio."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Anahi</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Excelente servicio. Un servicio muy bueno, meseros excelentes, comida rica. En realidad todo estuvo muy muy bien para nuestro evento."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Fernanda</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Sueño realizado. Excelente servicio. Cumple las expectativas. Calidad excelente en comida y un precio bastante justo. Totalmente agradecidos."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Cristel</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Maravillosa! Si están pensando en un lugar accesible, bonito, elegante, con la mejor atención, Finca Maldonado es la opción, todo el staff es increíblemente atento..."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Gisela</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"El lugar es muy bonito, la comida estuvo rica y muy accesibles, la atención de Raquel fue excepcional para nuestra celebración. Súper recomendados."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Belem</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Mi boda fue un día increíble sin preocupaciones. No tuvimos que preocuparnos por nada, desde los meseros hasta los administradores excelente servicio."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Anahi</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Excelente servicio. Un servicio muy bueno, meseros excelentes, comida rica. En realidad todo estuvo muy muy bien para nuestro evento."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Fernanda</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card">
+                                <p class="review-text">"Sueño realizado. Excelente servicio. Cumple las expectativas. Calidad excelente en comida y un precio bastante justo. Totalmente agradecidos."</p>
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">Cristel</span>
+                                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-overlay left"></div>
+                <div class="fade-overlay right"></div>
+            </div>
+            
+            <a href="https://www.google.com/search?q=finca+maldonado#lrd=0x85d1e2e42a988d8b:0x5f0a00df8281c5f,1" target="_blank" class="btn-dorado" style="margin-top: 30px; border-radius: 5px;">
+                <i class="fab fa-google"></i> Ver más reseñas en Google
+            </a>
+        </section>
+        
     </div>
 
     <div id="vista-restaurante" class="vista-seccion">
@@ -756,6 +970,13 @@
             const telefono = "5565796506";
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${nombreSalon}*.\nQuisiera saber disponibilidad y precios para un evento. ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // --- FUNCION PARA ABRIR WHATSAPP DESDE TARJETAS DE SHOWS ---
+        function abrirShowWhatsApp(event, mensaje) {
+            event.stopPropagation();
+            const telefono = "5565796506";
+            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
 
         // --- FUNCIONES RESTAURANTE ---
