@@ -145,6 +145,8 @@
         .btn-banner { display: inline-block; padding: 12px 30px; background: rgba(0,0,0,0.6); border: 1px solid var(--dorado); color: var(--dorado); text-transform: uppercase; font-size: 0.85rem; font-weight: bold; border-radius: 5px; transition: 0.3s; backdrop-filter: blur(5px); pointer-events: auto; cursor: pointer; }
         .btn-banner:hover { background: var(--gradient-oro); color: black; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
         
+        .bg-bodas { background-image: url('img/salon.jpg'); }
+        .bg-xv { background-image: url('img/pista.jpg'); }
         .bg-graduaciones { background-image: url('img/pista.jpg'); }
         .bg-padre { background-image: url('img/parrillada.jpg'); }
 
@@ -381,7 +383,21 @@
 
         <section class="banners-temporada reveal">
             <h2 style="color: var(--dorado); margin-bottom: 40px; font-size: 2.5rem;">Fechas Especiales</h2>
-            <div class="grid-banners" style="grid-template-columns: 1fr; max-width: 800px;">
+            <div class="grid-banners">
+                <div class="banner-item bg-bodas" onclick="window.open('https://wa.me/5565796506?text=Hola%20Finca%20Maldonado,%20nos%20gustaría%20cotizar%20nuestra%20boda.%20¡Queremos%20un%20evento%20de%20ensueño!%20💍✨', '_blank')">
+                    <div class="banner-content">
+                        <h3><i class="fas fa-rings"></i> Boda de Ensueño</h3>
+                        <p>Di 'sí, acepto' en un entorno mágico. Espacios bajo las estrellas y servicio impecable para tu gran día.</p>
+                        <button class="btn-banner">Cotizar Boda</button>
+                    </div>
+                </div>
+                <div class="banner-item bg-xv" onclick="window.open('https://wa.me/5565796506?text=Hola%20Finca%20Maldonado,%20queremos%20cotizar%20la%20fiesta%20de%20XV%20años.%20¡Buscamos%20una%20celebración%20inolvidable!%20👸✨', '_blank')">
+                    <div class="banner-content">
+                        <h3><i class="fas fa-crown"></i> Tus XV Inolvidables</h3>
+                        <p>Celebra tus quince con nosotros. Salones perfectos y paquetes exclusivos para tu gran debut.</p>
+                        <button class="btn-banner">Ver Paquetes</button>
+                    </div>
+                </div>
                 <div class="banner-item bg-graduaciones" onclick="window.open('https://wa.me/5565796506?text=Hola,%20estamos%20buscando%20salón%20para%20nuestra%20Graduación%202026.%20🎓', '_blank')">
                     <div class="banner-content">
                         <h3><i class="fas fa-graduation-cap"></i> Graduaciones 2026</h3>
@@ -409,7 +425,7 @@
         </section>
 
         <div id="visor-lightbox" onclick="cerrarFoto()">
-            <span class="cerrar-visor" onclick="cerrarFoto()">&times;</span>
+            <span class="cerrar-visor" onclick="cerrarFoto()">×</span>
             <img id="img-ampliada" src="" alt="Vista ampliada">
         </div>
 
@@ -529,7 +545,7 @@
             <div class="banner-item bg-padre" style="flex: 1; min-width: 300px; border-radius: 15px; padding: 40px 20px; text-align: center; border: 1px solid var(--dorado); cursor: pointer; position: relative; overflow: hidden;" onclick="window.open('https://wa.me/5565796506?text=Hola,%20me%20interesa%20reservar%20una%20mesa%20para%20celebrar%20el%20Día%20del%20Padre.%20👔', '_blank')">
                 <div class="banner-content">
                     <h3 style="font-size: 2rem;"><i class="fas fa-user-tie"></i> Especial Día del Padre</h3>
-                    <p style="font-size: 1.1rem;">Celebra a papá con un ambiente inigualable. Pregunta por nuestra Parrillada Norteña y obtén una cortesía al reservar en mayo para su día en junio.</p>
+                    <p style="font-size: 1.1rem;">Celebra a papá en su día con un ambiente inigualable. Pregunta por nuestra Parrillada Norteña y obtén una cortesía al reservar en mayo para su fecha en junio.</p>
                     <button class="btn-banner" style="background: rgba(0,0,0,0.8); border: 2px solid var(--dorado); padding: 10px 20px;">Reservar Mesa para Papá</button>
                 </div>
             </div>
@@ -600,7 +616,7 @@
                 </div>
 
                 <div class="tarjeta-interactiva categoria-desayuno reveal" onclick="toggleTarjeta(this)">
-                    <div class="tarjeta-bg" style="background-image: url('img/omelette_fit.jpg');"></div>
+                    <div class="tarjeta-bg" style="background-image: url('img/omelette_huerto.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
                         <h3 class="tarjeta-titulo">Omelette del Huerto</h3>
@@ -635,8 +651,6 @@
                     </div>
                 </div>
 
-            
-
                 <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
                     <div class="tarjeta-bg" style="background-image: url('img/jarra_clericot.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
@@ -656,7 +670,7 @@
                 </div>
 
                 <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
-                    <div class="tarjeta-bg" style="background-image: url('img/coctel_azul.jpg');"></div>
+                    <div class="tarjeta-bg" style="background-image: url('img/blue_mystique.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
                         <h3 class="tarjeta-titulo">Blue Mystique</h3>
@@ -665,7 +679,7 @@
                 </div>
 
                 <div class="tarjeta-interactiva categoria-bebida reveal" onclick="toggleTarjeta(this)">
-                    <div class="tarjeta-bg" style="background-image: url('img/frappe_rojo.jpg');"></div>
+                    <div class="tarjeta-bg" style="background-image: url('img/frappe_frutos.jpg');"></div>
                     <div class="icono-touch"><i class="fas fa-hand-pointer"></i></div>
                     <div class="tarjeta-overlay">
                         <h3 class="tarjeta-titulo">Frappé Frutos Rojos</h3>
@@ -742,13 +756,6 @@
             const telefono = "5565796506";
             let msg = `¡Hola Finca Maldonado! 👋\n\nVi su página web y me encantó el *${nombreSalon}*.\nQuisiera saber disponibilidad y precios para un evento. ¡Gracias! ✨`;
             window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        // --- FUNCION PARA ABRIR WHATSAPP DESDE TARJETAS DE SHOWS ---
-        function abrirShowWhatsApp(event, mensaje) {
-            event.stopPropagation();
-            const telefono = "5565796506";
-            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
 
         // --- FUNCIONES RESTAURANTE ---
