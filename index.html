@@ -28,6 +28,8 @@
             --neon-azul: #00f3ff;
             --radius: 15px;
             --shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            --cempasuchil: #ff7518;
+            --morado-muertos: #5d3fd3;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -62,12 +64,12 @@
         /* --- TOP BAR --- */
         .top-bar {
             position: fixed; top: 0; left: 0; width: 100%; height: 40px;
-            background: linear-gradient(to right, #006847, #ffffff, #ce1126); color: #000;
+            background: linear-gradient(to right, var(--morado-muertos), var(--cempasuchil), var(--morado-muertos)); color: #fff;
             display: flex; align-items: center; justify-content: center;
             font-weight: 700; font-size: 0.95rem; z-index: 1001;
             text-transform: uppercase; letter-spacing: 1px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            text-align: center; padding: 0 10px; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+            text-align: center; padding: 0 10px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         /* --- NAVBAR --- */
@@ -136,20 +138,20 @@
         .banners-temporada { padding: 80px 20px; text-align: center; background: rgba(5,5,5,0.9); border-top: 1px solid rgba(212, 175, 55, 0.3); border-bottom: 1px solid rgba(212, 175, 55, 0.3); }
         .grid-banners { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
         
-        /* TARJETAS CON BORDES MES PATRIO */
-        .banner-item { position: relative; border-radius: 15px; overflow: hidden; border: 3px solid #006847; box-shadow: 0 0 15px #ce1126; transition: all 0.4s ease; padding: 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; min-height: 260px; background-size: cover; background-position: center; margin-bottom: 10px;}
+        /* TARJETAS CON BORDES DIA DE MUERTOS */
+        .banner-item { position: relative; border-radius: 15px; overflow: hidden; border: 3px solid var(--morado-muertos); box-shadow: 0 0 15px var(--cempasuchil); transition: all 0.4s ease; padding: 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; min-height: 260px; background-size: cover; background-position: center; margin-bottom: 10px;}
         .banner-item::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 3px solid #ffffff; border-radius: 12px; pointer-events: none; z-index: 3; }
         
         .banner-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,20,20,0.7)); z-index: 1; transition: 0.4s; }
-        .banner-item:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(206, 17, 38, 0.6); border-color: #ce1126; }
-        .banner-item:hover::after { border-color: #006847; }
+        .banner-item:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255, 117, 24, 0.6); border-color: var(--cempasuchil); }
+        .banner-item:hover::after { border-color: var(--morado-muertos); }
         .banner-item:hover::before { background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(20,20,20,0.5)); }
         .banner-content { position: relative; z-index: 2; pointer-events: none; }
         .banner-content h3 { color: var(--dorado); font-size: 1.8rem; margin-bottom: 10px; text-transform: uppercase; font-family: var(--fuente-titulo); text-shadow: 0 2px 5px #000; }
         .banner-content p { color: #fff; font-size: 1rem; margin-bottom: 25px; line-height: 1.4; text-shadow: 0 2px 5px #000; }
         .btn-banner { display: inline-block; padding: 12px 30px; background: rgba(0,0,0,0.6); border: 1px solid var(--dorado); color: var(--dorado); text-transform: uppercase; font-size: 0.85rem; font-weight: bold; border-radius: 5px; transition: 0.3s; backdrop-filter: blur(5px); pointer-events: auto; cursor: pointer; }
         .btn-banner:hover { background: var(--gradient-oro); color: black; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-      
+       
         .bg-bodas { background-image: url('img/salongrande.jpg'); }
         .bg-xv { background-image: url('img/salonchico.jpg'); }
         .bg-graduaciones { background-image: url('img/salonbaby.jpg'); }
@@ -373,8 +375,8 @@
         <div class="spinner-dorado"></div>
     </div>
 
-    <div class="top-bar" style="background: linear-gradient(to right, #006847, #ffffff, #ce1126); color: #000; font-size: 0.95rem; text-shadow: 1px 1px 2px rgba(255,255,255,0.5);">
-        🇲🇽 MOMENTOS INOLVIDABLES : PROMOCIONES DE MES PATRIO EN GRADUACIONES Y FIESTAS 🇲🇽
+    <div class="top-bar">
+        💀 MOMENTOS MÁGICOS : PROMOCIONES DE DÍA DE MUERTOS EN EVENTOS Y RESTAURANTE 🕯️
     </div>
 
     <div class="fondo-animado"><div id="stars"></div><div id="stars2"></div><div id="stars3"></div></div>
@@ -449,11 +451,30 @@
             </div>
         </section>
 
-        <section class="banner-mes-patrio reveal" style="background: linear-gradient(135deg, #006847 0%, #ffffff 50%, #ce1126 100%); padding: 4px; text-align: center; margin: 60px auto 20px auto; max-width: 1100px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-            <div style="background: rgba(5,5,5,0.9); padding: 40px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <h2 style="color: #fff; font-family: var(--fuente-titulo); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">🇲🇽 ¡Celebra el Mes Patrio a lo Grande! 🇲🇽</h2>
-                <p style="color: #c6c7cc; font-size: 1.1rem; margin-bottom: 25px; max-width: 800px; line-height: 1.6;">Aprovecha nuestras promociones exclusivas de Septiembre para <strong>Graduaciones y Fiestas</strong>. Música, folclore, banquete y un ambiente inigualable con el toque mexicano que buscas.</p>
-                <a href="https://wa.me/5565796506?text=Hola,%20me%20interesan%20las%20promociones%20del%20Mes%20Patrio%20para%20una%20fiesta.%20🇲🇽" target="_blank" class="btn-dorado" style="border-color: #006847; background: rgba(0, 104, 71, 0.2); color: #fff; text-shadow: 0 1px 2px #000;"><i class="fab fa-whatsapp"></i> Cotizar Fiesta Patria</a>
+        <!-- BANNER DE DÍA DE MUERTOS -->
+        <section class="banner-dia-muertos reveal" style="background: linear-gradient(135deg, var(--morado-muertos) 0%, #000000 50%, var(--cempasuchil) 100%); padding: 4px; text-align: center; margin: 60px auto 20px auto; max-width: 1100px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div style="background: rgba(5,5,5,0.9); padding: 40px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+                
+                <h2 style="color: var(--cempasuchil); font-family: var(--fuente-titulo); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">💀 Celebra la Vida en la Finca 🕯️</h2>
+                <p style="color: #c6c7cc; font-size: 1.1rem; margin-bottom: 25px; max-width: 800px; line-height: 1.6;">Aprovecha nuestras promociones exclusivas de temporada. Pan de muerto, folclore, banquete exquisito y un ambiente rodeado de cempasúchil para que tu evento sea verdaderamente inolvidable.</p>
+                
+                <!-- CALAVERITA LITERARIA -->
+                <div style="background: rgba(255, 117, 24, 0.05); border: 1px dashed var(--cempasuchil); padding: 25px; border-radius: 10px; margin-bottom: 30px; font-style: italic; max-width: 600px; box-shadow: inset 0 0 15px rgba(255, 117, 24, 0.1);">
+                    <h4 style="color: #fff; margin-bottom: 15px; font-family: var(--fuente-titulo); font-size: 1.2rem;">~ Calaverita de la Finca ~</h4>
+                    <p style="color: var(--dorado); margin: 0; line-height: 1.6;">
+                        Buscaba la Muerte un salón elegante,<br>
+                        para armar un festín con todo y banquete,<br>
+                        llegó a Finca Maldonado al instante,<br>
+                        ¡y se quedó a bailar hasta el copete!<br>
+                        <br>
+                        "Con estos platillos y esta atención",<br>
+                        gritó la Huesuda muy animada,<br>
+                        "me quedo en la Finca, qué gran reventón,<br>
+                        ¡aquí sí que hay fiesta de la buena y pesada!"
+                    </p>
+                </div>
+
+                <a href="https://wa.me/5565796506?text=Hola,%20me%20interesan%20las%20promociones%20de%20Día%20de%20Muertos.%20💀🕯️" target="_blank" class="btn-dorado" style="border-color: var(--cempasuchil); background: rgba(255, 117, 24, 0.2); color: #fff; text-shadow: 0 1px 2px #000;"><i class="fab fa-whatsapp"></i> Cotizar Fiesta de Temporada</a>
             </div>
         </section>
 
@@ -662,7 +683,7 @@
             @keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
         </style>
 
-      
+        
 
         <section class="quienes-somos reveal" style="background: transparent; border-bottom: none;">
             <div class="qs-grid">
@@ -1090,3 +1111,11 @@ Quisiera saber disponibilidad y precios para un evento. ¡Gracias! ✨`;
     </script>
 </body>
 </html>
+```eof
+
+**Resumen de los cambios realizados:**
+*   Se eliminó toda referencia al "Mes Patrio" y las banderas de México.
+*   Se actualizaron los textos de la barra superior (Top Bar) con emojis de calaveras (💀) y velas (🕯️), cambiando su fondo a un degradado festivo morado y naranja oscuro (cempasúchil).
+*   Se reemplazó el banner verde y rojo por un nuevo banner (`.banner-dia-muertos`) con temática oscura, naranja y morada.
+*   En medio de ese banner, se redactó y diseñó una pequeña sección destacada con una **Calaverita Literaria** personalizada para Finca Maldonado.
+*   Se actualizaron los bordes dinámicos de las tarjetas de fechas especiales (bodas, XV años) para que vayan a juego con el tema del Día de Muertos y no con el tema patrio.
